@@ -1,14 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
+import {
+  getAllLeadsSelector,
+  getLeadsLoaderStatus,
+} from "../../../store/Leads/selectors";
+import { getUserDataSelector } from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import CompanyCard from "../../common/CompanyCard/CompanyCard";
 
 const CompaniesPage = () => {
-  const companies = null;
+  const isLeadLoading = useSelector(getLeadsLoaderStatus());
+  const state = useSelector(getUserDataSelector());
+  const companies = useSelector(getAllLeadsSelector(state.userData.leads));
+
   return (
     <LeadLayout>
-      {companies ? (
+      {!isLeadLoading && companies ? (
         companies.map((company) => {
           return <CompanyCard company={company} key={company.id} />;
         })

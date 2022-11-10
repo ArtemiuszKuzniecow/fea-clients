@@ -27,7 +27,7 @@ const Comments = ({ companyId, typeOfComments }) => {
 
   return (
     <>
-      {currentComments.length > 0 ? (
+      {currentComments ? (
         currentComments.length !== 0 ? (
           currentComments.length > 1 ? (
             allCommentsShown ? (

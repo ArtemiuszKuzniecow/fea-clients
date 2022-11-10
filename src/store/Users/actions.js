@@ -9,7 +9,7 @@ export const loadUserData = createAsyncThunk(
       const { content } = await userService.get(id);
       return content;
     } catch (error) {
-      return thunkApi.rejectWithValue("Error!");
+      return thunkApi.rejectWithValue(error);
     }
   }
 );

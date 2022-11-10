@@ -1,10 +1,10 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { getLoggedInStatusSelector } from "../../store/Users/selectors";
 import { useEffect } from "react";
-import { loadUserData } from "../../store/Users/actions";
+import { useDispatch, useSelector } from "react-redux";
 import localStorageService from "../../assets/services/localStorageService";
+import { loadLeadsData } from "../../store/Leads/actions";
+import { loadUserData } from "../../store/Users/actions";
+import { getLoggedInStatusSelector } from "../../store/Users/selectors";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const AppLoader = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(loadUserData(userId));
+      dispatch(loadLeadsData());
     }
   }, [dispatch]);
 
