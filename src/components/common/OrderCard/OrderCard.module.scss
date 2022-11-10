@@ -1,0 +1,18 @@
+@import "../../../assets/styles/mixins.scss";
+@import "../../../assets/styles/variables.scss";
+
+.orders_card_container {
+
+    &_closed {
+        background-color: $closed_order_background;
+        @include _container
+    }
+    &_opened {
+        background-color: $opened_order_background;
+        @include _container
+    }
+
+    &_item {
+        @include _frame
+    }
+}

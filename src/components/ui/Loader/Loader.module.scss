@@ -1,0 +1,52 @@
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/styles/mixins.scss";
+
+.loader {
+    display: flex;
+    justify-content: center;
+
+    &_item {
+        width: 20px;
+        height: 20px;
+        margin: 8px;
+        background-color: $font-color;
+        border-radius: 50%; 
+        list-style: none;
+        animation: animation-loading 1.2s infinite;
+  
+            &:nth-child(1) {
+              animation-delay: -0.6s;
+            }
+            &:nth-child(2) {
+              animation-delay: -0.45s;
+            }
+            &:nth-child(3) {
+              animation-delay: -0.3s;
+            }
+            &:nth-child(4) {
+              animation-delay: -0.15s;
+            }
+
+            @keyframes animation-loading {
+            0% {
+              transform: scale(0);
+            }
+            20% {
+                transform: scale(0);
+                background-color:$base-button-color;
+              }
+            40% {
+              transform: scale(1);
+              background-color:$base-button-color;
+            }
+            80% {
+              transform: scale(0);
+              background-color:$background-color;
+            }
+            100% {
+              transform: scale(0);
+              background-color:$hover-background;
+            }
+    }
+}
+}

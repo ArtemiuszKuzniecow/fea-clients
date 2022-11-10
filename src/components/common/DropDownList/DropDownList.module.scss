@@ -1,0 +1,45 @@
+@import "../../../assets/styles/mixins.scss";
+@import "../../../assets/styles/variables.scss";
+
+.dropdown_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+    &_ul {
+        max-height: 250px;
+        overflow: auto;
+        scroll-behavior: smooth;
+        list-style-type: none;
+        border-left: 1px solid $font-color;
+        border-right: 1px solid $font-color;
+        border-bottom: 1px solid $font-color;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin: 0;
+        padding: 0;
+        scrollbar-width: thin;         
+        scrollbar-color: $hover-background $background-color; 
+        
+        &::-webkit-scrollbar{
+            width: 10px;
+            height: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $hover-background;
+            border-radius: 50px;
+        }
+    }
+
+    &_li {
+        @include _link;
+        border-bottom: 1px solid $background-color;
+        cursor: pointer;
+        padding: 10px;
+        overflow-wrap: anywhere;
+        font-size: medium;
+    }
+}

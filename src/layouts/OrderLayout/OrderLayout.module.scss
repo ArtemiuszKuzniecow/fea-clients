@@ -1,0 +1,21 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/mixins.scss";
+
+.order_layout_container {
+    display: flex;        
+    flex-direction: row;
+    @media (min-width: 800px) {
+        justify-content: space-around;
+    }
+    @media (max-width: 800px) {
+        justify-content:space-evenly;
+    }
+    
+    
+    &_item {
+        width: 30%;
+        @media (max-width: 800px) {
+            width: 40%;
+        }
+    }
+}

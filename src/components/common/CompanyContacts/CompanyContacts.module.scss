@@ -1,0 +1,10 @@
+@import "../../../assets/styles/mixins.scss";
+
+.company_contacts {
+    @include _frame;
+
+    &_link {
+        @include _link
+    }
+    
+}   

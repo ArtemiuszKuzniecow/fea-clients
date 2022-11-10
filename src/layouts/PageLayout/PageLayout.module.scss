@@ -1,0 +1,95 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/mixins.scss";
+
+
+.hamburger {
+    max-width: 50px;
+}
+
+.header_container {
+    @media (min-width: 1200px) {
+        display: flex;
+        justify-content: space-around;
+
+    }
+    @media (max-width: 1200px) {
+        display: flex;
+        justify-content: space-between;
+        font-size: large;
+    }
+    @media (min-width: 850px) and (max-width: 1200px) {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        font-size: medium;
+    }
+    @media (max-width: 850px) {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+        flex-wrap: wrap;
+        font-size: small;
+    }
+
+        font-size: larger;
+        padding-top: 15px;
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+        color: $font-color;
+
+ 
+    
+
+    &_img {
+        text-align: left;
+        max-width: 30%;
+        @media (max-width: 850px) {
+            float: left;
+        }
+    }
+
+    &_companies,
+    &_login,
+    &_buttons {
+        @media (max-width: 850px) {
+            display: none;
+        }
+    }
+
+    &_hamburger {
+        @media (max-width: 850px) {
+            display: flex;
+            flex-direction: column;
+            max-width: 150px;
+            text-align: left;
+            border: 1px solid $font-color;
+            border-radius: 10px;
+            margin: 5px;
+            font-size: medium;
+        }
+        @media (min-width: 850px) {
+            display: none;
+        }
+        &_arrow {
+            cursor: pointer;
+            border: none;
+            background-color: $background-color;
+            border-radius: 10px;
+            &:hover {
+                background-color: $hover-background;
+            }
+        }
+    }
+
+    &_buttons {
+        position: fixed;
+        margin-left: 2%;
+        margin-top: 15%;
+        width: 80px;
+    }
+    
+    &_link{
+        @include _link; 
+    }
+    
+}
