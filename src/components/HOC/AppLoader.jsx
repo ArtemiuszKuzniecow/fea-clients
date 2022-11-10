@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedInStatusSelector } from "../../store/Users/selectors";
 import { useEffect } from "react";
-import { loadUserData } from "../../store/Users/usersActions";
+import { loadUserData } from "../../store/Users/actions";
 import localStorageService from "../../assets/services/localStorageService";
 
 const AppLoader = ({ children }) => {

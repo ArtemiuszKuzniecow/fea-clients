@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { CommmentsProvider } from "../../../hooks/useComments";
-import {
-  getIsLoadingStatus,
-  getUserLeadsSelector,
-  getUserOrdersSelector,
-} from "../../../store/Users/selectors";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
 import OrderCard from "../../common/OrderCard/OrderCard";
@@ -15,9 +8,9 @@ import style from "./CompanyInfoPage.module.scss";
 
 const CompanyInfoPage = () => {
   const { id } = useParams();
-  const companies = useSelector(getUserLeadsSelector());
-  const orders = useSelector(getUserOrdersSelector());
-  const isLoading = useSelector(getIsLoadingStatus());
+  const companies = null;
+  const orders = null;
+  const isLoading = null;
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
 
@@ -30,7 +23,7 @@ const CompanyInfoPage = () => {
           .filter((o) => o.companyId === id)
       );
     }
-  }, [isLoading]);
+  }, []);
 
   return currentCompany ? (
     <>
@@ -67,9 +60,7 @@ const CompanyInfoPage = () => {
           <hr />
         </div>
         <div className={style.company_info_page_item}>
-          <CommmentsProvider>
-            <Comments companyId={currentCompany.id} typeOfComments="company" />
-          </CommmentsProvider>
+          <Comments companyId={currentCompany.id} typeOfComments="company" />
         </div>
       </div>
       <div>

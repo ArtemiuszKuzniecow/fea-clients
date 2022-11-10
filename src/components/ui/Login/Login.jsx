@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../../store/Users/usersActions";
+import { logIn } from "../../../store/Users/actions";
 import Form from "./Form";
 
 const Login = () => {

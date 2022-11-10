@@ -1,13 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
-import { getUserLeadsSelector } from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import CompanyCard from "../../common/CompanyCard/CompanyCard";
 
 const CompaniesPage = () => {
-  const companies = useSelector(getUserLeadsSelector());
+  const companies = null;
   return (
     <LeadLayout>
       {companies ? (

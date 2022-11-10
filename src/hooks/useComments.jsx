@@ -1,10 +1,6 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import commentsService from "../assets/services/commentsService";
-import { useContext } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { getUserLeadsSelector } from "../store/Users/selectors";
 
 const CommmentsContext = React.createContext();
 
@@ -13,14 +9,37 @@ export const useComments = () => {
 };
 
 export const CommmentsProvider = ({ children }) => {
-  const companies = useSelector(getUserLeadsSelector());
+  // const companies = useSelector(getUserLeadsSelector());
   const [isLoading, setLoading] = useState(true);
   const [currentCompany, setCurrentCompany] = useState();
   const [currentComments, setCurrentComments] = useState([]);
 
-  const loadCurrentCompany = (companyId) => {
-    setCurrentCompany(companies.find((item) => item.id === companyId));
-  };
+  // export const getCompanyCommentsSelector = (companyId) => (state) => {
+  //   if (state.userData.userData) {
+  //     const comments = Object.values(
+  //       state.userData?.userData?.comments.company
+  //     );
+
+  //     return comments.filter((comment) =>
+  //       state.userData.userData.leads[companyId].companyComments.includes(
+  //         comment._id
+  //       )
+  //     );
+  //   }
+  // };
+  // export const getOrderCommentsSelector = (companyId, orderId) => (state) => {
+  //   const comments = Object.values(state.userData?.userData?.comments.order);
+  //   const commentsArray =
+  //     state.userData.userData.leads[companyId].ordersComments[orderId];
+  //   return (
+  //     commentsArray &&
+  //     comments.filter((comment) => commentsArray.includes(comment._id))
+  //   );
+  // };
+
+  // const loadCurrentCompany = (companyId) => {
+  //   setCurrentCompany(companies.find((item) => item.id === companyId));
+  // };
 
   const loadCurrentComments = (typeOfComments, comments, id, folderKey) => {
     if (comments && currentCompany) {
@@ -99,7 +118,6 @@ export const CommmentsProvider = ({ children }) => {
       value={{
         postComment,
         deleteComment,
-        loadCurrentCompany,
         currentCompany,
         currentComments,
         loadCurrentComments,

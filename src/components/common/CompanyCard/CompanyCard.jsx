@@ -5,7 +5,6 @@ import {
   clientStatusArray,
   companyInformation,
 } from "../../../assets/js/variables";
-import { CommmentsProvider } from "../../../hooks/useComments";
 import MyButton from "../Button/MyButton";
 import Comments from "../Comment/Comments";
 import CompanyContacts from "../CompanyContacts/CompanyContacts";
@@ -95,9 +94,7 @@ const CompanyCard = ({ company }) => {
       </div>
 
       <div className={style.company_card_comment}>
-        <CommmentsProvider>
-          <Comments companyId={company.id} typeOfComments="company" />
-        </CommmentsProvider>
+        <Comments companyId={company.id} typeOfComments="company" />
       </div>
     </div>
   );

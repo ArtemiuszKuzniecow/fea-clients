@@ -16,7 +16,7 @@ import Login from "./components/ui/Login/Login";
 import LogOut from "./components/ui/Login/LogOut";
 import Registration from "./components/ui/Login/Registration";
 import PageLayout from "./layouts/PageLayout/PageLayout";
-import { loadUserData } from "./store/Users/usersActions";
+import { loadUserData } from "./store/Users/actions";
 import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
 function App() {

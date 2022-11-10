@@ -2,7 +2,7 @@ import httpService from "../../assets/services/httpService";
 
 const userService = {
   get: async (id) => {
-    const { data } = await httpService.get(`${id}/`);
+    const { data } = await httpService.get(`users/${id}/`);
     return data;
   },
   create: async (payload) => {

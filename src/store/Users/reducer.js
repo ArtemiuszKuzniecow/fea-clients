@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import localStorageService from "../../assets/services/localStorageService";
-import { postCompanyComment } from "./commentsAction";
-import { loadUserData, logIn, signUp } from "./usersActions";
+import { loadUserData, logIn, signUp } from "./actions";
 
 const initialState = localStorageService.getAccessToken()
   ? {
@@ -24,16 +23,7 @@ const initialState = localStorageService.getAccessToken()
 export const UserSlice = createSlice({
   name: "User",
   initialState,
-  reducers: {
-    clearData: (state) => {
-      state.userData = null;
-      state.isLoading = false;
-      state.errors = null;
-      state.auth = null;
-      state.isLoggedIn = false;
-      state.dataLoaded = false;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [loadUserData.pending.type]: (state) => {
       state.isLoading = true;

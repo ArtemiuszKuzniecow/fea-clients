@@ -1,17 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import OrderLayout from "../../../layouts/OrderLayout/OrderLayout";
-import {
-  getUserLeadsSelector,
-  getUserOrdersSelector,
-} from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import OrderCard from "../../common/OrderCard/OrderCard";
 
 const OrdersListPage = () => {
-  const orders = useSelector(getUserOrdersSelector());
-  const companies = useSelector(getUserLeadsSelector());
+  const orders = null;
+  const companies = null;
   const ordersArray = [];
   if (companies && orders) {
     for (const company of companies) {

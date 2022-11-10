@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../../store/Users/usersActions";
+import { signUp } from "../../../store/Users/actions";
 import Form from "./Form";
 
 const Registration = () => {

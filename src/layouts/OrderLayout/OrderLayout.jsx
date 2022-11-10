@@ -1,15 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
-import { getUserOrdersSelector } from "../../store/Users/selectors";
 import style from "./OrderLayout.module.scss";
 
 const OrderLayout = ({ children }) => {
-  const orders = useSelector(getUserOrdersSelector());
-  const dates = orders
-    ? orders.map((order) => Object.values(order)[0].date)
-    : ["Добавьте первый запрос"];
+  // const dates = orders
+  //   ? orders.map((order) => Object.values(order)[0].date)
+  //   : ["Добавьте первый запрос"];
 
   return (
     <>
@@ -25,7 +22,7 @@ const OrderLayout = ({ children }) => {
         <div className={style.order_layout_container_item}>
           <DropDownList
             sampleText="Сортировать по дате запроса"
-            array={dates}
+            array={[1, 2, 3]}
           />
         </div>
       </div>

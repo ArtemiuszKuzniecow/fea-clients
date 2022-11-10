@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
-import { CommmentsProvider } from "../../../hooks/useComments";
-import {
-  getUserLeadsSelector,
-  getUserOrdersSelector,
-} from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import TextField from "../../common/Form/TextField/TextField";
@@ -15,8 +9,8 @@ import style from "./OrderPage.module.scss";
 
 const OrderPage = () => {
   const { id } = useParams();
-  const orders = useSelector(getUserOrdersSelector());
-  const companies = useSelector(getUserLeadsSelector());
+  const orders = null;
+  const companies = null;
   const [newPrice, setNewPrice] = useState(false);
   const currentOrder =
     orders && orders.find((order) => Object.keys(order).includes(id))[id];
@@ -178,9 +172,7 @@ const OrderPage = () => {
         </div>
       </div>
       <div className={style.comment}>
-        <CommmentsProvider>
-          <Comments companyId={currentCompany.id} typeOfComments="order" />
-        </CommmentsProvider>
+        <Comments companyId={currentCompany.id} typeOfComments="order" />
       </div>
     </>
   ) : (
