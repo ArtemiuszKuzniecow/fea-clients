@@ -1,32 +1,14 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useUserData from "../../../hooks/useUserData";
 import OrderLayout from "../../../layouts/OrderLayout/OrderLayout";
-import {
-  getAllLeadsSelector,
-  getLeadsLoadingStatus,
-} from "../../../store/Leads/selectors";
-import {
-  getAllOrders,
-  getOrdersLoadingStatus,
-} from "../../../store/Orders/selectors";
-import {
-  getIsLoadingStatus,
-  getUserDataSelector,
-} from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
 
 const OrdersListPage = () => {
-  const isLoading = useSelector(getIsLoadingStatus());
-  const isLeadsLoading = useSelector(getLeadsLoadingStatus());
-  const isOrdersLoading = useSelector(getOrdersLoadingStatus());
-  const state = useSelector(getUserDataSelector());
-  const orders = useSelector(getAllOrders(state?.userData?.orders));
-  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
+  const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
+    useUserData();
   const [ordersArray, setOrdersArray] = useState(null);
 
   const createOrdersArray = (orders, companies) => {

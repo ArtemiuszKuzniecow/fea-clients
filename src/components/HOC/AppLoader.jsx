@@ -5,6 +5,7 @@ import localStorageService from "../../assets/services/localStorageService";
 import { loadLeadsData } from "../../store/Leads/actions";
 import { loadLeadsCommentsData } from "../../store/LeadsComments/actions";
 import { loadOrdersData } from "../../store/Orders/actions";
+import { loadOrdersCommentsData } from "../../store/OrdersComments/actions";
 import { loadUserData } from "../../store/Users/actions";
 import { getLoggedInStatusSelector } from "../../store/Users/selectors";
 
@@ -18,6 +19,7 @@ const AppLoader = ({ children }) => {
       dispatch(loadLeadsData());
       dispatch(loadOrdersData());
       dispatch(loadLeadsCommentsData());
+      dispatch(loadOrdersCommentsData());
     }
   }, [isLoggedIn]);
 

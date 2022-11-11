@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useUserData from "../../../hooks/useUserData";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
 import OrderCard from "../../common/OrderCard/OrderCard";
@@ -8,20 +9,15 @@ import style from "./CompanyInfoPage.module.scss";
 
 const CompanyInfoPage = () => {
   const { id } = useParams();
-  const companies = null;
-  const orders = null;
-  const isLoading = null;
+  const { companies, orders } = useUserData();
+
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
 
   useEffect(() => {
     if (companies && orders) {
       setCurrentCompany(companies.find((item) => item.id === id));
-      setCurrentOrders(
-        orders
-          .map((order) => Object.values(order)[0])
-          .filter((o) => o.companyId === id)
-      );
+      setCurrentOrders(orders.filter((o) => o.companyId === id));
     }
   }, []);
 

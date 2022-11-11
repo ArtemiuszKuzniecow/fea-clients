@@ -1,20 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
-import {
-  getAllLeadsSelector,
-  getLeadsLoadingStatus,
-} from "../../../store/Leads/selectors";
-import {
-  getAllOrders,
-  getOrdersLoadingStatus,
-} from "../../../store/Orders/selectors";
-import {
-  getIsLoadingStatus,
-  getUserDataSelector,
-} from "../../../store/Users/selectors";
+import useUserData from "../../../hooks/useUserData";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import TextField from "../../common/Form/TextField/TextField";
@@ -22,13 +9,10 @@ import Loader from "../../ui/Loader/Loader";
 import style from "./OrderPage.module.scss";
 
 const OrderPage = () => {
-  const isLoading = useSelector(getIsLoadingStatus());
-  const isLeadsLoading = useSelector(getLeadsLoadingStatus());
-  const isOrdersLoading = useSelector(getOrdersLoadingStatus());
+  const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
+    useUserData();
+
   const { id } = useParams();
-  const state = useSelector(getUserDataSelector());
-  const orders = useSelector(getAllOrders(state?.userData?.orders));
-  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
   const [newPrice, setNewPrice] = useState(false);
   const [currentCompany, setCurrentCompany] = useState(null);
   const [currentOrder, setCurrentOrder] = useState(null);
@@ -45,7 +29,6 @@ const OrderPage = () => {
       );
     }
   }, [currentOrder]);
-  console.log(id);
 
   const toggleNewPrice = () => {
     setNewPrice((prevState) => !prevState);
