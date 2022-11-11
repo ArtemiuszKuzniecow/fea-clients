@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import localStorageService from "../../assets/services/localStorageService";
 import { loadLeadsData } from "../../store/Leads/actions";
+import { loadLeadsCommentsData } from "../../store/LeadsComments/actions";
 import { loadOrdersData } from "../../store/Orders/actions";
 import { loadUserData } from "../../store/Users/actions";
 import { getLoggedInStatusSelector } from "../../store/Users/selectors";
@@ -16,6 +17,7 @@ const AppLoader = ({ children }) => {
       dispatch(loadUserData(userId));
       dispatch(loadLeadsData());
       dispatch(loadOrdersData());
+      dispatch(loadLeadsCommentsData());
     }
   }, [isLoggedIn]);
 

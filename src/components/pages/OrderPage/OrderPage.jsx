@@ -1,6 +1,20 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
+import {
+  getAllLeadsSelector,
+  getLeadsLoadingStatus,
+} from "../../../store/Leads/selectors";
+import {
+  getAllOrders,
+  getOrdersLoadingStatus,
+} from "../../../store/Orders/selectors";
+import {
+  getIsLoadingStatus,
+  getUserDataSelector,
+} from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import TextField from "../../common/Form/TextField/TextField";
@@ -8,14 +22,30 @@ import Loader from "../../ui/Loader/Loader";
 import style from "./OrderPage.module.scss";
 
 const OrderPage = () => {
+  const isLoading = useSelector(getIsLoadingStatus());
+  const isLeadsLoading = useSelector(getLeadsLoadingStatus());
+  const isOrdersLoading = useSelector(getOrdersLoadingStatus());
   const { id } = useParams();
-  const orders = null;
-  const companies = null;
+  const state = useSelector(getUserDataSelector());
+  const orders = useSelector(getAllOrders(state?.userData?.orders));
+  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
   const [newPrice, setNewPrice] = useState(false);
-  const currentOrder =
-    orders && orders.find((order) => Object.keys(order).includes(id))[id];
-  const currentCompany =
-    currentOrder && companies.find((com) => com.id === currentOrder.companyId);
+  const [currentCompany, setCurrentCompany] = useState(null);
+  const [currentOrder, setCurrentOrder] = useState(null);
+
+  useEffect(() => {
+    if (orders && companies) {
+      setCurrentOrder(orders.find((order) => order.orderId === id));
+    }
+  }, [isLoading, isLeadsLoading, isOrdersLoading]);
+  useEffect(() => {
+    if (currentOrder) {
+      setCurrentCompany(
+        companies.find((company) => company.id === currentOrder.companyId)
+      );
+    }
+  }, [currentOrder]);
+  console.log(id);
 
   const toggleNewPrice = () => {
     setNewPrice((prevState) => !prevState);

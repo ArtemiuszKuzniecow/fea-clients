@@ -21,9 +21,9 @@ import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
 
 const OrdersListPage = () => {
-  const isDataLoading = useSelector(getIsLoadingStatus());
-  const isLeadLoading = useSelector(getLeadsLoadingStatus());
-  const isOrderLoading = useSelector(getOrdersLoadingStatus());
+  const isLoading = useSelector(getIsLoadingStatus());
+  const isLeadsLoading = useSelector(getLeadsLoadingStatus());
+  const isOrdersLoading = useSelector(getOrdersLoadingStatus());
   const state = useSelector(getUserDataSelector());
   const orders = useSelector(getAllOrders(state?.userData?.orders));
   const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
@@ -55,14 +55,13 @@ const OrdersListPage = () => {
 
   useEffect(() => {
     if (orders && companies) {
-      console.log("it works");
       setOrdersArray(createOrdersArray(orders, companies));
     }
-  }, [isDataLoading, isLeadLoading, isOrderLoading]);
+  }, [isLoading, isLeadsLoading, isOrdersLoading]);
 
   return (
     <OrderLayout>
-      {!isDataLoading && !isLeadLoading && !isOrderLoading ? (
+      {!isLoading && !isLeadsLoading && !isOrdersLoading ? (
         orders ? (
           ordersArray &&
           ordersArray.map((order) => {

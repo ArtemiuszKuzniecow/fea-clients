@@ -1,7 +1,21 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import localStorageService from "../../../assets/services/localStorageService";
+import {
+  getAllLeadsSelector,
+  getLeadsLoadingStatus,
+} from "../../../store/Leads/selectors";
+import {
+  getAllCompanyComments,
+  getLeadsCommentsLoadingStatus,
+} from "../../../store/LeadsComments/selecetors";
+import {
+  getIsLoadingStatus,
+  getUserDataSelector,
+} from "../../../store/Users/selectors";
 import Loader from "../../ui/Loader/Loader";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
@@ -9,10 +23,24 @@ import CommentForm from "./CommentForm";
 const Comments = ({ companyId, typeOfComments }) => {
   const localId = localStorageService.getUserId();
   const { id } = useParams();
-  const currentComments = null;
-
+  const isLoading = useSelector(getIsLoadingStatus());
+  const isLeadsLoading = useSelector(getLeadsLoadingStatus());
+  const isLeadsCommentsLoading = useSelector(getLeadsCommentsLoadingStatus());
+  const state = useSelector(getUserDataSelector());
+  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
+  const leadsComments = useSelector(
+    getAllCompanyComments(
+      companies.find((c) => c.id === companyId).companyComments
+    )
+  );
+  const [currentComments, setCurrentComments] = useState(null);
   const [allCommentsShown, setAllCommentsShown] = useState(false);
 
+  useEffect(() => {
+    if (companies && leadsComments && typeOfComments === "company") {
+      setCurrentComments(leadsComments);
+    }
+  }, [isLoading, isLeadsLoading, isLeadsCommentsLoading]);
   const handleCollapse = () => {
     setAllCommentsShown((prevState) => !prevState);
   };
