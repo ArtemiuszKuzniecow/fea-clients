@@ -41,7 +41,11 @@ function App() {
               <Route path="/logout" component={LogOut} />
               <Route path="/registration" component={Registration} />
 
-              <ProtectedRoute path="/companies" component={CompaniesPage} />
+              <ProtectedRoute
+                path="/companies"
+                exact
+                component={CompaniesPage}
+              />
               <ProtectedRoute
                 path="/new-company"
                 exact

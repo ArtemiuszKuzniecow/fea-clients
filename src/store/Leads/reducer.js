@@ -20,8 +20,8 @@ export const LeadsSlice = createSlice({
       state.isLoading = false;
     },
     [loadLeadsData.rejected.type]: (state, { payload }) => {
-      state.isLoading = false;
       state.error = payload;
+      state.isLoading = false;
     },
   },
 });

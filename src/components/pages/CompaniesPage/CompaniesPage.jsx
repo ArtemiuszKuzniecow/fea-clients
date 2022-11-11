@@ -4,30 +4,39 @@ import { Link } from "react-router-dom";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
 import {
   getAllLeadsSelector,
-  getLeadsLoaderStatus,
+  getLeadsLoadingStatus,
 } from "../../../store/Leads/selectors";
-import { getUserDataSelector } from "../../../store/Users/selectors";
+import {
+  getIsLoadingStatus,
+  getUserDataSelector,
+} from "../../../store/Users/selectors";
 import MyButton from "../../common/Button/MyButton";
 import CompanyCard from "../../common/CompanyCard/CompanyCard";
+import Loader from "../../ui/Loader/Loader";
 
 const CompaniesPage = () => {
-  const isLeadLoading = useSelector(getLeadsLoaderStatus());
+  const isDataLoading = useSelector(getIsLoadingStatus());
+  const isLeadLoading = useSelector(getLeadsLoadingStatus());
   const state = useSelector(getUserDataSelector());
-  const companies = useSelector(getAllLeadsSelector(state.userData.leads));
+  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
 
   return (
     <LeadLayout>
-      {!isLeadLoading && companies ? (
-        companies.map((company) => {
-          return <CompanyCard company={company} key={company.id} />;
-        })
+      {!isDataLoading && !isLeadLoading ? (
+        companies ? (
+          companies.map((company) => {
+            return <CompanyCard company={company} key={company.id} />;
+          })
+        ) : (
+          <>
+            <h3>Добавтье первую компанию</h3>
+            <Link to="/new-company">
+              <MyButton text="Добавить компанию" />
+            </Link>
+          </>
+        )
       ) : (
-        <>
-          <h3>Добавтье первую компанию</h3>
-          <Link to="/new-company">
-            <MyButton text="Добавить компанию" />
-          </Link>
-        </>
+        <Loader />
       )}
     </LeadLayout>
   );
