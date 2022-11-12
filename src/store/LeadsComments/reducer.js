@@ -28,7 +28,10 @@ export const LeadsCommentsSlice = createSlice({
       state.isLoading = true;
     },
     [postCompanyComment.fulfilled.type]: (state, { payload }) => {
-      state.leadsCommentData = payload.commentData;
+      state.leadsCommentData = {
+        ...state.leadsCommentData,
+        [payload.commentData._id]: payload.commentData,
+      };
       state.isLoading = false;
     },
     [postCompanyComment.rejected.type]: (state, { payload }) => {

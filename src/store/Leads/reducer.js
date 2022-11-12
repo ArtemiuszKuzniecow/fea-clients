@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { postCompanyComment } from "../LeadsComments/actions";
 import { loadLeadsData } from "./actions";
 
 const initialState = {
@@ -22,6 +23,21 @@ export const LeadsSlice = createSlice({
     [loadLeadsData.rejected.type]: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
+    },
+
+    [postCompanyComment.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [postCompanyComment.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.leadData = {
+        ...state.leadData,
+        [payload.companyId.companyComments]: payload.commentsArray,
+      };
+    },
+    [postCompanyComment.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
     },
   },
 });

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import commentsService from "../../../assets/services/commentsService";
 import localStorageService from "../../../assets/services/localStorageService";
 import useUserData from "../../../hooks/useUserData";
 import { postCompanyComment } from "../../../store/LeadsComments/actions";

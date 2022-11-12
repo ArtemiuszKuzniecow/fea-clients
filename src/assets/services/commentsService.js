@@ -24,6 +24,7 @@ const commentsService = {
     return {
       commentData: comment.data.content,
       commentsArray: comments.data.content,
+      companyId: companyId,
     };
   },
   // postNewComment: async (
