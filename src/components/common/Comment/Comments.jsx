@@ -1,9 +1,12 @@
+import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import commentsService from "../../../assets/services/commentsService";
 import localStorageService from "../../../assets/services/localStorageService";
 import useUserData from "../../../hooks/useUserData";
+import { postCompanyComment } from "../../../store/LeadsComments/actions";
 import { getAllCompanyComments } from "../../../store/LeadsComments/selecetors";
 import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import Loader from "../../ui/Loader/Loader";
@@ -12,6 +15,7 @@ import CommentForm from "./CommentForm";
 
 const Comments = ({ companyId, typeOfComments }) => {
   const localId = localStorageService.getUserId();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const {
     isLoading,
@@ -57,7 +61,19 @@ const Comments = ({ companyId, typeOfComments }) => {
   };
 
   const handleAddComment = (data) => {
-    console.log("add comment");
+    const comment = {
+      _id: nanoid(),
+      date: Date.now(),
+      value: data,
+    };
+    const commentsArray = [
+      ...companies.find((c) => c.id === companyId).companyComments,
+      comment._id,
+    ];
+
+    dispatch(
+      postCompanyComment({ payload: comment, array: commentsArray, companyId })
+    );
   };
 
   return (

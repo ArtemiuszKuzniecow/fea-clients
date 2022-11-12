@@ -61,6 +61,8 @@ export const signUp = createAsyncThunk(
       });
       const { content } = await userService.create({
         id: data.localId,
+        leads: "",
+        orders: "",
         ...rest,
       });
       const result = await authService.logIn({

@@ -123,16 +123,13 @@ const PageLayout = ({ children }) => {
       <hr />
       {currentUser && (
         <div className={style.header_container_buttons}>
-          {currentUser?.leads && (
-            <Link to="/new-company">
-              <MyButton text="Добавить компанию" />
-            </Link>
-          )}
-          {currentUser?.orders && (
-            <Link to="/new-order">
-              <MyButton text="Добавить запрос" />
-            </Link>
-          )}
+          <Link to="/new-company">
+            <MyButton text="Добавить компанию" />
+          </Link>
+
+          <Link to="/new-order">
+            <MyButton text="Добавить запрос" />
+          </Link>
         </div>
       )}
       <div>{children}</div>

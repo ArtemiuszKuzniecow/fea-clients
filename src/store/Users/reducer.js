@@ -23,7 +23,16 @@ const initialState = localStorageService.getAccessToken()
 export const UserSlice = createSlice({
   name: "User",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.userData = null;
+      state.isLoading = false;
+      state.errors = null;
+      state.auth = null;
+      state.isLoggedIn = false;
+      state.dataLoaded = false;
+    },
+  },
   extraReducers: {
     [loadUserData.pending.type]: (state) => {
       state.isLoading = true;

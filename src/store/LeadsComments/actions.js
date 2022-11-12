@@ -13,23 +13,20 @@ export const loadLeadsCommentsData = createAsyncThunk(
   }
 );
 
-// export const postCompanyComment = createAsyncThunk(
-//   "comment/created",
-//   async (commentsPayload, thunkAPI) => {
-//     const { commentEndpoint, companyEndpoint, prevState, payload } =
-//       commentsPayload;
-
-//     try {
-//       const data = await commentsService.postNewComment(
-//         commentEndpoint,
-//         companyEndpoint,
-//         prevState,
-//         payload
-//       );
-
-//       return data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+export const postCompanyComment = createAsyncThunk(
+  "leadComment/created",
+  async (commentsPayload, thunkAPI) => {
+    const { payload, array, companyId } = commentsPayload;
+    try {
+      const data = await commentsService.postLeadComment(
+        payload,
+        array,
+        companyId
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
