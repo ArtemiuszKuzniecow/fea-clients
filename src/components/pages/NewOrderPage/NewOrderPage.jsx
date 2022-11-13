@@ -44,41 +44,6 @@ const NewOrderPage = () => {
     });
   };
 
-  const [disabled, setDisabled] = useState(
-    cargo.orderPoints.map((point) => {
-      return false;
-    })
-  );
-
-  const [buttonText, setButtonText] = useState(
-    cargo.orderPoints.map((point) => {
-      return "OK";
-    })
-  );
-
-  const handleDisabled = (index) => {
-    setDisabled((prevState) => {
-      return prevState.map((state, i) => {
-        if (i === index) {
-          return !state;
-        } else {
-          return state;
-        }
-      });
-    });
-    setButtonText((prevState) => {
-      return prevState.map((state, i) => {
-        if (i === index && state === "OK") {
-          return "Редактировать";
-        } else if (i === index && state === "Редактировать") {
-          return "OK";
-        } else {
-          return state;
-        }
-      });
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(order);
@@ -87,16 +52,21 @@ const NewOrderPage = () => {
   return (
     companies && (
       <>
-        <div
-          className={style.new_order_container_item}
-          style={{ marginLeft: "auto", marginRight: "auto" }}
-        >
-          <DropDownList
-            array={companies.map((c) => c.company)}
-            sampleText="Выберите компанию"
-          />
-        </div>
         <div className={style.new_order_container}>
+          <div className={style.new_order_container_item}>
+            <h4>Выберите компанию:</h4>
+            <DropDownList
+              array={companies.map((c) => c.company)}
+              sampleText="Выберите компанию"
+            />
+          </div>
+          <div className={style.new_order_container_item}>
+            <h4>Статус запроса:</h4>
+            <DropDownList
+              array={cargo.orderStatus}
+              sampleText="Статус запроса"
+            />
+          </div>
           <div className={style.new_order_container_item}>
             <h4>Вид перевозки:</h4>
             <DropDownList
@@ -109,13 +79,6 @@ const NewOrderPage = () => {
             <DropDownList
               array={cargo.contractType}
               sampleText="Вид контракта"
-            />
-          </div>
-          <div className={style.new_order_container_item}>
-            <h4>Статус запроса:</h4>
-            <DropDownList
-              array={cargo.orderStatus}
-              sampleText="Статус запроса"
             />
           </div>
           <div className={style.new_order_container_item}>
@@ -134,10 +97,6 @@ const NewOrderPage = () => {
           <div className={style.new_order_container_item}>
             <h4>Как часто возит:</h4>
             <TextField name="howOften" type="text" />
-          </div>
-          <div className={style.new_order_container_item}>
-            <h4>Ставка:</h4>
-            <TextField name="price" type="text" />
           </div>
           <div className={style.new_order_container_item}>
             <h4>Вес груза:</h4> <TextField name="weight" type="text" />
