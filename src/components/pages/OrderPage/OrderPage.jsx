@@ -93,9 +93,9 @@ const OrderPage = () => {
           </div>
           <hr />
           <div className={style.order_container_frame_item}>
-            <h4>Дополнительная информация о грузе: </h4>
+            <h4>Дополнительная информация по запросу: </h4>
             <p className={style.order_container_frame}>
-              {currentOrder.addition}
+              {currentOrder.special}
             </p>
           </div>
           <hr />
@@ -118,14 +118,14 @@ const OrderPage = () => {
           </div>
           <hr />
           <div className={style.order_container_frame_item}>
-            <h4>Таможенный пост: </h4>
+            <h4>Место таможенного оформления: </h4>
             <p className={style.order_container_frame}>
               {currentOrder.customs}
             </p>
           </div>
           <hr />
           <div className={style.order_container_frame_item}>
-            <h4>Адрес доставки: </h4>
+            <h4>Адрес доставки груза: </h4>
             <p className={style.order_container_frame}>
               {currentOrder.deliveryAddress}
             </p>
@@ -139,7 +139,7 @@ const OrderPage = () => {
           </div>
           <hr />
           <div className={style.order_container_frame_item}>
-            <h4>Дата забора груза: </h4>
+            <h4>Когда забирать: </h4>
             <p className={style.order_container_frame}>
               {currentOrder.pickupDate}
             </p>
@@ -148,8 +148,22 @@ const OrderPage = () => {
         </div>
 
         <div className={style.order_container_column}>
-          <h2>Данные о компании</h2>
+          <h2>Данные о компании и запросе</h2>
           <hr />
+
+          <div className={style.order_container_frame_item}>
+            <h4>Вид перевозки: </h4>
+            <p className={style.order_container_frame}>
+              {currentOrder.containersTypes}
+            </p>
+          </div>
+          <hr />
+          <div className={style.order_container_frame_item}>
+            <h4>Вид контракта: </h4>
+            <p className={style.order_container_frame}>
+              {currentOrder.contractType}
+            </p>
+          </div>
 
           <div className={style.order_container_frame_item}>
             <h4>Как часто возит: </h4>
@@ -167,7 +181,14 @@ const OrderPage = () => {
           <hr />
           <div>
             <div className={style.order_container_frame_item}>
-              <h4>Наша актуальная ставка: </h4>
+              <h4>Статус запроса: </h4>
+              <p className={style.order_container_frame}>
+                {currentOrder.status}
+              </p>
+            </div>
+            <hr />
+            <div className={style.order_container_frame_item}>
+              <h4>Ставка: </h4>
               <p className={style.order_container_frame}>
                 {currentOrder.price}
               </p>

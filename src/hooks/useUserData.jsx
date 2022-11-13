@@ -21,8 +21,11 @@ const useUserData = () => {
   const isLeadsCommentsLoading = useSelector(getLeadsCommentsLoadingStatus());
   const isOrdersCommentsLoading = useSelector(getOrdersCommentsLoadingStatus());
   const state = useSelector(getUserDataSelector());
-  const orders = useSelector(getAllOrders(state?.userData?.orders));
-  const companies = useSelector(getAllLeadsSelector(state?.userData?.leads));
+  const companies = useSelector(
+    getAllLeadsSelector(state?.userData?.userData?.id)
+  );
+  const companiesIds = companies && Object.values(companies.map((c) => c.id));
+  const orders = useSelector(getAllOrders(companiesIds));
 
   return {
     isLoading,

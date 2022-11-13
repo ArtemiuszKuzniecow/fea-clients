@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import style from "./LeadLayout.module.scss";
-import { clientStatusArray } from "../../assets/js/variables";
+import cargo from "../../cargo.json";
 import PropTypes from "prop-types";
 
 const LeadLayout = ({ children }) => {
@@ -18,7 +18,7 @@ const LeadLayout = ({ children }) => {
       <div className={style.lead_layout_container}>
         <div className={style.lead_layout_container_item}>
           <DropDownList
-            array={clientStatusArray}
+            array={cargo.clientStatusArray}
             sampleText="Сортировать по статусу клиента"
           />
         </div>

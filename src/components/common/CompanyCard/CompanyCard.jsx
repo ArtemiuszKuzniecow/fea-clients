@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  clientStatusArray,
-  companyInformation,
-} from "../../../assets/js/variables";
+import cargo from "../../../cargo.json";
 import MyButton from "../Button/MyButton";
 import Comments from "../Comment/Comments";
 import CompanyContacts from "../CompanyContacts/CompanyContacts";
@@ -40,7 +37,7 @@ const CompanyCard = ({ company }) => {
     <div className={style.company_card_container}>
       <div className={style.company_card_title}>
         <h4>{company.company}</h4>
-        {companyInformation.map((information, index) => (
+        {cargo.companyInformation.map((information, index) => (
           <div key={information}>
             {information}:
             <span className={style.company_card_title_frame}>
@@ -65,7 +62,10 @@ const CompanyCard = ({ company }) => {
 
       <div className={style.company_card_status}>
         <div className={style.company_card_status_header}>
-          <DropDownList array={clientStatusArray} sampleText={status.status} />
+          <DropDownList
+            array={cargo.clientStatusArray}
+            sampleText={status.status}
+          />
         </div>
 
         <div className={style.company_card_status_header}>

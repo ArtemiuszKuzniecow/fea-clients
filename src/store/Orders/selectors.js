@@ -4,7 +4,7 @@ export const getOrdersLoadingStatus = () => (state) =>
 export const getAllOrders = (array) => (state) => {
   return state?.orderData?.orderData && !state?.userData?.isLoading
     ? Object.values(state?.orderData?.orderData).filter((order) =>
-        array.includes(order.orderId)
+        array.includes(order.companyId)
       )
     : null;
 };
