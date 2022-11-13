@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import commentsService from "../../assets/services/commentsService";
+import commentsService, {
+  leadsCommentsEndpoint,
+} from "../../assets/services/commentsService";
 
 export const loadLeadsCommentsData = createAsyncThunk(
   "leadsComment/loadleadsComment",
@@ -16,15 +18,24 @@ export const loadLeadsCommentsData = createAsyncThunk(
 export const postCompanyComment = createAsyncThunk(
   "leadComment/created",
   async (commentsPayload, thunkAPI) => {
-    const { payload, array, companyId } = commentsPayload;
     try {
-      const data = await commentsService.postLeadComment(
+      const { content } = await commentsService.putLeadComment(commentsPayload);
+      return content;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteCompanyComment = createAsyncThunk(
+  "leadComment/deleted",
+  async (payload, thunkAPI) => {
+    try {
+      const { content } = await commentsService.removeComment(
         payload,
-        array,
-        companyId
+        leadsCommentsEndpoint
       );
-      console.log(data);
-      return data;
+      return payload._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

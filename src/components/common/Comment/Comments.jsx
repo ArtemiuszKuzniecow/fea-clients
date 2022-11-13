@@ -5,8 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import localStorageService from "../../../assets/services/localStorageService";
 import useUserData from "../../../hooks/useUserData";
-import { postCompanyComment } from "../../../store/LeadsComments/actions";
+import {
+  deleteCompanyComment,
+  postCompanyComment,
+} from "../../../store/LeadsComments/actions";
 import { getAllCompanyComments } from "../../../store/LeadsComments/selecetors";
+import {
+  deleteOrderComment,
+  postOrderComment,
+} from "../../../store/OrdersComments/actions";
 import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import Loader from "../../ui/Loader/Loader";
 import Comment from "./Comment";
@@ -24,26 +31,16 @@ const Comments = ({ companyId, typeOfComments }) => {
     companies,
     orders,
   } = useUserData();
-  const leadsComments = useSelector(
-    getAllCompanyComments(
-      companies.find((c) => c.id === companyId).companyComments
-    )
-  );
-  const ordersComments = useSelector(
-    getAllOrdersComments(
-      typeOfComments === "order"
-        ? orders.find((o) => o.orderId === id).ordersComments
-        : null
-    )
-  );
+  const leadsComments = useSelector(getAllCompanyComments(companyId));
+  const ordersComments = useSelector(getAllOrdersComments(id));
   const [currentComments, setCurrentComments] = useState(null);
   const [allCommentsShown, setAllCommentsShown] = useState(false);
 
   useEffect(() => {
     if (companies && leadsComments && typeOfComments === "company") {
-      setCurrentComments(leadsComments);
+      setCurrentComments(leadsComments.sort((a, b) => a.date - b.date));
     } else if (orders && ordersComments && typeOfComments === "order") {
-      setCurrentComments(ordersComments);
+      setCurrentComments(ordersComments.sort((a, b) => a.date - b.date));
     }
   }, [
     isLoading,
@@ -56,23 +53,28 @@ const Comments = ({ companyId, typeOfComments }) => {
   };
 
   const handleDelete = (comment) => {
-    console.log("delete");
+    if (typeOfComments === "company") {
+      dispatch(deleteCompanyComment(comment));
+    } else {
+      dispatch(deleteOrderComment(comment));
+    }
   };
 
   const handleAddComment = (data) => {
-    const comment = {
-      _id: nanoid(),
-      date: Date.now(),
-      value: data,
-    };
-    const commentsArray = [
-      ...companies.find((c) => c.id === companyId).companyComments,
-      comment._id,
-    ];
-
-    dispatch(
-      postCompanyComment({ payload: comment, array: commentsArray, companyId })
-    );
+    const comment =
+      typeOfComments === "company"
+        ? {
+            _id: nanoid(),
+            date: Date.now(),
+            value: data,
+            companyId: companyId,
+          }
+        : { _id: nanoid(), date: Date.now(), value: data, orderId: id };
+    if (typeOfComments === "company") {
+      dispatch(postCompanyComment(comment));
+    } else {
+      dispatch(postOrderComment(comment));
+    }
   };
 
   return (
