@@ -164,7 +164,7 @@ const OrderPage = () => {
               {currentOrder.contractType}
             </p>
           </div>
-
+          <hr />
           <div className={style.order_container_frame_item}>
             <h4>Как часто возит: </h4>
             <p className={style.order_container_frame}>

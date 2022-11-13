@@ -73,7 +73,7 @@ const CompanyCard = ({ company }) => {
             type="text"
             name="date"
             onChange={handleChangeData}
-            isButton={true}
+            hasButton={true}
             disabled={disabled}
             onClick={handleDisabled}
             buttonText={disabled ? "Редактировать" : "ОК"}

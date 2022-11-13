@@ -6,7 +6,7 @@ import style from "./TextField.module.scss";
 const TextField = ({
   type,
   name,
-  isButton,
+  hasButton,
   buttonText,
   onChange,
   onClick,
@@ -24,7 +24,7 @@ const TextField = ({
         onChange={onChange}
         disabled={disabled}
       />
-      {isButton && <MyButton text={buttonText} onClick={onClick} />}
+      {hasButton && <MyButton text={buttonText} onClick={onClick} />}
     </div>
   );
 };
@@ -32,7 +32,7 @@ const TextField = ({
 TextField.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  isButton: PropTypes.bool,
+  hasButton: PropTypes.bool,
   buttonText: PropTypes.string,
   onChange: PropTypes.func,
   onClick: PropTypes.func,

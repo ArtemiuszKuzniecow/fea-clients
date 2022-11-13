@@ -14,13 +14,8 @@
     padding-bottom: 10px;
 
     &_item {
+        width: 45%;
 
-        @media (min-width: 1250px) {
-             width: 25%;
-        }
-        @media (min-width: 1000px) and (max-width: 1250px) {
-             width: 40%;
-        }
         @media (max-width: 1000px) {
              width: 100%;
         }
@@ -30,6 +25,10 @@
         
         & label {
             margin-bottom: 5px;
+        }
+
+        &_frame {
+            @include _frame
         }
     }
 }
