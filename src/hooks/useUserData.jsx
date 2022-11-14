@@ -24,7 +24,8 @@ const useUserData = () => {
   const companies = useSelector(
     getAllLeadsSelector(state?.userData?.userData?.id)
   );
-  const companiesIds = companies && Object.values(companies.map((c) => c.id));
+  const companiesIds =
+    !isLeadsLoading && companies && Object.values(companies.map((c) => c.id));
   const orders = useSelector(getAllOrders(companiesIds));
 
   return {

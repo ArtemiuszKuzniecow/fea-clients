@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import Loader from "../../ui/Loader/Loader";
 import MyButton from "../Button/MyButton";
 import style from "./DropDownList.module.scss";
-import PropTypes from "prop-types";
 
-const DropDownList = ({ array, sampleText }) => {
+const DropDownList = ({ array, sampleText, onChange, name }) => {
   const [openList, setOpenList] = useState(false);
   const [textSample, setTextSample] = useState(sampleText);
 
@@ -14,10 +15,11 @@ const DropDownList = ({ array, sampleText }) => {
   };
   const handleSampleText = (text) => {
     setTextSample(text);
+    onChange({ [name]: text });
     toggleList();
   };
 
-  return (
+  return array ? (
     <div className={style.dropdown_container}>
       <MyButton
         text={textSample}
@@ -42,12 +44,16 @@ const DropDownList = ({ array, sampleText }) => {
         })}
       </ul>
     </div>
+  ) : (
+    <Loader />
   );
 };
 
 DropDownList.propTypes = {
   array: PropTypes.array,
   sampleText: PropTypes.string,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default DropDownList;

@@ -88,7 +88,7 @@ const OrderPage = () => {
           <div className={style.order_container_frame_item}>
             <h4>Можно ли штабелировать: </h4>
             <p className={style.order_container_frame}>
-              {currentOrder.transshipment}
+              {currentOrder.transshipment ? "Да" : "Нет"}
             </p>
           </div>
           <hr />
