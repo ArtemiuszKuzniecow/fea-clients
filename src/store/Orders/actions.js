@@ -12,3 +12,15 @@ export const loadOrdersData = createAsyncThunk(
     }
   }
 );
+
+export const postNewOrder = createAsyncThunk(
+  "newOrder/created",
+  async (payload, thunkAPI) => {
+    try {
+      const { content } = await ordersService.putNewOrder(payload);
+      return content;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);

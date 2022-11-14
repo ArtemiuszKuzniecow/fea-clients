@@ -1,12 +1,13 @@
+import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import style from "./NewCompanyPage.module.scss";
 
 const NewCompanyPage = () => {
+  const currentCompanyId = nanoid();
   const [company, setCompany] = useState({
     city: "",
-    comments: [],
     company: "",
     contacts: {
       email: "",
@@ -16,14 +17,12 @@ const NewCompanyPage = () => {
     containersTypes: "",
     contractType: "",
     directions: "",
-    isRequested: "",
+    id: currentCompanyId,
+    isRequested: false,
     manager: "",
     sphere: "",
-    status: {
-      date: "",
-      value: "",
-    },
-    id: "",
+    status: { date: Date.now(), value: "Получил запрос" },
+    userID: "",
   });
   return (
     <div>

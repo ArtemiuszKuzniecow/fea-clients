@@ -38,9 +38,11 @@ const Comments = ({ companyId, typeOfComments }) => {
 
   useEffect(() => {
     if (companies && leadsComments && typeOfComments === "company") {
-      setCurrentComments(leadsComments.sort((a, b) => a.date - b.date));
+      const commentsArray = leadsComments.sort((a, b) => a.date - b.date);
+      setCurrentComments(commentsArray.length > 0 ? commentsArray : null);
     } else if (orders && ordersComments && typeOfComments === "order") {
-      setCurrentComments(ordersComments.sort((a, b) => a.date - b.date));
+      const commentsArray = ordersComments.sort((a, b) => a.date - b.date);
+      setCurrentComments(commentsArray.length > 0 ? commentsArray : null);
     }
   }, [
     isLoading,

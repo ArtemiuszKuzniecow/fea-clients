@@ -21,6 +21,7 @@ const useUserData = () => {
   const isLeadsCommentsLoading = useSelector(getLeadsCommentsLoadingStatus());
   const isOrdersCommentsLoading = useSelector(getOrdersCommentsLoadingStatus());
   const state = useSelector(getUserDataSelector());
+  const currentUserData = useSelector(getUserDataSelector());
   const companies = useSelector(
     getAllLeadsSelector(state?.userData?.userData?.id)
   );
@@ -33,9 +34,10 @@ const useUserData = () => {
     isLeadsLoading,
     isOrdersLoading,
     isLeadsCommentsLoading,
+    isOrdersCommentsLoading,
+    currentUserData,
     orders,
     companies,
-    isOrdersCommentsLoading,
   };
 };
 

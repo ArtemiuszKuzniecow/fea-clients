@@ -1,8 +1,11 @@
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
+import { postNewOrder } from "../../../store/Orders/actions";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import RadioButtons from "../../common/Form/RadioButtons/RadioButtons";
@@ -13,6 +16,9 @@ import style from "./NewOrderPage.module.scss";
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading } = useUserData();
   const currentCompanies = companies && companies.map((c) => c.company);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const currentOrderId = nanoid();
   const [order, setOrder] = useState({
     companyId: "",
     containersTypes: "",
@@ -26,7 +32,7 @@ const NewOrderPage = () => {
     incoterms: "",
     isActual: false,
     isClosed: false,
-    orderId: nanoid(),
+    orderId: currentOrderId,
     package: "",
     pickupAddress: "",
     pickupDate: "",
@@ -42,7 +48,8 @@ const NewOrderPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(order);
+    dispatch(postNewOrder(order));
+    history.push(`orders-list`);
   };
 
   const handleChange = ({ target }) => {
@@ -157,7 +164,7 @@ const NewOrderPage = () => {
           <TextField name="package" type="text" onChange={handleChange} />
         </div>
         <div className={style.new_order_container_item}>
-          <h4>Дополнительная информация по запросу:</h4>
+          <h4>Дополнительная информация:</h4>
           <TextField name="special" type="text" onChange={handleChange} />
         </div>
         <div className={style.new_order_container_item}>
