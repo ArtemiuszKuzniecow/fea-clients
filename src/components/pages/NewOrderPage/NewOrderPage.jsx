@@ -75,6 +75,7 @@ const NewOrderPage = () => {
 
   return !isLoading && !isLeadsLoading && companies ? (
     <>
+      <h1>Добавить новый запрос:</h1>
       <div className={style.new_order_container}>
         <div className={style.new_order_container_item}>
           <h4>Выберите компанию:</h4>
