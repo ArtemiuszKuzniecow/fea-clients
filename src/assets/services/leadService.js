@@ -7,6 +7,19 @@ const leadService = {
     const { data } = await httpService.get(leadEndpoint);
     return data;
   },
+
+  putNewLead: async (payload) => {
+    const { data } = await httpService.put(leadEndpoint + payload.id, payload);
+    return data;
+  },
+
+  editLeadParam: async (id, param, payload) => {
+    const { data } = await httpService.put(
+      `${leadEndpoint}${id}/${param}`,
+      payload
+    );
+    return data;
+  },
 };
 
 export default leadService;

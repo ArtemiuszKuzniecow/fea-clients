@@ -67,6 +67,10 @@
                 width: 100%;
                 }   
         background-color: $background-color;
+
+        &_calendar {
+            font: 1.2em sans-serif;
+        }
         
         &_header {
             font-size: larger;

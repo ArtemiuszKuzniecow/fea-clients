@@ -22,12 +22,15 @@ const useUserData = () => {
   const isOrdersCommentsLoading = useSelector(getOrdersCommentsLoadingStatus());
   const state = useSelector(getUserDataSelector());
   const currentUserData = useSelector(getUserDataSelector());
-  const companies = useSelector(
-    getAllLeadsSelector(state?.userData?.userData?.id)
-  );
+  const companies = useSelector(getAllLeadsSelector(state?.userData?.id));
   const companiesIds =
     !isLeadsLoading && companies && Object.values(companies.map((c) => c.id));
   const orders = useSelector(getAllOrders(companiesIds));
+
+  const companiesFiltredByDate = (currentDate) =>
+    !isLeadsLoading &&
+    companies &&
+    Object.values(companies.filter((c) => c.status.date === currentDate));
 
   return {
     isLoading,
@@ -38,6 +41,7 @@ const useUserData = () => {
     currentUserData,
     orders,
     companies,
+    companiesFiltredByDate,
   };
 };
 

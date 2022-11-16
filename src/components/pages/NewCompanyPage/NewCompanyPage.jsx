@@ -1,8 +1,11 @@
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
+import { postNewLead } from "../../../store/Leads/actions";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
@@ -11,6 +14,8 @@ import style from "./NewCompanyPage.module.scss";
 
 const NewCompanyPage = () => {
   const currentCompanyId = nanoid();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { isLoading, currentUserData } = useUserData();
   const [company, setCompany] = useState(null);
 
@@ -38,7 +43,8 @@ const NewCompanyPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(company);
+    dispatch(postNewLead(company));
+    history.push("companies");
   };
 
   const handleChangeDropDown = (data) => {

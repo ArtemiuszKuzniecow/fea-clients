@@ -49,7 +49,7 @@ const NewOrderPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewOrder(order));
-    history.push(`orders-list`);
+    history.push("orders-list");
   };
 
   const handleChange = ({ target }) => {

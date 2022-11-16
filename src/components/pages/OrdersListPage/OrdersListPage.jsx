@@ -44,7 +44,7 @@ const OrdersListPage = () => {
   return (
     <OrderLayout>
       {!isLoading && !isLeadsLoading && !isOrdersLoading ? (
-        orders ? (
+        orders.length > 0 ? (
           ordersArray &&
           ordersArray.map((order) => {
             return (

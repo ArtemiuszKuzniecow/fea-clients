@@ -1,20 +1,20 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import getDateFormat from "../../../assets/utils/getDateFormat";
 import cargo from "../../../cargo.json";
+import { editLeadParameter } from "../../../store/Leads/actions";
 import MyButton from "../Button/MyButton";
 import Comments from "../Comment/Comments";
 import CompanyContacts from "../CompanyContacts/CompanyContacts";
 import DropDownList from "../DropDownList/DropDownList";
-import TextField from "../Form/TextField/TextField";
 import style from "./CompanyCard.module.scss";
 
 const CompanyCard = ({ company }) => {
-  const [status, setStatus] = useState({
-    status: "Выбрать действие",
-    date: "",
-  });
+  const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
+  const [status, setStatus] = useState(null);
   const companyInformationData = [
     company.directions,
     company.sphere,
@@ -27,10 +27,17 @@ const CompanyCard = ({ company }) => {
   };
 
   const handleChangeData = ({ target }) => {
-    setStatus((prevState) => ({
-      ...prevState,
-      date: target.value,
-    }));
+    const currentDate = new Date(target.value);
+    setStatus((prevState) => ({ ...prevState, date: currentDate.getTime() }));
+  };
+  const handleChange = (data) => {
+    setStatus((prevState) => ({ ...prevState, ...data }));
+  };
+
+  const refreshStatus = (data) => {
+    dispatch(
+      editLeadParameter({ payload: data, id: company.id, parameter: "status" })
+    );
   };
 
   return (
@@ -64,22 +71,24 @@ const CompanyCard = ({ company }) => {
         <div className={style.company_card_status_header}>
           <DropDownList
             array={cargo.clientStatusArray}
-            sampleText={status.status}
+            sampleText={company.status.value || "Выбрать действие"}
+            onChange={handleChange}
+            name="value"
           />
         </div>
 
-        <div className={style.company_card_status_header}>
-          <TextField
-            type="text"
-            name="date"
+        <h5>
+          <label htmlFor="date">Когда связаться: </label>
+          <input
+            className={style.company_card_status_calendar}
+            type="date"
+            id="date"
             onChange={handleChangeData}
-            hasButton={true}
-            disabled={disabled}
-            onClick={handleDisabled}
-            buttonText={disabled ? "Редактировать" : "ОК"}
-          />
-          <br />
-          Связаться: {company.status.date}
+          />{" "}
+          <MyButton text="OK" onClick={() => refreshStatus(status)} />
+        </h5>
+        <div className={style.company_card_status_header}>
+          Связаться: {getDateFormat(company.status.date, ".")}
         </div>
         {company.isRequested ? (
           <Link to="/orders-list">
