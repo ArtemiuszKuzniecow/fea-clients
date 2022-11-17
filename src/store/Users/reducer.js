@@ -46,9 +46,11 @@ export const UserSlice = createSlice({
     },
     setClientsStatus: (state, { payload }) => {
       state.clientsStatusFilter = payload;
+      state.isLoading = false;
     },
     setContactDate: (state, { payload }) => {
       state.contactDateFilter = payload;
+      state.isLoading = false;
     },
   },
   extraReducers: {

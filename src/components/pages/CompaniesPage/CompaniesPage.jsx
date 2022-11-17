@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useUserData from "../../../hooks/useUserData";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
@@ -9,6 +9,8 @@ import Loader from "../../ui/Loader/Loader";
 const CompaniesPage = () => {
   const { isLoading, isLeadsLoading, companies, clientStatus, contactDate } =
     useUserData();
+  // const [currentCompanies, setCurrentCompanies] = useState([]);
+
   return (
     <LeadLayout>
       {!isLoading && !isLeadsLoading ? (

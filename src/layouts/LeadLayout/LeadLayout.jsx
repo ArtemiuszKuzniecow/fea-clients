@@ -11,7 +11,7 @@ import style from "./LeadLayout.module.scss";
 
 const LeadLayout = ({ children }) => {
   const dispatch = useDispatch();
-  const { companies, isLeadsLoading } = useUserData();
+  const { companies, isLeadsLoading, isLoading } = useUserData();
   const [statusArray, setStatusArray] = useState(null);
   const [dateToContactWithClient, setDateToContactWithClient] = useState(null);
   const [dateFilter, setDateFilter] = useState({ date: "" });
@@ -23,18 +23,12 @@ const LeadLayout = ({ children }) => {
 
   useEffect(() => {
     if (companies && !isLeadsLoading) {
-      setDateToContactWithClient([
-        "Все компании",
-        ...createSetArray(
-          companies.map((c) => getDateFormat(c.status.date, "."))
-        ),
-      ]);
-      setStatusArray([
-        "Все компании",
-        ...createSetArray(companies.map((c) => c.status.value)),
-      ]);
+      const dateArr = companies.map((c) => getDateFormat(c.status.date, "."));
+      const statusArr = companies.map((c) => c.status.value);
+      setDateToContactWithClient(["Все компании", ...createSetArray(dateArr)]);
+      setStatusArray(["Все компании", ...createSetArray(statusArr)]);
     }
-  }, [isLeadsLoading]);
+  }, [isLeadsLoading, isLoading]);
 
   const handleChangeDropDownStatus = (data) => {
     setStatusFilter((prevState) => ({ ...prevState, ...data }));
