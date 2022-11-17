@@ -8,4 +8,11 @@ export default function getDateFormat(date, separator) {
   )}${separator}${currentDate.getFullYear()}`;
 }
 
+export function getOppositeDateFormat(data) {
+  const date = new Date(
+    `${data.slice(6)}-${data.slice(3, 5)}-${data.slice(0, 2)}`
+  );
+  return date;
+}
+
 export const today = Date.now();

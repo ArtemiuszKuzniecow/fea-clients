@@ -10,6 +10,10 @@ const initialState = localStorageService.getAccessToken()
       auth: { userId: localStorageService.getUserId() },
       isLoggedIn: true,
       dataLoaded: false,
+      clientsStatusFilter: null,
+      contactDateFilter: null,
+      openedClosedOrdersFilter: null,
+      orderDateFilter: null,
     }
   : {
       userData: null,
@@ -18,6 +22,10 @@ const initialState = localStorageService.getAccessToken()
       auth: null,
       isLoggedIn: false,
       dataLoaded: false,
+      clientsStatusFilter: null,
+      contactDateFilter: null,
+      openedClosedOrdersFilter: null,
+      orderDateFilter: null,
     };
 
 export const UserSlice = createSlice({
@@ -31,6 +39,16 @@ export const UserSlice = createSlice({
       state.auth = null;
       state.isLoggedIn = false;
       state.dataLoaded = false;
+      state.clientsStatusFilter = null;
+      state.contactDateFilter = null;
+      state.openedClosedOrdersFilter = null;
+      state.orderDateFilter = null;
+    },
+    setClientsStatus: (state, { payload }) => {
+      state.clientsStatusFilter = payload;
+    },
+    setContactDate: (state, { payload }) => {
+      state.contactDateFilter = payload;
     },
   },
   extraReducers: {
