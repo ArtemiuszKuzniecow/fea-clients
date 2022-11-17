@@ -1,28 +1,38 @@
-import React, { useState } from "react";
-import DropDownList from "../../components/common/DropDownList/DropDownList";
-import style from "./LeadLayout.module.scss";
-import cargo from "../../cargo.json";
 import PropTypes from "prop-types";
-import useUserData from "../../hooks/useUserData";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import getDateFormat, {
   getOppositeDateFormat,
 } from "../../assets/utils/getDateFormat";
-import { useDispatch } from "react-redux";
+import DropDownList from "../../components/common/DropDownList/DropDownList";
+import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
+import style from "./LeadLayout.module.scss";
 
 const LeadLayout = ({ children }) => {
   const dispatch = useDispatch();
   const { companies, isLeadsLoading } = useUserData();
+  const [statusArray, setStatusArray] = useState(null);
   const [dateToContactWithClient, setDateToContactWithClient] = useState(null);
   const [dateFilter, setDateFilter] = useState({ date: "" });
   const [statusFilter, setStatusFilter] = useState({ status: "" });
+
+  const createSetArray = (arr) => {
+    return Array.from(new Set(arr));
+  };
+
   useEffect(() => {
     if (companies && !isLeadsLoading) {
-      const datesSet = new Set(
-        companies.map((c) => getDateFormat(c.status.date, "."))
-      );
-      setDateToContactWithClient(["Все компании", ...Array.from(datesSet)]);
+      setDateToContactWithClient([
+        "Все компании",
+        ...createSetArray(
+          companies.map((c) => getDateFormat(c.status.date, "."))
+        ),
+      ]);
+      setStatusArray([
+        "Все компании",
+        ...createSetArray(companies.map((c) => c.status.value)),
+      ]);
     }
   }, [isLeadsLoading]);
 
@@ -41,10 +51,6 @@ const LeadLayout = ({ children }) => {
     dispatch(UserSlice.actions.setContactDate(dateFilter.date));
   }, [dateFilter, statusFilter]);
 
-  const changeRedux = (data) => {
-    dispatch(UserSlice.actions.setClientsStatus(data));
-  };
-
   return (
     companies &&
     !isLeadsLoading && (
@@ -53,7 +59,7 @@ const LeadLayout = ({ children }) => {
         <div className={style.lead_layout_container}>
           <div className={style.lead_layout_container_item}>
             <DropDownList
-              array={["Все компании", ...cargo.clientStatusArray]}
+              array={statusArray}
               sampleText="Фильтровать по статусу клиента"
               name="status"
               onChange={handleChangeDropDownStatus}
@@ -68,7 +74,6 @@ const LeadLayout = ({ children }) => {
             />
           </div>
         </div>
-        <button onClick={() => changeRedux("test")}>test</button>
         <div>{children}</div>
       </>
     )

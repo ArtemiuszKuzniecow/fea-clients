@@ -7,8 +7,8 @@ import CompanyCard from "../../common/CompanyCard/CompanyCard";
 import Loader from "../../ui/Loader/Loader";
 
 const CompaniesPage = () => {
-  const { isLoading, isLeadsLoading, companies } = useUserData();
-
+  const { isLoading, isLeadsLoading, companies, clientStatus, contactDate } =
+    useUserData();
   return (
     <LeadLayout>
       {!isLoading && !isLeadsLoading ? (

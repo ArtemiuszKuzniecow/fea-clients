@@ -10,8 +10,8 @@ const initialState = localStorageService.getAccessToken()
       auth: { userId: localStorageService.getUserId() },
       isLoggedIn: true,
       dataLoaded: false,
-      clientsStatusFilter: null,
-      contactDateFilter: null,
+      clientsStatusFilter: "Все компании",
+      contactDateFilter: "Все компании",
       openedClosedOrdersFilter: null,
       orderDateFilter: null,
     }
@@ -22,8 +22,8 @@ const initialState = localStorageService.getAccessToken()
       auth: null,
       isLoggedIn: false,
       dataLoaded: false,
-      clientsStatusFilter: null,
-      contactDateFilter: null,
+      clientsStatusFilter: "Все компании",
+      contactDateFilter: "Все компании",
       openedClosedOrdersFilter: null,
       orderDateFilter: null,
     };
