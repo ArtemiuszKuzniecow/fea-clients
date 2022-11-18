@@ -52,6 +52,14 @@ export const UserSlice = createSlice({
       state.contactDateFilter = payload;
       state.isLoading = false;
     },
+    setOpenedStatus: (state, { payload }) => {
+      state.openedClosedOrdersFilter = payload;
+      state.isLoading = false;
+    },
+    setOrderDate: (state, { payload }) => {
+      state.orderDateFilter = payload;
+      state.isLoading = false;
+    },
   },
   extraReducers: {
     [loadUserData.pending.type]: (state) => {

@@ -13,6 +13,8 @@ import {
   getClientStatusSelector,
   getContactDateSelector,
   getIsLoadingStatus,
+  getOpenedStatus,
+  getOrderDate,
   getUserDataSelector,
 } from "../store/Users/selectors";
 
@@ -30,6 +32,8 @@ const useUserData = () => {
   const orders = useSelector(getAllOrders(companiesIds));
   const clientStatus = useSelector(getClientStatusSelector());
   const contactDate = useSelector(getContactDateSelector());
+  const openedStatus = useSelector(getOpenedStatus());
+  const orderDate = useSelector(getOrderDate());
 
   return {
     isLoading,
@@ -42,6 +46,8 @@ const useUserData = () => {
     companies,
     clientStatus,
     contactDate,
+    openedStatus,
+    orderDate,
   };
 };
 

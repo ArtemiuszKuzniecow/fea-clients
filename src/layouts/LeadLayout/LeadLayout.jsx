@@ -28,7 +28,7 @@ const LeadLayout = ({ children }) => {
       setDateToContactWithClient(["Все компании", ...dateArr]);
       setStatusArray(["Все компании", ...statusArr]);
     }
-  }, [isLeadsLoading, isLoading]);
+  }, [isLeadsLoading, isLoading, clientStatus, contactDate]);
 
   const handleChangeDropDownStatus = (data) => {
     setStatusFilter((prevState) => ({ ...prevState, ...data }));

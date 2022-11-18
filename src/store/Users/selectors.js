@@ -7,3 +7,6 @@ export const getClientStatusSelector = () => (state) =>
   state.userData.clientsStatusFilter;
 export const getContactDateSelector = () => (state) =>
   state.userData.contactDateFilter;
+export const getOpenedStatus = () => (state) =>
+  state.userData.openedClosedOrdersFilter;
+export const getOrderDate = () => (state) => state.userData.orderDateFilter;
