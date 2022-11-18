@@ -31,11 +31,6 @@ const useUserData = () => {
   const clientStatus = useSelector(getClientStatusSelector());
   const contactDate = useSelector(getContactDateSelector());
 
-  const companiesFiltredByDate = (currentDate) =>
-    !isLeadsLoading &&
-    companies &&
-    Object.values(companies.filter((c) => c.status.date === currentDate));
-
   return {
     isLoading,
     isLeadsLoading,
@@ -45,7 +40,6 @@ const useUserData = () => {
     currentUserData,
     orders,
     companies,
-    companiesFiltredByDate,
     clientStatus,
     contactDate,
   };
