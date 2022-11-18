@@ -70,8 +70,14 @@ const CompanyCard = ({ company }) => {
       <div className={style.company_card_status}>
         <div className={style.company_card_status_header}>
           <DropDownList
-            array={cargo.clientStatusArray}
-            sampleText={company.status.value || "Выбрать действие"}
+            array={
+              company.isRequested
+                ? cargo.clientStatusArray.filter((s, i) => i > 2)
+                : cargo.clientStatusArray.filter((s, i) => i !== 3)
+            }
+            sampleText={
+              company.isRequested ? "Получил запрос" : company.status.value
+            }
             onChange={handleChange}
             name="value"
           />

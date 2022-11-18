@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useUserData from "../../../hooks/useUserData";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
@@ -9,13 +10,48 @@ import Loader from "../../ui/Loader/Loader";
 const CompaniesPage = () => {
   const { isLoading, isLeadsLoading, companies, clientStatus, contactDate } =
     useUserData();
-  // const [currentCompanies, setCurrentCompanies] = useState([]);
+  const [currentCompanies, setCurrentCompanies] = useState([]);
+
+  useEffect(() => {
+    if (!isLoading && !isLeadsLoading) {
+      if (
+        (clientStatus.length < 1 || clientStatus === "Все компании") &&
+        !contactDate
+      ) {
+        setCurrentCompanies(companies);
+      } else if (
+        (clientStatus.length > 1 || clientStatus !== "Все компании") &&
+        !contactDate
+      ) {
+        setCurrentCompanies(
+          companies.filter((c) => c.status.value === clientStatus)
+        );
+      } else if (
+        (clientStatus.length < 1 || clientStatus === "Все компании") &&
+        contactDate
+      ) {
+        setCurrentCompanies(
+          companies.filter((c) => c.status.date === contactDate)
+        );
+      } else if (
+        (clientStatus.length > 1 || clientStatus !== "Все компании") &&
+        contactDate
+      ) {
+        setCurrentCompanies(
+          companies.filter(
+            (c) =>
+              c.status.date === contactDate && c.status.value === clientStatus
+          )
+        );
+      }
+    }
+  }, [clientStatus, contactDate, isLoading, isLeadsLoading]);
 
   return (
     <LeadLayout>
       {!isLoading && !isLeadsLoading ? (
-        companies.length > 0 ? (
-          companies.map((company) => {
+        currentCompanies.length > 0 ? (
+          currentCompanies.map((company) => {
             return <CompanyCard company={company} key={company.id} />;
           })
         ) : (
