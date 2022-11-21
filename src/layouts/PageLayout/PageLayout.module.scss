@@ -48,6 +48,14 @@
         }
     }
 
+    &_companies {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 25%;
+    }
+
     &_companies,
     &_login,
     &_buttons {

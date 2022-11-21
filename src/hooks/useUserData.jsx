@@ -10,7 +10,11 @@ import {
 } from "../store/Orders/selectors";
 import { getOrdersCommentsLoadingStatus } from "../store/OrdersComments/selectors";
 import {
+  getClientStatusSelector,
+  getContactDateSelector,
   getIsLoadingStatus,
+  getOpenedStatus,
+  getOrderDate,
   getUserDataSelector,
 } from "../store/Users/selectors";
 
@@ -26,11 +30,10 @@ const useUserData = () => {
   const companiesIds =
     !isLeadsLoading && companies && Object.values(companies.map((c) => c.id));
   const orders = useSelector(getAllOrders(companiesIds));
-
-  const companiesFiltredByDate = (currentDate) =>
-    !isLeadsLoading &&
-    companies &&
-    Object.values(companies.filter((c) => c.status.date === currentDate));
+  const clientStatus = useSelector(getClientStatusSelector());
+  const contactDate = useSelector(getContactDateSelector());
+  const openedStatus = useSelector(getOpenedStatus());
+  const orderDate = useSelector(getOrderDate());
 
   return {
     isLoading,
@@ -41,7 +44,10 @@ const useUserData = () => {
     currentUserData,
     orders,
     companies,
-    companiesFiltredByDate,
+    clientStatus,
+    contactDate,
+    openedStatus,
+    orderDate,
   };
 };
 

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Loader from "../../ui/Loader/Loader";
 import MyButton from "../Button/MyButton";
 import style from "./DropDownList.module.scss";
@@ -7,6 +8,15 @@ import style from "./DropDownList.module.scss";
 const DropDownList = ({ array, sampleText, onChange, name }) => {
   const [openList, setOpenList] = useState(false);
   const [textSample, setTextSample] = useState(sampleText);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (array) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [array]);
 
   const toggleList = () => {
     setOpenList((prevState) => {
@@ -19,7 +29,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
     toggleList();
   };
 
-  return array ? (
+  return array && !isLoading ? (
     <div className={style.dropdown_container}>
       <MyButton
         text={textSample}

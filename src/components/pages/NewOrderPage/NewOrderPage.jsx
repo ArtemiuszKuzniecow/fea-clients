@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
+import { editLeadParameter } from "../../../store/Leads/actions";
 import { postNewOrder } from "../../../store/Orders/actions";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
@@ -49,6 +50,13 @@ const NewOrderPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewOrder(order));
+    dispatch(
+      editLeadParameter({
+        payload: true,
+        id: order.companyId,
+        parameter: "isRequested",
+      })
+    );
     history.push("orders-list");
   };
 
