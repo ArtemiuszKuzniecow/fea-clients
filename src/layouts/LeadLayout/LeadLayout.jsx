@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import getDateFormat, {
-  createSetArray,
-} from "../../assets/utils/getDateFormat";
+import getDateFormat from "../../assets/utils/getDateFormat";
+import { createSetArray } from "../../assets/utils/createSetArray";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";

@@ -8,8 +8,4 @@ export default function getDateFormat(date, separator) {
   )}${separator}${currentDate.getFullYear()}`;
 }
 
-export function createSetArray(arr) {
-  return Array.from(new Set(arr));
-}
-
 export const today = Date.now();

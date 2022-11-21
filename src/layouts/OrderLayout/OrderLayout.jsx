@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createSetArray } from "../../assets/utils/createSetArray";
 import getDateFormat from "../../assets/utils/getDateFormat";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
@@ -11,16 +12,22 @@ import style from "./OrderLayout.module.scss";
 
 const OrderLayout = ({ children }) => {
   const dispatch = useDispatch();
-  const { orders, isOrdersLoading, isLoading, openedStatus, orderDate } =
-    useUserData();
+  const { orders, isOrdersLoading, isLoading } = useUserData();
   const [isOpenedFilter, setOpenedFilter] = useState({ isClosed: "" });
   const [actualDateFilter, setActualDateFilter] = useState({ date: "" });
   const [datesOfOrders, setDatesOfOrders] = useState(null);
 
   const handleChangeDropDownStatusIsOpen = (data) => {
+    const getIsClosedField = () => {
+      if (data.isClosed === "Все") {
+        return "";
+      } else {
+        return data.isClosed !== "Открытые";
+      }
+    };
     setOpenedFilter((prevState) => ({
       ...prevState,
-      isClosed: data === "Открытые",
+      isClosed: getIsClosedField(),
     }));
   };
   const handleChangeDropDownDate = (data) => {
@@ -33,9 +40,19 @@ const OrderLayout = ({ children }) => {
   };
 
   useEffect(() => {
+    // console.log(orders);
+    // console.log(!isLoading);
+    // console.log(!isOrdersLoading);
+    orders &&
+      !isOrdersLoading &&
+      !isLoading &&
+      setDatesOfOrders([
+        "Все запросы",
+        ...createSetArray(orders.map((o) => getDateFormat(o.date, "."))),
+      ]);
     dispatch(UserSlice.actions.setOpenedStatus(isOpenedFilter.isClosed));
     dispatch(UserSlice.actions.setOrderDate(actualDateFilter.date));
-  }, [isOrdersLoading, isLoading, openedStatus, orderDate]);
+  }, [isOrdersLoading, isLoading, isOpenedFilter, actualDateFilter]);
 
   return (
     <>
@@ -44,7 +61,7 @@ const OrderLayout = ({ children }) => {
         <div className={style.order_layout_container_item}>
           <DropDownList
             sampleText="Сортировать (открытые/закрытые запросы)"
-            array={["Открытые", "Закрытые"]}
+            array={["Все", "Открытые", "Закрытые"]}
             name="isClosed"
             onChange={handleChangeDropDownStatusIsOpen}
           />
@@ -53,7 +70,7 @@ const OrderLayout = ({ children }) => {
         <div className={style.order_layout_container_item}>
           <DropDownList
             sampleText="Сортировать по дате запроса"
-            array={[1, 2, 3]}
+            array={datesOfOrders}
             name="date"
             onChange={handleChangeDropDownDate}
           />

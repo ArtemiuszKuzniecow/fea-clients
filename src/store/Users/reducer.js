@@ -39,8 +39,8 @@ export const UserSlice = createSlice({
       state.auth = null;
       state.isLoggedIn = false;
       state.dataLoaded = false;
-      state.clientsStatusFilter = null;
-      state.contactDateFilter = null;
+      state.clientsStatusFilter = "Все компании";
+      state.contactDateFilter = "Все компании";
       state.openedClosedOrdersFilter = null;
       state.orderDateFilter = null;
     },

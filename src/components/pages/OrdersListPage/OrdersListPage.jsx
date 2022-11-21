@@ -7,8 +7,16 @@ import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
 
 const OrdersListPage = () => {
-  const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
-    useUserData();
+  const {
+    isLoading,
+    isLeadsLoading,
+    isOrdersLoading,
+    orders,
+    companies,
+    openedStatus,
+    orderDate,
+  } = useUserData();
+  const [currentOrders, setCurrentOrders] = useState([]);
   const [ordersArray, setOrdersArray] = useState(null);
 
   const createOrdersArray = (orders, companies) => {
@@ -34,12 +42,33 @@ const OrdersListPage = () => {
     }
     return array;
   };
+  useEffect(() => {
+    if (!isLoading && !isLeadsLoading && !isOrdersLoading && orders) {
+      if (openedStatus === "" && orderDate === "") {
+        setCurrentOrders(orders);
+      } else if (openedStatus && orderDate === "") {
+        setCurrentOrders(orders.filter((o) => o.isClosed));
+      } else if (!openedStatus && orderDate === "") {
+        setCurrentOrders(orders.filter((o) => !o.isClosed));
+      } else if (openedStatus === "" && typeof orderDate === "number") {
+        setCurrentOrders(orders.filter((o) => o.date === orderDate));
+      } else if (openedStatus && typeof orderDate === "number") {
+        setCurrentOrders(
+          orders.filter((o) => o.date === orderDate && o.isClosed)
+        );
+      } else if (!openedStatus && typeof orderDate === "number") {
+        setCurrentOrders(
+          orders.filter((o) => o.date === orderDate && !o.isClosed)
+        );
+      }
+    }
+  }, [isLoading, isLeadsLoading, isOrdersLoading, openedStatus, orderDate]);
 
   useEffect(() => {
-    if (orders && companies) {
-      setOrdersArray(createOrdersArray(orders, companies));
+    if (currentOrders) {
+      setOrdersArray(createOrdersArray(currentOrders, companies));
     }
-  }, [isLoading, isLeadsLoading, isOrdersLoading]);
+  }, [currentOrders]);
 
   return (
     <OrderLayout>

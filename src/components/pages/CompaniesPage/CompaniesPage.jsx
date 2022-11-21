@@ -50,7 +50,7 @@ const CompaniesPage = () => {
   return (
     <LeadLayout>
       {!isLoading && !isLeadsLoading ? (
-        currentCompanies.length > 0 ? (
+        currentCompanies && currentCompanies.length > 0 ? (
           currentCompanies.map((company) => {
             return <CompanyCard company={company} key={company.id} />;
           })
