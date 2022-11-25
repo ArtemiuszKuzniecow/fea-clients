@@ -60,7 +60,7 @@ const NewOrderPage = () => {
     history.push("orders-list");
   };
 
-  const handleChange = ({ target }) => {
+  const handleChange = (target) => {
     setOrder((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 

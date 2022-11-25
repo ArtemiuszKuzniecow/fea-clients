@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useUserData from "../../../hooks/useUserData";
+import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
 import OrderCard from "../../common/OrderCard/OrderCard";
@@ -15,6 +16,8 @@ const CompanyInfoPage = () => {
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
 
+  console.log(id);
+
   useEffect(() => {
     if (companies && orders) {
       setCurrentCompany(companies.find((item) => item.id === id));
@@ -26,9 +29,8 @@ const CompanyInfoPage = () => {
     currentCompany && (
       <>
         <div className={style.company_info_page_container}>
-          <h1>{currentCompany.company}</h1>
-
           <div className={style.company_info_page_item}>
+            <h1>{currentCompany.company}</h1>
             <CompanyContacts
               phone={currentCompany.contacts.phone}
               email={currentCompany.contacts.email}
@@ -40,6 +42,13 @@ const CompanyInfoPage = () => {
               <h4>Основные направления компании </h4>
               <p className={style.company_info_page_frame}>
                 {currentCompany.directions}
+              </p>
+            </div>
+            <hr />
+            <div className={style.company_info_page_frame_item}>
+              <h4>Тип контракта:</h4>
+              <p className={style.company_info_page_frame}>
+                {currentCompany.contractType}
               </p>
             </div>
             <hr />
@@ -57,6 +66,9 @@ const CompanyInfoPage = () => {
               </p>
             </div>
             <hr />
+            <Link to={`${id}/edit`}>
+              <MyButton text="Изменить информацию о компании" />
+            </Link>
           </div>
           <div className={style.company_info_page_item}>
             <Comments companyId={currentCompany.id} typeOfComments="company" />

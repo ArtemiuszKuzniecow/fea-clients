@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage/CompaniesPage";
 import CompanyInfoPage from "./components/pages/CompanyInfoPage/CompanyInfoPage";
+import EditCompanyPage from "./components/pages/EditCompanyPage/EditCompanyPage";
 import MainPage from "./components/pages/MainPage/MainPage";
 import NewCompanyPage from "./components/pages/NewCompanyPage/NewCompanyPage";
 import NewOrderPage from "./components/pages/NewOrderPage/NewOrderPage";
@@ -59,6 +60,11 @@ function App() {
               />
               <ProtectedRoute path="/orders-list/:id" component={OrderPage} />
               <ProtectedRoute path="/:id" exact component={CompanyInfoPage} />
+              <ProtectedRoute
+                path="/:id/edit"
+                exact
+                component={EditCompanyPage}
+              />
             </Switch>
           </PageLayout>
         </BrowserRouter>

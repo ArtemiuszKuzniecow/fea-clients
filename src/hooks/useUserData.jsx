@@ -29,6 +29,9 @@ const useUserData = () => {
   const companies = useSelector(getAllLeadsSelector(state?.userData?.id));
   const companiesIds =
     !isLeadsLoading && companies && Object.values(companies.map((c) => c.id));
+  const getCompanyById = (id) => {
+    if (!isLeadsLoading && companies) return companies.find((c) => c.id === id);
+  };
   const orders = useSelector(getAllOrders(companiesIds));
   const clientStatus = useSelector(getClientStatusSelector());
   const contactDate = useSelector(getContactDateSelector());
@@ -44,6 +47,7 @@ const useUserData = () => {
     currentUserData,
     orders,
     companies,
+    getCompanyById,
     clientStatus,
     contactDate,
     openedStatus,

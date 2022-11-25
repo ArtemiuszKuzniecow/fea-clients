@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import MyButton from "../../Button/MyButton";
 import style from "./TextField.module.scss";
 
@@ -11,7 +13,13 @@ const TextField = ({
   onChange,
   onClick,
   disabled,
+  value,
 }) => {
+  const [content, setContent] = useState(value || "");
+  function handleChange({ target }) {
+    onChange(target);
+    setContent(target.value);
+  }
   return (
     <div className={style.field_container}>
       <input
@@ -21,8 +29,9 @@ const TextField = ({
         className={
           disabled ? style.field_style_usual_disabled : style.field_style_usual
         }
-        onChange={onChange}
+        onChange={handleChange}
         disabled={disabled}
+        value={content}
       />
       {hasButton && <MyButton text={buttonText} onClick={onClick} />}
     </div>
