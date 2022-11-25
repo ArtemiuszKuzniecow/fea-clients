@@ -13,7 +13,6 @@ import style from "./CompanyCard.module.scss";
 
 const CompanyCard = ({ company }) => {
   const dispatch = useDispatch();
-  const [disabled, setDisabled] = useState(false);
   const [status, setStatus] = useState(null);
   const companyInformationData = [
     company.directions,
@@ -21,10 +20,6 @@ const CompanyCard = ({ company }) => {
     company.contractType,
     company.containersTypes,
   ];
-
-  const handleDisabled = () => {
-    setDisabled((prevState) => !prevState);
-  };
 
   const handleChangeData = ({ target }) => {
     const currentDate = new Date(target.value);
@@ -43,7 +38,7 @@ const CompanyCard = ({ company }) => {
   return (
     <div className={style.company_card_container}>
       <div className={style.company_card_title}>
-        <h4>{company.company}</h4>
+        <h3>{company.company}</h3>
         {cargo.companyInformation.map((information, index) => (
           <div key={information}>
             {information}:

@@ -1,6 +1,6 @@
+import PropTypes from "prop-types";
 import React from "react";
 import style from "./CompanyContacts.module.scss";
-import PropTypes from "prop-types";
 
 const CompanyContacts = ({ phone, email, website, manager, city }) => {
   return (
@@ -14,7 +14,12 @@ const CompanyContacts = ({ phone, email, website, manager, city }) => {
         </a>
       </div>
       <div>
-        <a href={website} className={style.company_contacts_link}>
+        <a
+          href={website}
+          target="_blank"
+          rel="noreferrer"
+          className={style.company_contacts_link}
+        >
           {website}
         </a>
       </div>

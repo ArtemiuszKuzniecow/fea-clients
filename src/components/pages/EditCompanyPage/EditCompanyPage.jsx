@@ -1,8 +1,6 @@
-import { nanoid } from "nanoid";
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
 import { postNewLead } from "../../../store/Leads/actions";
@@ -10,71 +8,62 @@ import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
 import Loader from "../../ui/Loader/Loader";
-import style from "./NewCompanyPage.module.scss";
+import style from "./EditCompanyPage.module.scss";
 
-const NewCompanyPage = () => {
-  const currentCompanyId = nanoid();
+const EditCompanyPage = () => {
+  const { id } = useParams();
+  const { getCompanyById } = useUserData();
+  const currentCompany = getCompanyById(id);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { isLoading, currentUserData } = useUserData();
-  const [company, setCompany] = useState(null);
-
-  useEffect(() => {
-    !isLoading &&
-      setCompany({
-        city: "",
-        company: "",
-        contacts: {
-          email: "",
-          phone: "",
-          website: "",
-        },
-        containersTypes: "",
-        contractType: "",
-        directions: "",
-        id: currentCompanyId,
-        isRequested: false,
-        manager: "",
-        sphere: "",
-        status: { date: Date.now(), value: "Отправил КП" },
-        userID: currentUserData.userData.id,
-      });
-  }, [isLoading]);
+  const [company, setCompany] = useState(currentCompany);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewLead(company));
-    history.push("companies");
+    history.push(`/${id}`);
   };
 
   const handleChangeDropDown = (data) => {
     setCompany((prevState) => ({ ...prevState, ...data }));
   };
-  const handleChangeStatus = (data) => {
-    setCompany((prevState) => ({ ...prevState, value: data }));
-  };
-  const handleChange = ({ target }) => {
+  const handleChange = (target) => {
     setCompany((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
-  const handleContactsChange = ({ target }) => {
+  const handleContactsChange = (target) => {
     setCompany((prevState) => ({
       ...prevState,
       contacts: { ...prevState.contacts, [target.name]: target.value },
     }));
   };
 
-  return !isLoading ? (
+  return currentCompany ? (
     <>
-      <h1>Добавить новую компанию:</h1>
-      <div className={style.new_company_container}>
-        <div className={style.new_company_container_item}>
+      <div>
+        <h1>Редактирвоать данные:</h1>
+        <Link to={`/${id}`}>
+          <MyButton text="Назад" />
+        </Link>
+      </div>
+      <div className={style.edit_company_container}>
+        <div className={style.edit_company_container_item}>
           <div>
             <h4>Название компании: </h4>
-            <TextField type="text" name="company" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="company"
+              onChange={handleChange}
+              value={currentCompany.company}
+            />
           </div>
           <div>
             <h4>Имя сотрудника: </h4>
-            <TextField type="text" name="manager" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="manager"
+              onChange={handleChange}
+              value={currentCompany.manager}
+            />
           </div>
           <div>
             <h4>Телефоны: </h4>
@@ -82,11 +71,17 @@ const NewCompanyPage = () => {
               type="text"
               name="phone"
               onChange={handleContactsChange}
+              value={currentCompany.contacts.phone}
             />
           </div>
           <div>
             <h4>Город: </h4>
-            <TextField type="text" name="city" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="city"
+              onChange={handleChange}
+              value={currentCompany.city}
+            />
           </div>
           <div>
             <h4>Электронная почта: </h4>
@@ -94,6 +89,7 @@ const NewCompanyPage = () => {
               type="text"
               name="email"
               onChange={handleContactsChange}
+              value={currentCompany.contacts.email}
             />
           </div>
           <div>
@@ -102,54 +98,56 @@ const NewCompanyPage = () => {
               type="text"
               name="website"
               onChange={handleContactsChange}
+              value={currentCompany.contacts.email}
             />
           </div>
           <div>
             <h4>Основные направления: </h4>
-            <TextField type="text" name="directions" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="directions"
+              onChange={handleChange}
+              value={currentCompany.directions}
+            />
           </div>
           <div>
             <h4>Сфера деятельности: </h4>
-            <TextField type="text" name="sphere" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="sphere"
+              onChange={handleChange}
+              value={currentCompany.sphere}
+            />
           </div>
         </div>
 
-        <div className={style.new_company_container_item}>
+        <div className={style.edit_company_container_item}>
           <div>
             <h4>Виды грузоперевозок: </h4>
             <DropDownList
-              array={cargo.containersTypes}
-              sampleText="Виды грузоперевозок"
-              onChange={handleChangeDropDown}
+              sampleText={currentCompany.containersTypes}
               name="containersTypes"
+              array={cargo.containersTypes}
+              onChange={handleChangeDropDown}
             />
           </div>
           <div>
             <h4>Виды контрактов: </h4>
             <DropDownList
               array={cargo.contractType}
-              sampleText="Виды контрактов"
               onChange={handleChangeDropDown}
+              sampleText={currentCompany.contractType}
               name="contractType"
-            />
-          </div>
-          <div>
-            <h4>Статус: </h4>
-            <DropDownList
-              array={cargo.clientStatusArray}
-              sampleText="Статус"
-              onChange={handleChangeStatus}
-              name="status"
             />
           </div>
         </div>
       </div>
       <br />
-      <MyButton text="Добавить компанию" onClick={handleSubmit} />
+      <MyButton text="Сохранить изменения" onClick={handleSubmit} />
     </>
   ) : (
     <Loader />
   );
 };
 
-export default NewCompanyPage;
+export default EditCompanyPage;
