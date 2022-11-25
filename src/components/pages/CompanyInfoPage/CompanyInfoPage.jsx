@@ -69,6 +69,8 @@ const CompanyInfoPage = () => {
             <Link to={`${id}/edit`}>
               <MyButton text="Изменить информацию о компании" />
             </Link>
+            <hr />
+            <MyButton text="Удалить компанию из базы" />
           </div>
           <div className={style.company_info_page_item}>
             <Comments companyId={currentCompany.id} typeOfComments="company" />
