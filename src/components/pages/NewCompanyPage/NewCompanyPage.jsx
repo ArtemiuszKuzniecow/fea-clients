@@ -53,10 +53,10 @@ const NewCompanyPage = () => {
   const handleChangeStatus = (data) => {
     setCompany((prevState) => ({ ...prevState, value: data }));
   };
-  const handleChange = ({ target }) => {
+  const handleChange = (target) => {
     setCompany((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
-  const handleContactsChange = ({ target }) => {
+  const handleContactsChange = (target) => {
     setCompany((prevState) => ({
       ...prevState,
       contacts: { ...prevState.contacts, [target.name]: target.value },
