@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import leadService from "../../assets/services/leadService";
 import ordersService from "../../assets/services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
@@ -19,6 +20,18 @@ export const postNewOrder = createAsyncThunk(
     try {
       const { content } = await ordersService.putNewOrder(payload);
       return content;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteOrder = createAsyncThunk(
+  "order/deleted",
+  async (orderPayload, thunkAPI) => {
+    try {
+      const { content } = await ordersService.removeOrder(orderPayload);
+      return orderPayload.orderId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

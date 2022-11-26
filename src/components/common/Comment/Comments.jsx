@@ -14,7 +14,7 @@ import {
   deleteOrderComment,
   postOrderComment,
 } from "../../../store/OrdersComments/actions";
-import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
+import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selectors";
 import Loader from "../../ui/Loader/Loader";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
@@ -32,7 +32,7 @@ const Comments = ({ companyId, typeOfComments }) => {
     orders,
   } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(companyId));
-  const ordersComments = useSelector(getAllOrdersComments(id));
+  const ordersComments = useSelector(getAllOrdersCommentsById(id));
   const [currentComments, setCurrentComments] = useState(null);
   const [allCommentsShown, setAllCommentsShown] = useState(false);
 

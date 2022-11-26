@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
 import useUserData from "../../../hooks/useUserData";
+import { deleteLead } from "../../../store/Leads/actions";
+import { deleteCompanyComment } from "../../../store/LeadsComments/actions";
+import { getAllCompanyComments } from "../../../store/LeadsComments/selecetors";
+import { deleteOrderComment } from "../../../store/OrdersComments/actions";
+import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
+import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
 import style from "./CompanyInfoPage.module.scss";
@@ -12,11 +19,14 @@ const CompanyInfoPage = () => {
   const { id } = useParams();
   const { isLoading, isLeadsLoading, isOrdersLoading, companies, orders } =
     useUserData();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
-
-  console.log(id);
+  const [isOpen, setIsOpen] = useState(false);
+  const leadsComments = useSelector(getAllCompanyComments(id));
+  const ordersComments = useSelector(getAllOrdersComments());
 
   useEffect(() => {
     if (companies && orders) {
@@ -24,6 +34,19 @@ const CompanyInfoPage = () => {
       setCurrentOrders(orders.filter((o) => o.companyId === id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
+
+  const handleDeleteCompany = (currentCompany) => {
+    dispatch(deleteLead(currentCompany));
+    leadsComments &&
+      leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
+    ordersComments &&
+      ordersComments.forEach((c) => {
+        if (currentOrders.map((o) => o.orderId).includes(c.orderId)) {
+          dispatch(deleteOrderComment(c));
+        }
+      });
+    history.push("/");
+  };
 
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     currentCompany && (
@@ -70,7 +93,28 @@ const CompanyInfoPage = () => {
               <MyButton text="Изменить информацию о компании" />
             </Link>
             <hr />
-            <MyButton text="Удалить компанию из базы" />
+            <MyButton
+              text="Удалить компанию из базы"
+              onClick={() => setIsOpen((prevState) => !prevState)}
+            />
+            <ModalWindow
+              open={isOpen}
+              onClose={() => setIsOpen((prevState) => !prevState)}
+            >
+              <div className={style.company_info_page_modal_content}>
+                Вы уверены, что хотите удалить эту компанию из базы?
+                <div className={style.company_info_page_modal_content_buttons}>
+                  <MyButton
+                    text="Да"
+                    onClick={() => handleDeleteCompany(currentCompany)}
+                  />
+                  <MyButton
+                    text="Нет"
+                    onClick={() => setIsOpen((prevState) => !prevState)}
+                  />
+                </div>
+              </div>
+            </ModalWindow>
           </div>
           <div className={style.company_info_page_item}>
             <Comments companyId={currentCompany.id} typeOfComments="company" />

@@ -98,7 +98,7 @@ const EditCompanyPage = () => {
               type="text"
               name="website"
               onChange={handleContactsChange}
-              value={currentCompany.contacts.email}
+              value={currentCompany.contacts.website}
             />
           </div>
           <div>

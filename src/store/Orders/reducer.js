@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadOrdersData, postNewOrder } from "./actions";
+import { deleteOrder, loadOrdersData, postNewOrder } from "./actions";
 
 const initialState = {
   orderData: null,
@@ -32,6 +32,18 @@ export const OrdersSlice = createSlice({
       state.isLoading = false;
     },
     [postNewOrder.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    [deleteOrder.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteOrder.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      delete state.orderData[payload];
+    },
+    [deleteOrder.rejected.type]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
