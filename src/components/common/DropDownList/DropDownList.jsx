@@ -29,7 +29,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
     toggleList();
   };
 
-  return array && !isLoading ? (
+  return !isLoading ? (
     <div className={style.dropdown_container}>
       <MyButton
         text={textSample}
