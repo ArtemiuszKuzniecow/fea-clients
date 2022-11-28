@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editLeadParameter, loadLeadsData, postNewLead } from "./actions";
+import {
+  deleteLead,
+  editLeadParameter,
+  loadLeadsData,
+  postNewLead,
+} from "./actions";
 
 const initialState = {
   leadData: null,
@@ -48,6 +53,22 @@ export const LeadsSlice = createSlice({
           [payload.parameter]: payload.content,
         },
       };
+    },
+    [editLeadParameter.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    [deleteLead.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteLead.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      delete state.leadData[payload];
+    },
+    [deleteLead.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
     },
   },
 });

@@ -14,6 +14,13 @@ const ordersService = {
     );
     return data;
   },
+  removeOrder: async (payload) => {
+    const { data } = await httpService.delete(
+      ordersEndpoint + payload.orderId,
+      payload
+    );
+    return data;
+  },
 };
 
 export default ordersService;

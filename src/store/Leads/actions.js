@@ -41,3 +41,15 @@ export const editLeadParameter = createAsyncThunk(
     }
   }
 );
+
+export const deleteLead = createAsyncThunk(
+  "lead/deleted",
+  async (leadPayload, thunkAPI) => {
+    try {
+      const { content } = await leadService.removeLead(leadPayload);
+      return leadPayload.id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);

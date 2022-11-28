@@ -65,7 +65,7 @@ const OrdersListPage = () => {
   }, [isLoading, isLeadsLoading, isOrdersLoading, openedStatus, orderDate]);
 
   useEffect(() => {
-    if (currentOrders) {
+    if (currentOrders && companies) {
       setOrdersArray(createOrdersArray(currentOrders, companies));
     }
   }, [currentOrders]);

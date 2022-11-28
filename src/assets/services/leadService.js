@@ -20,6 +20,14 @@ const leadService = {
     );
     return data;
   },
+
+  removeLead: async (payload) => {
+    const { data } = await httpService.delete(
+      leadEndpoint + payload.id,
+      payload
+    );
+    return data;
+  },
 };
 
 export default leadService;
