@@ -36,6 +36,8 @@ const CompanyCard = ({ company }) => {
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
 
+  console.log(company);
+
   useEffect(() => {
     if (orders) {
       setCurrentOrders(orders.filter((o) => o.companyId === company.id));
@@ -142,7 +144,7 @@ const CompanyCard = ({ company }) => {
           Связаться: {getDateFormat(company.status.date, ".")}
         </div>
         {company.isRequested ? (
-          <Link to="/orders-list">
+          <Link to={`${company.id}/orders`}>
             <MyButton
               isDisabled={!company.isRequested}
               text="Посмотреть все запросы"
