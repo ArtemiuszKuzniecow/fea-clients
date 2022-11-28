@@ -5,6 +5,7 @@ import useUserData from "../../../hooks/useUserData";
 import { deleteLead } from "../../../store/Leads/actions";
 import { deleteCompanyComment } from "../../../store/LeadsComments/actions";
 import { getAllCompanyComments } from "../../../store/LeadsComments/selecetors";
+import { deleteOrder } from "../../../store/Orders/actions";
 import { deleteOrderComment } from "../../../store/OrdersComments/actions";
 import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
@@ -45,7 +46,8 @@ const CompanyInfoPage = () => {
           dispatch(deleteOrderComment(c));
         }
       });
-    history.push("/");
+    orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
+    history.push("/companies");
   };
 
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
