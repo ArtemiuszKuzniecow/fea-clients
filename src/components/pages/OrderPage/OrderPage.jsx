@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import useUserData from "../../../hooks/useUserData";
+import { deleteOrderComment } from "../../../store/OrdersComments/actions";
+import { deleteOrder } from "../../../store/Orders/actions";
+import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import TextField from "../../common/Form/TextField/TextField";
+import ModalContent from "../../common/ModalContent/ModalContent";
+import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import Loader from "../../ui/Loader/Loader";
 import style from "./OrderPage.module.scss";
 
 const OrderPage = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
     useUserData();
+  const orderComments = useSelector(getAllOrdersCommentsById(id));
 
-  const { id } = useParams();
   const [newPrice, setNewPrice] = useState(false);
   const [currentCompany, setCurrentCompany] = useState(null);
   const [currentOrder, setCurrentOrder] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (orders && companies) {
@@ -33,6 +43,14 @@ const OrderPage = () => {
   const toggleNewPrice = () => {
     setNewPrice((prevState) => !prevState);
   };
+
+  const handleDeleteOrder = () => {
+    dispatch(deleteOrder(currentOrder));
+    orderComments &&
+      orderComments.forEach((c) => dispatch(deleteOrderComment(c)));
+    history.push("/orders-list");
+  };
+
   const handleChange = () => {
     console.log("any");
   };
@@ -202,6 +220,21 @@ const OrderPage = () => {
             </div>
             {newPrice ? <TextField type="text" name="price" /> : null}
           </div>
+          <hr />
+          <MyButton
+            text="Удалить запрос из базы"
+            onClick={() => setIsOpen((prevState) => !prevState)}
+          />
+          <ModalWindow
+            open={isOpen}
+            onClose={() => setIsOpen((prevState) => !prevState)}
+          >
+            <ModalContent
+              deleteFunc={() => handleDeleteOrder()}
+              openFunc={() => setIsOpen((prevState) => !prevState)}
+              item="запрос"
+            />
+          </ModalWindow>
           <h3>{currentOrder.isClosed ? "Запрос закрыт" : "Запрос открыт"}</h3>
         </div>
       </div>
