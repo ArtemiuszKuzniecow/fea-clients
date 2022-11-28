@@ -27,16 +27,15 @@ const useUserData = () => {
   const state = useSelector(getUserDataSelector());
   const currentUserData = useSelector(getUserDataSelector());
   const companies = useSelector(getAllLeadsSelector(state?.userData?.id));
-  const companiesIds =
-    !isLeadsLoading && companies && Object.values(companies.map((c) => c.id));
   const getCompanyById = (id) => {
     if (!isLeadsLoading && companies) return companies.find((c) => c.id === id);
   };
-  const orders = useSelector(getAllOrders(companiesIds));
   const clientStatus = useSelector(getClientStatusSelector());
   const contactDate = useSelector(getContactDateSelector());
   const openedStatus = useSelector(getOpenedStatus());
   const orderDate = useSelector(getOrderDate());
+  const companiesIds = companies && Object.values(companies.map((c) => c.id));
+  const orders = useSelector(getAllOrders(companiesIds));
 
   return {
     isLoading,

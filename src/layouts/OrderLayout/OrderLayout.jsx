@@ -12,7 +12,7 @@ import style from "./OrderLayout.module.scss";
 
 const OrderLayout = ({ children }) => {
   const dispatch = useDispatch();
-  const { orders, isOrdersLoading, isLoading } = useUserData();
+  const { orders, isOrdersLoading, isLeadsLoading, isLoading } = useUserData();
   const [isOpenedFilter, setOpenedFilter] = useState({ isClosed: "" });
   const [actualDateFilter, setActualDateFilter] = useState({ date: "" });
   const [datesOfOrders, setDatesOfOrders] = useState(null);
@@ -40,19 +40,22 @@ const OrderLayout = ({ children }) => {
   };
 
   useEffect(() => {
-    // console.log(orders);
-    // console.log(!isLoading);
-    // console.log(!isOrdersLoading);
-    orders &&
-      !isOrdersLoading &&
-      !isLoading &&
+    if (orders) {
       setDatesOfOrders([
         "Все запросы",
         ...createSetArray(orders.map((o) => getDateFormat(o.date, "."))),
       ]);
-    dispatch(UserSlice.actions.setOpenedStatus(isOpenedFilter.isClosed));
-    dispatch(UserSlice.actions.setOrderDate(actualDateFilter.date));
-  }, [isOrdersLoading, isLoading, isOpenedFilter, actualDateFilter]);
+
+      dispatch(UserSlice.actions.setOpenedStatus(isOpenedFilter.isClosed));
+      dispatch(UserSlice.actions.setOrderDate(actualDateFilter.date));
+    }
+  }, [
+    isOrdersLoading,
+    isLoading,
+    isOpenedFilter,
+    isLeadsLoading,
+    actualDateFilter,
+  ]);
 
   return (
     <>

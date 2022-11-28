@@ -42,8 +42,15 @@ const OrdersListPage = () => {
     }
     return array;
   };
+
   useEffect(() => {
-    if (!isLoading && !isLeadsLoading && !isOrdersLoading && orders) {
+    if (
+      !isLoading &&
+      !isLeadsLoading &&
+      !isOrdersLoading &&
+      orders &&
+      orders.length
+    ) {
       if (openedStatus === "" && orderDate === "") {
         setCurrentOrders(orders);
       } else if (openedStatus && orderDate === "") {
@@ -72,7 +79,7 @@ const OrdersListPage = () => {
 
   return (
     <OrderLayout>
-      {!isLoading && !isLeadsLoading && !isOrdersLoading ? (
+      {!isLoading && !isLeadsLoading && !isOrdersLoading && currentOrders ? (
         orders.length > 0 ? (
           ordersArray &&
           ordersArray.map((order) => {
