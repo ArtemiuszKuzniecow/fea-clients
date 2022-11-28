@@ -11,6 +11,7 @@ import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
+import ModalContent from "../../common/ModalContent/ModalContent";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
@@ -103,19 +104,11 @@ const CompanyInfoPage = () => {
               open={isOpen}
               onClose={() => setIsOpen((prevState) => !prevState)}
             >
-              <div className={style.company_info_page_modal_content}>
-                Вы уверены, что хотите удалить эту компанию из базы?
-                <div className={style.company_info_page_modal_content_buttons}>
-                  <MyButton
-                    text="Да"
-                    onClick={() => handleDeleteCompany(currentCompany)}
-                  />
-                  <MyButton
-                    text="Нет"
-                    onClick={() => setIsOpen((prevState) => !prevState)}
-                  />
-                </div>
-              </div>
+              <ModalContent
+                deleteFunc={() => handleDeleteCompany(currentCompany)}
+                openFunc={() => setIsOpen((prevState) => !prevState)}
+                item="компанию"
+              />
             </ModalWindow>
           </div>
           <div className={style.company_info_page_item}>

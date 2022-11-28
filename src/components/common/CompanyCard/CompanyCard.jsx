@@ -1,25 +1,60 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import cargo from "../../../cargo.json";
-import { editLeadParameter } from "../../../store/Leads/actions";
+import useUserData from "../../../hooks/useUserData";
+import { deleteLead, editLeadParameter } from "../../../store/Leads/actions";
+import { deleteCompanyComment } from "../../../store/LeadsComments/actions";
+import { getAllCompanyComments } from "../../../store/LeadsComments/selecetors";
+import { deleteOrder } from "../../../store/Orders/actions";
+import { deleteOrderComment } from "../../../store/OrdersComments/actions";
+import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import MyButton from "../Button/MyButton";
 import Comments from "../Comment/Comments";
 import CompanyContacts from "../CompanyContacts/CompanyContacts";
 import DropDownList from "../DropDownList/DropDownList";
+import ModalContent from "../ModalContent/ModalContent";
+import ModalWindow from "../ModalWindow/ModalWindow";
 import style from "./CompanyCard.module.scss";
 
 const CompanyCard = ({ company }) => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentOrders, setCurrentOrders] = useState();
   const companyInformationData = [
     company.directions,
     company.sphere,
     company.contractType,
     company.containersTypes,
   ];
+
+  const { orders, isLoading, isOrdersLoading } = useUserData();
+  const leadsComments = useSelector(getAllCompanyComments(company.id));
+  const ordersComments = useSelector(getAllOrdersComments());
+  const history = useHistory();
+
+  useEffect(() => {
+    if (orders) {
+      setCurrentOrders(orders.filter((o) => o.companyId === company.id));
+    }
+  }, [isLoading, isOrdersLoading]);
+
+  const handleDeleteCompany = (currentCompany) => {
+    dispatch(deleteLead(company));
+    leadsComments &&
+      leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
+    ordersComments &&
+      ordersComments.forEach((c) => {
+        if (currentOrders.map((o) => o.orderId).includes(c.orderId)) {
+          dispatch(deleteOrderComment(c));
+        }
+      });
+    orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
+    history.push("/companies");
+  };
 
   const handleChangeData = ({ target }) => {
     const currentDate = new Date(target.value);
@@ -51,6 +86,21 @@ const CompanyCard = ({ company }) => {
         <Link to={"/" + company.id}>
           <MyButton text="Информация о компании" />
         </Link>
+        <hr />
+        <MyButton
+          text="Удалить компанию из базы"
+          onClick={() => setIsOpen((prevState) => !prevState)}
+        />
+        <ModalWindow
+          open={isOpen}
+          onClose={() => setIsOpen((prevState) => !prevState)}
+        >
+          <ModalContent
+            deleteFunc={() => handleDeleteCompany(company)}
+            openFunc={() => setIsOpen((prevState) => !prevState)}
+            item="компанию"
+          />
+        </ModalWindow>
       </div>
       <div className={style.company_card_contacts}>
         <CompanyContacts
