@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import leadService from "../../assets/services/leadService";
 import ordersService from "../../assets/services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
@@ -20,6 +19,24 @@ export const postNewOrder = createAsyncThunk(
     try {
       const { content } = await ordersService.putNewOrder(payload);
       return content;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const editOrderParameter = createAsyncThunk(
+  "order/paramEdited",
+  async (orderPayload, thunkAPI) => {
+    const { payload, id, parameter } = orderPayload;
+    try {
+      const { content } = await ordersService.editOrderParam(
+        id,
+        parameter,
+        payload
+      );
+
+      return { content, id: id, parameter: parameter };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteOrder, loadOrdersData, postNewOrder } from "./actions";
+import {
+  deleteOrder,
+  editOrderParameter,
+  loadOrdersData,
+  postNewOrder,
+} from "./actions";
 
 const initialState = {
   orderData: null,
@@ -32,6 +37,24 @@ export const OrdersSlice = createSlice({
       state.isLoading = false;
     },
     [postNewOrder.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    [editOrderParameter.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [editOrderParameter.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.orderData = {
+        ...state.orderData,
+        [payload.id]: {
+          ...state.orderData[payload.id],
+          [payload.parameter]: payload.content,
+        },
+      };
+    },
+    [editOrderParameter.rejected.type]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

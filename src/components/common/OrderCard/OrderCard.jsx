@@ -3,7 +3,7 @@ import style from "./OrderCard.module.scss";
 import MyButton from "../Button/MyButton";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import ModalContent from "../ModalContent/ModalContent";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,7 @@ const OrderCard = ({ order, companyName }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const handleRedirect = (id) => {
+    history.location.pathname = "/";
     history.push(`orders-list/${id}`);
   };
   const handleDeleteOrder = () => {

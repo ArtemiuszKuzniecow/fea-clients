@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
@@ -19,9 +19,14 @@ import ModalContent from "../ModalContent/ModalContent";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import style from "./CompanyCard.module.scss";
 
-const CompanyCard = ({ company }) => {
+const CompanyCard = ({ companyId }) => {
   const dispatch = useDispatch();
-  const [status, setStatus] = useState(null);
+  const { getCompanyById } = useUserData();
+  const company = getCompanyById(companyId);
+  const [status, setStatus] = useState({
+    date: company.status.date,
+    value: company.status.value,
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrders, setCurrentOrders] = useState();
   const companyInformationData = [
@@ -42,7 +47,7 @@ const CompanyCard = ({ company }) => {
     }
   }, [isLoading, isOrdersLoading]);
 
-  const handleDeleteCompany = (currentCompany) => {
+  const handleDeleteCompany = () => {
     dispatch(deleteLead(company));
     leadsComments &&
       leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
@@ -64,9 +69,13 @@ const CompanyCard = ({ company }) => {
     setStatus((prevState) => ({ ...prevState, ...data }));
   };
 
-  const refreshStatus = (data) => {
+  const refreshStatus = () => {
     dispatch(
-      editLeadParameter({ payload: data, id: company.id, parameter: "status" })
+      editLeadParameter({
+        payload: status,
+        id: company.id,
+        parameter: "status",
+      })
     );
   };
 
@@ -120,9 +129,7 @@ const CompanyCard = ({ company }) => {
                 ? cargo.clientStatusArray.filter((s, i) => i > 2)
                 : cargo.clientStatusArray.filter((s, i) => i !== 3)
             }
-            sampleText={
-              company.isRequested ? "Получил запрос" : company.status.value
-            }
+            sampleText={company.status.value}
             onChange={handleChange}
             name="value"
           />
@@ -135,14 +142,14 @@ const CompanyCard = ({ company }) => {
             type="date"
             id="date"
             onChange={handleChangeData}
-          />{" "}
-          <MyButton text="OK" onClick={() => refreshStatus(status)} />
+          />
+          <MyButton text="OK" onClick={() => refreshStatus()} />
         </h5>
         <div className={style.company_card_status_header}>
           Связаться: {getDateFormat(company.status.date, ".")}
         </div>
         {company.isRequested ? (
-          <Link to="/orders-list">
+          <Link to={`${company.id}/orders`}>
             <MyButton
               isDisabled={!company.isRequested}
               text="Посмотреть все запросы"
@@ -161,7 +168,7 @@ const CompanyCard = ({ company }) => {
 };
 
 CompanyCard.propTypes = {
-  company: PropTypes.object.isRequired,
+  companyId: PropTypes.string.isRequired,
 };
 
 export default CompanyCard;

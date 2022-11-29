@@ -4,7 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import getDateFormat from "../../../assets/utils/getDateFormat";
 import useUserData from "../../../hooks/useUserData";
 import { deleteOrderComment } from "../../../store/OrdersComments/actions";
-import { deleteOrder } from "../../../store/Orders/actions";
+import { deleteOrder, editOrderParameter } from "../../../store/Orders/actions";
 import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
@@ -26,6 +26,7 @@ const OrderPage = () => {
   const [currentCompany, setCurrentCompany] = useState(null);
   const [currentOrder, setCurrentOrder] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [price, setPrice] = useState({ price: "" });
 
   useEffect(() => {
     if (orders && companies) {
@@ -44,6 +45,17 @@ const OrderPage = () => {
     setNewPrice((prevState) => !prevState);
   };
 
+  const handleChangePrice = (target) => {
+    setPrice({ price: target.value });
+  };
+
+  const handleRefreshPrice = () => {
+    dispatch(
+      editOrderParameter({ payload: price, id: id, parameter: "price" })
+    );
+    toggleNewPrice();
+  };
+
   const handleDeleteOrder = () => {
     dispatch(deleteOrder(currentOrder));
     orderComments &&
@@ -51,9 +63,6 @@ const OrderPage = () => {
     history.push("/orders-list");
   };
 
-  const handleChange = () => {
-    console.log("any");
-  };
   return currentOrder && currentCompany ? (
     <>
       <h1>{currentCompany.company}</h1>
@@ -208,7 +217,7 @@ const OrderPage = () => {
             <div className={style.order_container_frame_item}>
               <h4>Ставка: </h4>
               <p className={style.order_container_frame}>
-                {currentOrder.price}
+                {currentOrder?.price?.price}
               </p>
             </div>
             <hr />
@@ -218,7 +227,17 @@ const OrderPage = () => {
               </Link>
               <MyButton text="Обновить ставку" onClick={toggleNewPrice} />
             </div>
-            {newPrice ? <TextField type="text" name="price" /> : null}
+            {newPrice ? (
+              <TextField
+                type="text"
+                name="price"
+                value={currentOrder.price?.price}
+                hasButton={true}
+                buttonText="Обновить"
+                onChange={handleChangePrice}
+                onClick={handleRefreshPrice}
+              />
+            ) : null}
           </div>
           <hr />
           <MyButton

@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import MyButton from "../../Button/MyButton";
 import style from "./TextField.module.scss";
