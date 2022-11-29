@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/fea-clients/static/css/main.f5e2e49a.css",
+    "main.js": "/fea-clients/static/js/main.31678486.js",
+    "static/media/free-icon-eye-2311537.png": "/fea-clients/static/media/free-icon-eye-2311537.fa6c69b036bcd18cc9d3.png",
+    "index.html": "/fea-clients/index.html",
+    "main.f5e2e49a.css.map": "/fea-clients/static/css/main.f5e2e49a.css.map",
+    "main.31678486.js.map": "/fea-clients/static/js/main.31678486.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5e2e49a.css",
+    "static/js/main.31678486.js"
+  ]
+}
