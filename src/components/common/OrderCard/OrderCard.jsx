@@ -16,8 +16,6 @@ const OrderCard = ({ order, companyName }) => {
   const history = useHistory();
   const orderComments = useSelector(getAllOrdersCommentsById(order.orderId));
 
-  console.log(history.location.pathname);
-
   const [isOpen, setIsOpen] = useState(false);
   const handleRedirect = (id) => {
     history.location.pathname = "/";

@@ -51,9 +51,11 @@ const CompaniesPage = () => {
     <LeadLayout>
       {!isLoading && !isLeadsLoading ? (
         currentCompanies && currentCompanies.length > 0 ? (
-          currentCompanies.map((company) => {
-            return <CompanyCard company={company} key={company.id} />;
-          })
+          currentCompanies
+            .map((company) => company.id)
+            .map((c) => {
+              return <CompanyCard companyId={c} key={c} />;
+            })
         ) : (
           <>
             <h3>Добавтье первую компанию</h3>

@@ -14,6 +14,13 @@ const ordersService = {
     );
     return data;
   },
+  editOrderParam: async (id, param, payload) => {
+    const { data } = await httpService.put(
+      `${ordersEndpoint}${id}/${param}`,
+      payload
+    );
+    return data;
+  },
   removeOrder: async (payload) => {
     const { data } = await httpService.delete(
       ordersEndpoint + payload.orderId,
