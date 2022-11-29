@@ -36,8 +36,6 @@ const CompanyCard = ({ company }) => {
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
 
-  console.log(company);
-
   useEffect(() => {
     if (orders) {
       setCurrentOrders(orders.filter((o) => o.companyId === company.id));
@@ -137,7 +135,7 @@ const CompanyCard = ({ company }) => {
             type="date"
             id="date"
             onChange={handleChangeData}
-          />{" "}
+          />
           <MyButton text="OK" onClick={() => refreshStatus(status)} />
         </h5>
         <div className={style.company_card_status_header}>
