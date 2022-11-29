@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.scss";
-import localStorageService from "./assets/services/localStorageService";
+import localStorageService from "./services/localStorageService";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage/CompaniesPage";

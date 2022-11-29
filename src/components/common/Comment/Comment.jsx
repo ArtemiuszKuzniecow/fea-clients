@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import getDateFormat from "../../../assets/utils/getDateFormat";
+import getDateFormat from "../../../utils/getDateFormat";
 import style from "./Comment.module.scss";
 
 const Comment = ({

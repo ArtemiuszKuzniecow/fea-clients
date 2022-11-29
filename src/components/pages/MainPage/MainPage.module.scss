@@ -3,8 +3,8 @@
 
 .container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     gap: 20px;
     align-items: center;
 
@@ -14,4 +14,18 @@
         justify-content: space-between;
         gap: 20px;
     }
+}
+
+.link {
+    @include _link
+}
+
+.frame {
+    cursor: pointer;
+    @include _frame
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
 }

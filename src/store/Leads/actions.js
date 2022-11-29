@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import leadService from "../../assets/services/leadService";
+import leadService from "../../services/leadService";
 
 export const loadLeadsData = createAsyncThunk(
   "lead/loadLead",

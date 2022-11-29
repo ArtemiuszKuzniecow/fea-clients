@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import getDateFormat from "../../../assets/utils/getDateFormat";
+import getDateFormat from "../../../utils/getDateFormat";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
 import { deleteLead, editLeadParameter } from "../../../store/Leads/actions";

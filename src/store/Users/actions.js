@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "../../assets/services/authService";
-import userService from "../../assets/services/userService";
+import authService from "../../services/authService";
+import userService from "../../services/userService";
 
 export const loadUserData = createAsyncThunk(
   "user/loadUser",

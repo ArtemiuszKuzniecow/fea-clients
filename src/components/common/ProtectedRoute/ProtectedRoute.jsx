@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import localStorageService from "../../../assets/services/localStorageService";
+import localStorageService from "../../../services/localStorageService";
 
 const ProtectedRoute = ({ component: Component, children, ...rest }) => {
   const accessToken = localStorageService.getAccessToken();

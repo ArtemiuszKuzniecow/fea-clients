@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import getDateFormat from "../../../assets/utils/getDateFormat";
+import getDateFormat from "../../../utils/getDateFormat";
 import cargo from "../../../cargo.json";
 import useUserData from "../../../hooks/useUserData";
 import { editLeadParameter } from "../../../store/Leads/actions";

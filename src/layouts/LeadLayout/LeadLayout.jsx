@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import getDateFormat from "../../assets/utils/getDateFormat";
-import { createSetArray } from "../../assets/utils/createSetArray";
+import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
 import style from "./LeadLayout.module.scss";
+import { createSetArray } from "../../utils/createSetArray";
 
 const LeadLayout = ({ children }) => {
   const dispatch = useDispatch();
