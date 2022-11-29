@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-import getDateFormat from "../../../assets/utils/getDateFormat";
+import getDateFormat from "../../../utils/getDateFormat";
 import useUserData from "../../../hooks/useUserData";
 import { deleteOrderComment } from "../../../store/OrdersComments/actions";
 import { deleteOrder, editOrderParameter } from "../../../store/Orders/actions";

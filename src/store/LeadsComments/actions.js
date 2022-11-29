@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import commentsService, {
   leadsCommentsEndpoint,
-} from "../../assets/services/commentsService";
+} from "../../services/commentsService";
 
 export const loadLeadsCommentsData = createAsyncThunk(
   "leadsComment/loadleadsComment",

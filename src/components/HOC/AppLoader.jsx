@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import localStorageService from "../../assets/services/localStorageService";
+import localStorageService from "../../services/localStorageService";
 import { loadLeadsData } from "../../store/Leads/actions";
 import { loadLeadsCommentsData } from "../../store/LeadsComments/actions";
 import { loadOrdersData } from "../../store/Orders/actions";

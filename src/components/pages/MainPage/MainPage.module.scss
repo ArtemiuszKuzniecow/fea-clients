@@ -16,7 +16,16 @@
     }
 }
 
+.link {
+    @include _link
+}
+
 .frame {
     cursor: pointer;
     @include _frame
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
 }

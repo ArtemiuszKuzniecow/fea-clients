@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import localStorageService from "../../../assets/services/localStorageService";
+import localStorageService from "../../../services/localStorageService";
 import { UserSlice } from "../../../store/Users/reducer";
 import Loader from "../Loader/Loader";
 

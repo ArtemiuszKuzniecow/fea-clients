@@ -36,6 +36,7 @@
 } 
 
 @mixin _frame {
+    max-height: 400px;
     border: 1px solid $font-color;
     color: $font-color;
     padding: 10px;

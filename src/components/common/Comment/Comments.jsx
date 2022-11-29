@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import localStorageService from "../../../assets/services/localStorageService";
+import localStorageService from "../../../services/localStorageService";
 import useUserData from "../../../hooks/useUserData";
 import {
   deleteCompanyComment,

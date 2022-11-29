@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import hamburger from "../../assets/icons/588a64e7d06f6719692a2d11.png";
 import logo from "../../assets/icons/android-chrome-192x192.png";
-import localStorageService from "../../assets/services/localStorageService";
+import localStorageService from "../../services/localStorageService";
 import MyButton from "../../components/common/Button/MyButton";
 import Loader from "../../components/ui/Loader/Loader";
 import { getUserDataSelector } from "../../store/Users/selectors";

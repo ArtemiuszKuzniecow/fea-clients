@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import ordersService from "../../assets/services/ordersService";
+import ordersService from "../../services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",

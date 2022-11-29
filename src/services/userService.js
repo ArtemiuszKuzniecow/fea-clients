@@ -1,4 +1,4 @@
-import httpService from "../../assets/services/httpService";
+import httpService from "./httpService";
 
 const usersEndpoint = "users/";
 

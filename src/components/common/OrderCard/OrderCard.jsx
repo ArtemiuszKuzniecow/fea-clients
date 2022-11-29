@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import style from "./OrderCard.module.scss";
-import MyButton from "../Button/MyButton";
-import getDateFormat from "../../../assets/utils/getDateFormat";
 import PropTypes from "prop-types";
-import { Link, useHistory } from "react-router-dom";
-import ModalWindow from "../ModalWindow/ModalWindow";
-import ModalContent from "../ModalContent/ModalContent";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selectors";
-import { deleteOrderComment } from "../../../store/OrdersComments/actions";
+import { useHistory } from "react-router-dom";
+import getDateFormat from "../../../utils/getDateFormat";
 import { deleteOrder } from "../../../store/Orders/actions";
+import { deleteOrderComment } from "../../../store/OrdersComments/actions";
+import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selectors";
+import MyButton from "../Button/MyButton";
+import ModalContent from "../ModalContent/ModalContent";
+import ModalWindow from "../ModalWindow/ModalWindow";
+import style from "./OrderCard.module.scss";
 
 const OrderCard = ({ order, companyName }) => {
   const dispatch = useDispatch();

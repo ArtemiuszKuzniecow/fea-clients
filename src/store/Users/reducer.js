@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import localStorageService from "../../assets/services/localStorageService";
+import localStorageService from "../../services/localStorageService";
 import { loadUserData, logIn, signUp } from "./actions";
 
 const initialState = localStorageService.getAccessToken()
