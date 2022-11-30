@@ -24,45 +24,41 @@ const CompanyCard = ({ companyId }) => {
   const { getCompanyById } = useUserData();
   const company = getCompanyById(companyId);
   const [status, setStatus] = useState({
-    date: company ? company.status.date : null,
-    value: company ? company.status.value : null,
+    date: company ? company?.status?.date : null,
+    value: company ? company?.status?.value : null,
   });
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrders, setCurrentOrders] = useState();
   const companyInformationData = company && [
-    company.directions,
-    company.sphere,
-    company.contractType,
-    company.containersTypes,
+    company?.directions,
+    company?.sphere,
+    company?.contractType,
+    company?.containersTypes,
   ];
 
   const { orders, isLoading, isOrdersLoading } = useUserData();
-  const leadsComments = useSelector(getAllCompanyComments(company.id));
+  const leadsComments = useSelector(getAllCompanyComments(company?.id));
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
 
   useEffect(() => {
     if (orders) {
-      setCurrentOrders(orders.filter((o) => o.companyId === company.id));
+      setCurrentOrders(orders.filter((o) => o.companyId === company?.id));
     }
   }, [isLoading, isOrdersLoading]);
 
   const handleDeleteCompany = () => {
     dispatch(deleteLead(company));
-    console.log("company deleted");
     leadsComments &&
       leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
-    console.log("lead com deleted");
     ordersComments &&
       ordersComments.forEach((c) => {
         if (currentOrders.map((o) => o.orderId).includes(c.orderId)) {
           dispatch(deleteOrderComment(c));
         }
       });
-    console.log("order com deleted");
     orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
-    console.log("orders deleted");
     history.push("/companies");
   };
 

@@ -13,7 +13,6 @@ const CompaniesPage = () => {
   const [currentCompanies, setCurrentCompanies] = useState([]);
 
   useEffect(() => {
-    console.log(isLeadsLoading, companies);
     if (!isLoading && !isLeadsLoading) {
       if (
         (clientStatus.length < 1 || clientStatus === "Все компании") &&

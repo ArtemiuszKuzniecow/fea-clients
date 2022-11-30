@@ -13,7 +13,6 @@ const TextField = ({
   onClick,
   disabled,
   value,
-  required,
 }) => {
   const [content, setContent] = useState(value || "");
   function handleChange({ target }) {
@@ -31,8 +30,7 @@ const TextField = ({
         }
         onChange={handleChange}
         disabled={disabled}
-        value={content}
-        required={required}
+        value={content.trim()}
       />
       {hasButton && <MyButton text={buttonText} onClick={onClick} />}
     </div>
@@ -47,7 +45,6 @@ TextField.propTypes = {
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  required: PropTypes.bool,
 };
 
 export default TextField;
