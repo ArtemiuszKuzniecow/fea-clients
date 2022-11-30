@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/fea-clients/static/css/main.f5e2e49a.css",
-    "main.js": "/fea-clients/static/js/main.40da4464.js",
+    "main.css": "/fea-clients/static/css/main.64cc43f0.css",
+    "main.js": "/fea-clients/static/js/main.ea6fbc7d.js",
     "static/media/free-icon-eye-2311537.png": "/fea-clients/static/media/free-icon-eye-2311537.fa6c69b036bcd18cc9d3.png",
     "index.html": "/fea-clients/index.html",
-    "main.f5e2e49a.css.map": "/fea-clients/static/css/main.f5e2e49a.css.map",
-    "main.40da4464.js.map": "/fea-clients/static/js/main.40da4464.js.map"
+    "main.64cc43f0.css.map": "/fea-clients/static/css/main.64cc43f0.css.map",
+    "main.ea6fbc7d.js.map": "/fea-clients/static/js/main.ea6fbc7d.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5e2e49a.css",
-    "static/js/main.40da4464.js"
+    "static/css/main.64cc43f0.css",
+    "static/js/main.ea6fbc7d.js"
   ]
 }
