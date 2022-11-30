@@ -15,7 +15,13 @@ const initialState = {
 export const OrdersSlice = createSlice({
   name: "Order",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.orderData = null;
+      state.isLoading = true;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [loadOrdersData.pending.type]: (state) => {
       state.isLoading = true;

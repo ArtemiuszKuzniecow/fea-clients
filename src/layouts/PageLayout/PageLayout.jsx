@@ -9,10 +9,12 @@ import MyButton from "../../components/common/Button/MyButton";
 import Loader from "../../components/ui/Loader/Loader";
 import { getUserDataSelector } from "../../store/Users/selectors";
 import style from "./PageLayout.module.scss";
+import useUserData from "../../hooks/useUserData";
 
 const PageLayout = ({ children }) => {
   const accessToken = localStorageService.getAccessToken();
   const { userData: currentUser } = useSelector(getUserDataSelector());
+  const { companies, isLeadsLoading, isLoading } = useUserData();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleCollapse = () => {
     setIsCollapsed((prevState) => !prevState);
@@ -127,9 +129,11 @@ const PageLayout = ({ children }) => {
             <MyButton text="Добавить компанию" />
           </Link>
 
-          <Link to="/new-order">
-            <MyButton text="Добавить запрос" />
-          </Link>
+          {companies && companies.length > 0 && !isLoading && !isLeadsLoading && (
+            <Link to="/new-order">
+              <MyButton text="Добавить запрос" />
+            </Link>
+          )}
         </div>
       )}
       <div>{children}</div>

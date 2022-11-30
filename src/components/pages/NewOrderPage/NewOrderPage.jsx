@@ -15,11 +15,13 @@ import Loader from "../../ui/Loader/Loader";
 import style from "./NewOrderPage.module.scss";
 
 const NewOrderPage = () => {
-  const { companies, isLoading, isLeadsLoading } = useUserData();
+  const { companies, isLoading, isLeadsLoading, currentUserData } =
+    useUserData();
   const currentCompanies = companies && companies.map((c) => c.company);
   const dispatch = useDispatch();
   const history = useHistory();
   const currentOrderId = nanoid();
+  const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
   const [order, setOrder] = useState({
     companyId: "",
     containersTypes: "",
@@ -45,19 +47,32 @@ const NewOrderPage = () => {
     typeOfCargo: "",
     volume: "",
     weight: "",
+    userID: currentUserData.userData.id,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postNewOrder(order));
-    dispatch(
-      editLeadParameter({
-        payload: true,
-        id: order.companyId,
-        parameter: "isRequested",
-      })
-    );
-    history.push("orders-list");
+    setHasBeenSubmited(true);
+    if (
+      order.companyId !== "" &&
+      order.containersTypes !== "" &&
+      order.contractType !== "" &&
+      order.deliveryAddress !== "" &&
+      order.pickupAddress !== "" &&
+      order.typeOfCargo !== "" &&
+      order.volume !== "" &&
+      order.weight !== ""
+    ) {
+      dispatch(postNewOrder(order));
+      dispatch(
+        editLeadParameter({
+          payload: true,
+          id: order.companyId,
+          parameter: "isRequested",
+        })
+      );
+      history.push("orders-list");
+    }
   };
 
   const handleChange = (target) => {
@@ -93,6 +108,9 @@ const NewOrderPage = () => {
             onChange={handleChooseCompany}
             name="companyId"
           />
+          {hasBeenSubmited && order.companyId === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Статус запроса:</h4>
@@ -111,6 +129,9 @@ const NewOrderPage = () => {
             onChange={handleChangeDropDown}
             name="containersTypes"
           />
+          {hasBeenSubmited && order.containersTypes === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Вид контракта:</h4>
@@ -120,6 +141,9 @@ const NewOrderPage = () => {
             onChange={handleChangeDropDown}
             name="contractType"
           />
+          {hasBeenSubmited && order.contractType === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Инкотермс:</h4>
@@ -136,12 +160,19 @@ const NewOrderPage = () => {
           order.containersTypes === "Авиа" ? (
             <TextField name="volume" type="text" onChange={handleChange} />
           ) : (
-            <DropDownList
-              array={cargo.volume}
-              sampleText="Объём груза"
-              name="volume"
-              onChange={handleChangeDropDown}
-            />
+            <>
+              <DropDownList
+                array={cargo.volume}
+                sampleText="Объём груза"
+                name="volume"
+                onChange={handleChangeDropDown}
+              />
+              {hasBeenSubmited && order.volume === "" && (
+                <span className={style.error}>
+                  Это поле должно быть заполнено
+                </span>
+              )}
+            </>
           )}
         </div>{" "}
         <div className={style.new_order_container_item}>
@@ -151,10 +182,16 @@ const NewOrderPage = () => {
         <div className={style.new_order_container_item}>
           <h4>Вес груза:</h4>{" "}
           <TextField name="weight" type="text" onChange={handleChange} />
+          {hasBeenSubmited && order.weight === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Характер груза:</h4>
           <TextField name="typeOfCargo" type="text" onChange={handleChange} />
+          {hasBeenSubmited && order.typeOfCargo === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Код ТН ВЭД:</h4>
@@ -179,6 +216,9 @@ const NewOrderPage = () => {
         <div className={style.new_order_container_item}>
           <h4>Адрес забора груза:</h4>
           <TextField name="pickupAddress" type="text" onChange={handleChange} />
+          {hasBeenSubmited && order.pickupAddress === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Место таможенного оформления:</h4>
@@ -191,6 +231,9 @@ const NewOrderPage = () => {
             type="text"
             onChange={handleChange}
           />
+          {hasBeenSubmited && order.deliveryAddress === "" && (
+            <span className={style.error}>Это поле должно быть заполнено</span>
+          )}
         </div>
         <div className={style.new_order_container_item}>
           <h4>Когда забирать:</h4>

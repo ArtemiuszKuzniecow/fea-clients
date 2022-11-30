@@ -18,6 +18,7 @@ const NewCompanyPage = () => {
   const history = useHistory();
   const { isLoading, currentUserData } = useUserData();
   const [company, setCompany] = useState(null);
+  const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
 
   useEffect(() => {
     !isLoading &&
@@ -43,8 +44,16 @@ const NewCompanyPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postNewLead(company));
-    history.push("companies");
+    setHasBeenSubmited(true);
+    if (
+      company.company !== "" &&
+      company.manager !== "" &&
+      company.directions !== "" &&
+      company.sphere !== ""
+    ) {
+      dispatch(postNewLead(company));
+      history.push("/companies");
+    }
   };
 
   const handleChangeDropDown = (data) => {
@@ -71,10 +80,20 @@ const NewCompanyPage = () => {
           <div>
             <h4>Название компании: </h4>
             <TextField type="text" name="company" onChange={handleChange} />
+            {hasBeenSubmited && company.company === "" && (
+              <span className={style.error}>
+                Это поле должно быть заполнено
+              </span>
+            )}
           </div>
           <div>
             <h4>Имя сотрудника: </h4>
             <TextField type="text" name="manager" onChange={handleChange} />
+            {hasBeenSubmited && company.manager === "" && (
+              <span className={style.error}>
+                Это поле должно быть заполнено
+              </span>
+            )}
           </div>
           <div>
             <h4>Телефоны: </h4>
@@ -107,13 +126,22 @@ const NewCompanyPage = () => {
           <div>
             <h4>Основные направления: </h4>
             <TextField type="text" name="directions" onChange={handleChange} />
+            {hasBeenSubmited && company.directions === "" && (
+              <span className={style.error}>
+                Это поле должно быть заполнено
+              </span>
+            )}
           </div>
           <div>
             <h4>Сфера деятельности: </h4>
             <TextField type="text" name="sphere" onChange={handleChange} />
+            {hasBeenSubmited && company.sphere === "" && (
+              <span className={style.error}>
+                Это поле должно быть заполнено
+              </span>
+            )}
           </div>
         </div>
-
         <div className={style.new_company_container_item}>
           <div>
             <h4>Виды грузоперевозок: </h4>

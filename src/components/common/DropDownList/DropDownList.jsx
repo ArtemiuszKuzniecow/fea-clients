@@ -33,6 +33,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
     <div className={style.dropdown_container}>
       <MyButton
         text={textSample}
+        type="text"
         isDisabled={false}
         onClick={() => {
           toggleList();

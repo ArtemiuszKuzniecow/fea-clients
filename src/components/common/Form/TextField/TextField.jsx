@@ -30,7 +30,7 @@ const TextField = ({
         }
         onChange={handleChange}
         disabled={disabled}
-        value={content}
+        value={content.trim()}
       />
       {hasButton && <MyButton text={buttonText} onClick={onClick} />}
     </div>
