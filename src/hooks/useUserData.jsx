@@ -34,7 +34,7 @@ const useUserData = () => {
   const contactDate = useSelector(getContactDateSelector());
   const openedStatus = useSelector(getOpenedStatus());
   const orderDate = useSelector(getOrderDate());
-  const companiesIds = companies && Object.values(companies.map((c) => c.id));
+  const companiesIds = companies && companies.map((c) => c.id);
   const orders = useSelector(getAllOrders(companiesIds));
 
   return {

@@ -15,7 +15,13 @@ const initialState = {
 export const LeadsSlice = createSlice({
   name: "Lead",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.leadData = null;
+      state.isLoading = true;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [loadLeadsData.pending.type]: (state) => {
       state.isLoading = true;

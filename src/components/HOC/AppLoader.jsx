@@ -16,12 +16,12 @@ const AppLoader = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(loadUserData(userId));
-      dispatch(loadLeadsData());
-      dispatch(loadOrdersData());
-      dispatch(loadLeadsCommentsData());
-      dispatch(loadOrdersCommentsData());
+      dispatch(loadLeadsData(userId));
+      dispatch(loadOrdersData(userId));
+      dispatch(loadLeadsCommentsData(userId));
+      dispatch(loadOrdersCommentsData(userId));
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, dispatch]);
 
   return children;
 };

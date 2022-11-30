@@ -70,8 +70,15 @@ const Comments = ({ companyId, typeOfComments }) => {
             date: Date.now(),
             value: data,
             companyId: companyId,
+            userID: localId,
           }
-        : { _id: nanoid(), date: Date.now(), value: data, orderId: id };
+        : {
+            _id: nanoid(),
+            date: Date.now(),
+            value: data,
+            orderId: id,
+            userID: localId,
+          };
     if (typeOfComments === "company") {
       dispatch(postCompanyComment(comment));
     } else {

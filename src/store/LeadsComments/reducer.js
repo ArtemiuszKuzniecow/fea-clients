@@ -14,7 +14,13 @@ const initialState = {
 export const LeadsCommentsSlice = createSlice({
   name: "LeadsComment",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.leadsCommentData = null;
+      state.isLoading = true;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [loadLeadsCommentsData.pending.type]: (state) => {
       state.isLoading = true;

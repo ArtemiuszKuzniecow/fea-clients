@@ -15,7 +15,8 @@ import Loader from "../../ui/Loader/Loader";
 import style from "./NewOrderPage.module.scss";
 
 const NewOrderPage = () => {
-  const { companies, isLoading, isLeadsLoading } = useUserData();
+  const { companies, isLoading, isLeadsLoading, currentUserData } =
+    useUserData();
   const currentCompanies = companies && companies.map((c) => c.company);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -45,6 +46,7 @@ const NewOrderPage = () => {
     typeOfCargo: "",
     volume: "",
     weight: "",
+    userID: currentUserData.userData.id,
   });
 
   const handleSubmit = (e) => {

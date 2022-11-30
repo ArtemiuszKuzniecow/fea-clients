@@ -3,10 +3,16 @@ import ordersService from "../../services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",
-  async (thunkApi) => {
+  async (id, thunkApi) => {
     try {
       const { content } = await ordersService.get();
-      return content;
+      const result = {};
+      for (const key in content) {
+        if (content[key].userID === id) {
+          result[key] = content[key];
+        }
+      }
+      return result;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }

@@ -14,7 +14,13 @@ const initialState = {
 export const OrdersCommentsSlice = createSlice({
   name: "OrdersComments",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.ordersCommentsData = null;
+      state.isLoading = true;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [loadOrdersCommentsData.pending.type]: (state) => {
       state.isLoading = true;

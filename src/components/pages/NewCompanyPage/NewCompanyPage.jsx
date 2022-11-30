@@ -70,11 +70,21 @@ const NewCompanyPage = () => {
         <div className={style.new_company_container_item}>
           <div>
             <h4>Название компании: </h4>
-            <TextField type="text" name="company" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="company"
+              onChange={handleChange}
+              required={true}
+            />
           </div>
           <div>
             <h4>Имя сотрудника: </h4>
-            <TextField type="text" name="manager" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="manager"
+              onChange={handleChange}
+              required={true}
+            />
           </div>
           <div>
             <h4>Телефоны: </h4>
@@ -82,6 +92,7 @@ const NewCompanyPage = () => {
               type="text"
               name="phone"
               onChange={handleContactsChange}
+              required={true}
             />
           </div>
           <div>
@@ -106,11 +117,21 @@ const NewCompanyPage = () => {
           </div>
           <div>
             <h4>Основные направления: </h4>
-            <TextField type="text" name="directions" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="directions"
+              onChange={handleChange}
+              required={true}
+            />
           </div>
           <div>
             <h4>Сфера деятельности: </h4>
-            <TextField type="text" name="sphere" onChange={handleChange} />
+            <TextField
+              type="text"
+              name="sphere"
+              onChange={handleChange}
+              required={true}
+            />
           </div>
         </div>
 

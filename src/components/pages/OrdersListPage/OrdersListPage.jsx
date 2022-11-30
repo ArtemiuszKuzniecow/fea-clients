@@ -94,9 +94,15 @@ const OrdersListPage = () => {
         ) : (
           <>
             <h3>Добавтье первую компанию</h3>
-            <Link to="/new-order">
-              <MyButton text="Добавить запрос" />
-            </Link>
+            {companies && companies.length > 0 ? (
+              <Link to="/new-order">
+                <MyButton text="Добавить запрос" />
+              </Link>
+            ) : (
+              <Link to="/new-company">
+                <MyButton text="Добавить компанию" />
+              </Link>
+            )}
           </>
         )
       ) : (

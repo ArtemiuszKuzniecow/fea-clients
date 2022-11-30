@@ -24,12 +24,13 @@ const CompanyCard = ({ companyId }) => {
   const { getCompanyById } = useUserData();
   const company = getCompanyById(companyId);
   const [status, setStatus] = useState({
-    date: company.status.date,
-    value: company.status.value,
+    date: company ? company.status.date : null,
+    value: company ? company.status.value : null,
   });
+
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrders, setCurrentOrders] = useState();
-  const companyInformationData = [
+  const companyInformationData = company && [
     company.directions,
     company.sphere,
     company.contractType,
@@ -49,15 +50,19 @@ const CompanyCard = ({ companyId }) => {
 
   const handleDeleteCompany = () => {
     dispatch(deleteLead(company));
+    console.log("company deleted");
     leadsComments &&
       leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
+    console.log("lead com deleted");
     ordersComments &&
       ordersComments.forEach((c) => {
         if (currentOrders.map((o) => o.orderId).includes(c.orderId)) {
           dispatch(deleteOrderComment(c));
         }
       });
+    console.log("order com deleted");
     orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
+    console.log("orders deleted");
     history.push("/companies");
   };
 
@@ -78,92 +83,93 @@ const CompanyCard = ({ companyId }) => {
       })
     );
   };
-
   return (
-    <div className={style.company_card_container}>
-      <div className={style.company_card_title}>
-        <h3>{company.company}</h3>
-        {cargo.companyInformation.map((information, index) => (
-          <div key={information}>
-            {information}:
-            <span className={style.company_card_title_frame}>
-              {companyInformationData[index]}
-            </span>
-          </div>
-        ))}
-        <hr />
-        <Link to={"/" + company.id}>
-          <MyButton text="Информация о компании" />
-        </Link>
-        <hr />
-        <MyButton
-          text="Удалить компанию из базы"
-          onClick={() => setIsOpen((prevState) => !prevState)}
-        />
-        <ModalWindow
-          open={isOpen}
-          onClose={() => setIsOpen((prevState) => !prevState)}
-        >
-          <ModalContent
-            deleteFunc={() => handleDeleteCompany(company)}
-            openFunc={() => setIsOpen((prevState) => !prevState)}
-            item="компанию"
-          />
-        </ModalWindow>
-      </div>
-      <div className={style.company_card_contacts}>
-        <CompanyContacts
-          phone={company.contacts.phone}
-          email={company.contacts.email}
-          website={company.contacts.website}
-          manager={company.manager}
-          city={company.city}
-        />
-      </div>
-
-      <div className={style.company_card_status}>
-        <div className={style.company_card_status_header}>
-          <DropDownList
-            array={
-              company.isRequested
-                ? cargo.clientStatusArray.filter((s, i) => i > 2)
-                : cargo.clientStatusArray.filter((s, i) => i !== 3)
-            }
-            sampleText={company.status.value}
-            onChange={handleChange}
-            name="value"
-          />
-        </div>
-
-        <h5>
-          <label htmlFor="date">Когда связаться: </label>
-          <input
-            className={style.company_card_status_calendar}
-            type="date"
-            id="date"
-            onChange={handleChangeData}
-          />
-          <MyButton text="OK" onClick={() => refreshStatus()} />
-        </h5>
-        <div className={style.company_card_status_header}>
-          Связаться: {getDateFormat(company.status.date, ".")}
-        </div>
-        {company.isRequested ? (
-          <Link to={`${company.id}/orders`}>
-            <MyButton
-              isDisabled={!company.isRequested}
-              text="Посмотреть все запросы"
-            />
+    company && (
+      <div className={style.company_card_container}>
+        <div className={style.company_card_title}>
+          <h3>{company.company}</h3>
+          {cargo.companyInformation.map((information, index) => (
+            <div key={information}>
+              {information}:
+              <span className={style.company_card_title_frame}>
+                {companyInformationData[index]}
+              </span>
+            </div>
+          ))}
+          <hr />
+          <Link to={"/" + company.id}>
+            <MyButton text="Информация о компании" />
           </Link>
-        ) : (
-          <div>Запросов нет</div>
-        )}
-      </div>
+          <hr />
+          <MyButton
+            text="Удалить компанию из базы"
+            onClick={() => setIsOpen((prevState) => !prevState)}
+          />
+          <ModalWindow
+            open={isOpen}
+            onClose={() => setIsOpen((prevState) => !prevState)}
+          >
+            <ModalContent
+              deleteFunc={() => handleDeleteCompany(company)}
+              openFunc={() => setIsOpen((prevState) => !prevState)}
+              item="компанию"
+            />
+          </ModalWindow>
+        </div>
+        <div className={style.company_card_contacts}>
+          <CompanyContacts
+            phone={company.contacts.phone}
+            email={company.contacts.email}
+            website={company.contacts.website}
+            manager={company.manager}
+            city={company.city}
+          />
+        </div>
 
-      <div className={style.company_card_comment}>
-        <Comments companyId={company.id} typeOfComments="company" />
+        <div className={style.company_card_status}>
+          <div className={style.company_card_status_header}>
+            <DropDownList
+              array={
+                company.isRequested
+                  ? cargo.clientStatusArray.filter((s, i) => i > 2)
+                  : cargo.clientStatusArray.filter((s, i) => i !== 3)
+              }
+              sampleText={company.status.value}
+              onChange={handleChange}
+              name="value"
+            />
+          </div>
+
+          <h5>
+            <label htmlFor="date">Когда связаться: </label>
+            <input
+              className={style.company_card_status_calendar}
+              type="date"
+              id="date"
+              onChange={handleChangeData}
+            />
+            <MyButton text="OK" onClick={() => refreshStatus()} />
+          </h5>
+          <div className={style.company_card_status_header}>
+            Связаться: {getDateFormat(company.status.date, ".")}
+          </div>
+          {company.isRequested ? (
+            <Link to={`${company.id}/orders`}>
+              <MyButton
+                isDisabled={!company.isRequested}
+                text="Посмотреть все запросы"
+              />
+            </Link>
+          ) : (
+            <div>Запросов нет</div>
+          )}
+        </div>
+
+        <div className={style.company_card_comment}>
+          <Comments companyId={company.id} typeOfComments="company" />
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
