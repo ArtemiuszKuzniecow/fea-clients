@@ -1,0 +1,4 @@
+{
+  "port": 8080,
+  "mongoUri": "mongodb+srv://artemiuszkuzniecow:Artemiusz06021992@cluster0.o2mdbyw.mongodb.net/fea-clients-app?retryWrites=true&w=majority"
+}

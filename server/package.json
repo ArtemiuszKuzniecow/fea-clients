@@ -1,0 +1,22 @@
+{
+  "name": "fea-clients",
+  "version": "1.0.0",
+  "description": "database",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "serve": "cross-env NODE_ENV=development nodemon app.js"
+  },
+  "author": "Artemiusz Kuzniecow <artemiuszkuzniecow@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "config": "^3.3.8",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
