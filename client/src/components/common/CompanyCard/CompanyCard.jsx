@@ -30,12 +30,6 @@ const CompanyCard = ({ companyId }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrders, setCurrentOrders] = useState();
-  const companyInformationData = company && [
-    company?.directions,
-    company?.sphere,
-    company?.contractType,
-    company?.containersTypes,
-  ];
 
   const { orders, isLoading, isOrdersLoading } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(company?.id));
@@ -84,14 +78,30 @@ const CompanyCard = ({ companyId }) => {
       <div className={style.company_card_container}>
         <div className={style.company_card_title}>
           <h3>{company.company}</h3>
-          {cargo.companyInformation.map((information, index) => (
-            <div key={information}>
-              {information}:
-              <span className={style.company_card_title_frame}>
-                {companyInformationData[index]}
-              </span>
-            </div>
-          ))}
+          <div>
+            Направление:
+            <span className={style.company_card_title_frame}>
+              {company?.directions}
+            </span>
+          </div>
+          <div>
+            Сфера деятельности:
+            <span className={style.company_card_title_frame}>
+              {company?.sphere}
+            </span>
+          </div>
+          <div>
+            Тип контракта:
+            <span className={style.company_card_title_frame}>
+              {company?.contractType}
+            </span>
+          </div>
+          <div>
+            Тип перевозки:
+            <span className={style.company_card_title_frame}>
+              {company?.containersTypes}
+            </span>
+          </div>
           <hr />
           <Link to={"/" + company.id}>
             <MyButton text="Информация о компании" />
