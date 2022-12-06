@@ -28,4 +28,32 @@ router
     }
   });
 
+router
+  .route("/:orderId")
+  .delete(auth, async (req, res) => {
+    try {
+      const { orderId } = req.params;
+      const removedOrder = Order.findById(orderId);
+      await removedOrder.remove();
+      return res.send(null);
+    } catch (error) {
+      res.status(500).json({
+        message: "Something was wrong, try it later.",
+      });
+    }
+  })
+  .patch(auth, async (req, res) => {
+    try {
+      const { orderId } = req.params;
+      const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
+        new: true,
+      });
+      res.send(updatedOrder);
+    } catch (error) {
+      res.status(500).json({
+        message: "Something was wrong, try it later.",
+      });
+    }
+  });
+
 module.exports = router;
