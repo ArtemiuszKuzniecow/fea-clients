@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./MainPageContent.module.scss";
 import declOfNum from "../../../utils/declOfNum";
 import getDateFormat, { today } from "../../../utils/getDateFormat";
 import useUserData from "../../../hooks/useUserData";
@@ -48,28 +47,24 @@ const MainPageContent = () => {
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     <>
       <h3>Добрый день, {currentUser.name}!</h3>
-      <div className={style.container}>
-        <div className={style.container_item}>
+      <div>
+        <div>
           <h4>
             У Вас всего {companies.length}{" "}
             {declOfNum(companies.length, companiesEndingsArray)}:
           </h4>
-          <div className={style.frame}>
-            <Link to="companies/" className={style.link}>
-              Посмотреть
-            </Link>
+          <div>
+            <Link to="companies/">Посмотреть</Link>
           </div>
           <h4>
             У Вас всего {orders.length}{" "}
             {declOfNum(orders.length, ordersEndingsArray)}:
           </h4>
-          <div className={style.frame}>
-            <Link to="orders-list" className={style.link}>
-              Посмотреть
-            </Link>
+          <div>
+            <Link to="orders-list">Посмотреть</Link>
           </div>
         </div>
-        <div className={style.container_item}>
+        <div>
           <h4>
             {companiesToConnect.length > 0
               ? `У Вас всего ${companiesToConnect.length}
@@ -79,27 +74,22 @@ const MainPageContent = () => {
                 )} для связи сегодня:`
               : "Сегодня нет компаний для связи"}
           </h4>
-          <div
-            className={style.frame}
-            onClick={() => handleCompaniesCollapse()}
-          >
+          <div onClick={() => handleCompaniesCollapse()}>
             {companiesToConnect.length > 0 ? (
               isCompaniesCollapsed ? (
                 <span>Посмотреть</span>
               ) : (
-                <div className={style.list}>
+                <div>
                   <span>Свернуть</span>{" "}
                   {companiesToConnect.map((c) => (
-                    <Link to={c.id} className={style.link} key={c.id}>
+                    <Link to={c.id} key={c.id}>
                       {c.company}
                     </Link>
                   ))}
                 </div>
               )
             ) : (
-              <Link to="companies" className={style.link}>
-                Посмотреть все компании
-              </Link>
+              <Link to="companies">Посмотреть все компании</Link>
             )}
           </div>
 
@@ -109,19 +99,15 @@ const MainPageContent = () => {
                 ${declOfNum(orders.length, ordersEndingsArray)}:`
               : "У Вас нет открытых запросов"}
           </h4>
-          <div className={style.frame} onClick={() => handleOrdersCollapse()}>
+          <div onClick={() => handleOrdersCollapse()}>
             {openedOrders.length > 0 ? (
               isOrdersCollapsed ? (
                 <span>Посмотреть</span>
               ) : (
-                <div className={style.list}>
+                <div>
                   <span>Свернуть</span>
                   {openedOrders.map((o) => (
-                    <Link
-                      to={`orders-list/${o.orderId}`}
-                      className={style.link}
-                      key={o.orderId}
-                    >
+                    <Link to={`orders-list/${o.orderId}`} key={o.orderId}>
                       {`Компания: ${getCompanyById(o.companyId).company}`}
                       <br />
                       {`Дата запроса: ${getDateFormat(o.date, ".")}`}

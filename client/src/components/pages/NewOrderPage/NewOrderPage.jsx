@@ -12,7 +12,6 @@ import DropDownList from "../../common/DropDownList/DropDownList";
 import RadioButtons from "../../common/Form/RadioButtons/RadioButtons";
 import TextField from "../../common/Form/TextField/TextField";
 import Loader from "../../ui/Loader/Loader";
-import style from "./NewOrderPage.module.scss";
 
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading, currentUserData } =
@@ -99,8 +98,8 @@ const NewOrderPage = () => {
   return !isLoading && !isLeadsLoading && companies ? (
     <>
       <h1>Добавить новый запрос:</h1>
-      <div className={style.new_order_container}>
-        <div className={style.new_order_container_item}>
+      <div>
+        <div>
           <h4>Выберите компанию:</h4>
           <DropDownList
             array={currentCompanies}
@@ -109,10 +108,10 @@ const NewOrderPage = () => {
             name="companyId"
           />
           {hasBeenSubmited && order.companyId === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Статус запроса:</h4>
           <DropDownList
             array={cargo.orderStatus}
@@ -121,7 +120,7 @@ const NewOrderPage = () => {
             onChange={handleChangeDropDown}
           />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Вид перевозки:</h4>
           <DropDownList
             array={cargo.containersTypes}
@@ -130,10 +129,10 @@ const NewOrderPage = () => {
             name="containersTypes"
           />
           {hasBeenSubmited && order.containersTypes === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Вид контракта:</h4>
           <DropDownList
             array={cargo.contractType}
@@ -142,10 +141,10 @@ const NewOrderPage = () => {
             name="contractType"
           />
           {hasBeenSubmited && order.contractType === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Инкотермс:</h4>
           <DropDownList
             array={cargo.incoterms}
@@ -154,7 +153,7 @@ const NewOrderPage = () => {
             name="incoterms"
           />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Объём груза:</h4>
           {order.containersTypes === "Сборный груз" ||
           order.containersTypes === "Авиа" ? (
@@ -168,63 +167,61 @@ const NewOrderPage = () => {
                 onChange={handleChangeDropDown}
               />
               {hasBeenSubmited && order.volume === "" && (
-                <span className={style.error}>
-                  Это поле должно быть заполнено
-                </span>
+                <span>Это поле должно быть заполнено</span>
               )}
             </>
           )}
         </div>{" "}
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Как часто возит:</h4>
           <TextField name="howOften" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Вес груза:</h4>{" "}
           <TextField name="weight" type="text" onChange={handleChange} />
           {hasBeenSubmited && order.weight === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Характер груза:</h4>
           <TextField name="typeOfCargo" type="text" onChange={handleChange} />
           {hasBeenSubmited && order.typeOfCargo === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Код ТН ВЭД:</h4>
           <TextField name="hsCode" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Температурный режим:</h4>
           <TextField name="temperature" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Класс опасности:</h4>
           <TextField name="hazard" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Вид упаковки:</h4>
           <TextField name="package" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Дополнительная информация:</h4>
           <TextField name="special" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Адрес забора груза:</h4>
           <TextField name="pickupAddress" type="text" onChange={handleChange} />
           {hasBeenSubmited && order.pickupAddress === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Место таможенного оформления:</h4>
           <TextField name="customs" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Адрес доставки груза:</h4>
           <TextField
             name="deliveryAddress"
@@ -232,26 +229,24 @@ const NewOrderPage = () => {
             onChange={handleChange}
           />
           {hasBeenSubmited && order.deliveryAddress === "" && (
-            <span className={style.error}>Это поле должно быть заполнено</span>
+            <span>Это поле должно быть заполнено</span>
           )}
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Когда забирать:</h4>
           <TextField name="pickupDate" type="text" onChange={handleChange} />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Актуальность груза:</h4>
           <RadioButtons onChange={handleChangeRadio} name="isActual" />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Можно ли штабелировать:</h4>
           <RadioButtons onChange={handleChangeRadio} name="transshipment" />
         </div>
-        <div className={style.new_order_container_item}>
+        <div>
           <h4>Дата запроса:</h4>
-          <div className={style.new_order_container_item_frame}>
-            {getDateFormat(Date.now(), ".")}
-          </div>
+          <div>{getDateFormat(Date.now(), ".")}</div>
         </div>
       </div>
 

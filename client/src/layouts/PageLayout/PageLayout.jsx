@@ -8,7 +8,6 @@ import localStorageService from "../../services/localStorageService";
 import MyButton from "../../components/common/Button/MyButton";
 import Loader from "../../components/ui/Loader/Loader";
 import { getUserDataSelector } from "../../store/Users/selectors";
-import style from "./PageLayout.module.scss";
 import useUserData from "../../hooks/useUserData";
 
 const PageLayout = ({ children }) => {
@@ -22,48 +21,14 @@ const PageLayout = ({ children }) => {
 
   return (
     <>
-      <div className={style.header_container}>
+      <div className="container bg-sky-50  border">
         <Link to="/">
-          <img src={logo} alt="logo" className={style.header_container_img} />
+          <img src={logo} alt="logo" width={50} />
         </Link>
-
-        {accessToken && (
-          <div className={style.header_container_companies}>
-            <Link to="/companies">
-              <MyButton text="Компании" />
-            </Link>
-            <Link to="/orders-list">
-              <MyButton text="Запросы" />
-            </Link>
-          </div>
-        )}
-
-        {!accessToken ? (
-          <div className={style.header_container_login}>
-            <Link to="/login" className={style.header_container_link}>
-              <span>Вход</span>
-            </Link>
-            /
-            <Link to="/registration" className={style.header_container_link}>
-              <span>Регистрация</span>
-            </Link>
-          </div>
-        ) : (
-          <div className={style.header_container_login}>
-            {currentUser && <h3>{currentUser.name}</h3>}
-            <Link to="/logout" className={style.header_container_link}>
-              <span>Выход</span>
-            </Link>
-          </div>
-        )}
-
-        <div
-          className={style.header_container_hamburger}
-          onClick={toggleCollapse}
-        >
+        <div onClick={toggleCollapse}>
           {!isCollapsed ? (
             <>
-              <img src={hamburger} className={style.hamburger} />
+              <img src={hamburger} width={30} />
             </>
           ) : (
             <>
@@ -71,49 +36,32 @@ const PageLayout = ({ children }) => {
                 currentUser ? (
                   <>
                     <span style={{ margin: 10 }}>{currentUser.name}</span>
-                    <Link
-                      to="/companies"
-                      className={style.header_container_link}
-                    >
+                    <Link to="/companies">
                       <span>Компании</span>
                     </Link>
-                    <Link
-                      to="/orders-list"
-                      className={style.header_container_link}
-                    >
+                    <Link to="/orders-list">
                       <span>Запросы</span>
                     </Link>
-                    <Link
-                      to="/new-company"
-                      className={style.header_container_link}
-                    >
+                    <Link to="/new-company">
                       <span>Добавить компанию</span>
                     </Link>
-                    <Link
-                      to="new-order"
-                      className={style.header_container_link}
-                    >
+                    <Link to="new-order">
                       <span>Добавить запрос</span>
                     </Link>
-                    <Link to="/logout" className={style.header_container_link}>
+                    <Link to="/logout">
                       <span>Выход</span>
                     </Link>
-                    <button className={style.header_container_hamburger_arrow}>
-                      Закрыть меню
-                    </button>
+                    <button>Закрыть меню</button>
                   </>
                 ) : (
                   <Loader />
                 )
               ) : (
                 <>
-                  <Link to="/login" className={style.header_container_link}>
+                  <Link to="/login">
                     <span>Вход</span>
                   </Link>
-                  <Link
-                    to="/registration"
-                    className={style.header_container_link}
-                  >
+                  <Link to="/registration">
                     <span>Регистрация</span>
                   </Link>
                 </>
@@ -123,19 +71,6 @@ const PageLayout = ({ children }) => {
         </div>
       </div>
       <hr />
-      {currentUser && (
-        <div className={style.header_container_buttons}>
-          <Link to="/new-company">
-            <MyButton text="Добавить компанию" />
-          </Link>
-
-          {companies && companies.length > 0 && !isLoading && !isLeadsLoading && (
-            <Link to="/new-order">
-              <MyButton text="Добавить запрос" />
-            </Link>
-          )}
-        </div>
-      )}
       <div>{children}</div>
     </>
   );

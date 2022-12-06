@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import cargo from "../../../cargo.json";
@@ -10,7 +9,6 @@ import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
 import Loader from "../../ui/Loader/Loader";
-import style from "./NewCompanyPage.module.scss";
 
 const NewCompanyPage = () => {
   const currentCompanyId = nanoid();
@@ -75,24 +73,20 @@ const NewCompanyPage = () => {
   return !isLoading ? (
     <>
       <h1>Добавить новую компанию:</h1>
-      <div className={style.new_company_container}>
-        <div className={style.new_company_container_item}>
+      <div>
+        <div>
           <div>
             <h4>Название компании: </h4>
             <TextField type="text" name="company" onChange={handleChange} />
             {hasBeenSubmited && company.company === "" && (
-              <span className={style.error}>
-                Это поле должно быть заполнено
-              </span>
+              <span>Это поле должно быть заполнено</span>
             )}
           </div>
           <div>
             <h4>Имя сотрудника: </h4>
             <TextField type="text" name="manager" onChange={handleChange} />
             {hasBeenSubmited && company.manager === "" && (
-              <span className={style.error}>
-                Это поле должно быть заполнено
-              </span>
+              <span>Это поле должно быть заполнено</span>
             )}
           </div>
           <div>
@@ -127,22 +121,18 @@ const NewCompanyPage = () => {
             <h4>Основные направления: </h4>
             <TextField type="text" name="directions" onChange={handleChange} />
             {hasBeenSubmited && company.directions === "" && (
-              <span className={style.error}>
-                Это поле должно быть заполнено
-              </span>
+              <span>Это поле должно быть заполнено</span>
             )}
           </div>
           <div>
             <h4>Сфера деятельности: </h4>
             <TextField type="text" name="sphere" onChange={handleChange} />
             {hasBeenSubmited && company.sphere === "" && (
-              <span className={style.error}>
-                Это поле должно быть заполнено
-              </span>
+              <span>Это поле должно быть заполнено</span>
             )}
           </div>
         </div>
-        <div className={style.new_company_container_item}>
+        <div>
           <div>
             <h4>Виды грузоперевозок: </h4>
             <DropDownList

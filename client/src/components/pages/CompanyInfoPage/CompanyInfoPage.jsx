@@ -15,7 +15,6 @@ import ModalContent from "../../common/ModalContent/ModalContent";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import OrderCard from "../../common/OrderCard/OrderCard";
 import Loader from "../../ui/Loader/Loader";
-import style from "./CompanyInfoPage.module.scss";
 
 const CompanyInfoPage = () => {
   const { id } = useParams();
@@ -54,8 +53,8 @@ const CompanyInfoPage = () => {
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     currentCompany && (
       <>
-        <div className={style.company_info_page_container}>
-          <div className={style.company_info_page_item}>
+        <div>
+          <div>
             <h1>{currentCompany.company}</h1>
             <CompanyContacts
               phone={currentCompany.contacts.phone}
@@ -64,32 +63,22 @@ const CompanyInfoPage = () => {
               manager={currentCompany.manager}
               city={currentCompany.city}
             />
-            <div className={style.company_info_page_frame_item}>
+            <div>
               <h4>Основные направления компании </h4>
-              <p className={style.company_info_page_frame}>
-                {currentCompany.directions}
-              </p>
+              <p>{currentCompany.directions}</p>
             </div>
             <hr />
-            <div className={style.company_info_page_frame_item}>
+            <div>
               <h4>Тип контракта:</h4>
-              <p className={style.company_info_page_frame}>
-                {currentCompany.contractType}
-              </p>
+              <p>{currentCompany.contractType}</p>
             </div>
             <hr />
-            <div className={style.company_info_page_frame_item}>
-              <h4>Виды перевозок </h4>{" "}
-              <p className={style.company_info_page_frame}>
-                {currentCompany.containersTypes}
-              </p>
+            <div>
+              <h4>Виды перевозок </h4> <p>{currentCompany.containersTypes}</p>
             </div>
             <hr />
-            <div className={style.company_info_page_frame_item}>
-              <h4>Вид контрактов </h4>{" "}
-              <p className={style.company_info_page_frame}>
-                {currentCompany.contractType}
-              </p>
+            <div>
+              <h4>Вид контрактов </h4> <p>{currentCompany.contractType}</p>
             </div>
             <hr />
             <Link to={`${id}/edit`}>
@@ -111,7 +100,7 @@ const CompanyInfoPage = () => {
               />
             </ModalWindow>
           </div>
-          <div className={style.company_info_page_item}>
+          <div>
             <Comments companyId={currentCompany.id} typeOfComments="company" />
           </div>
         </div>

@@ -1,25 +1,17 @@
 import PropTypes from "prop-types";
 import React from "react";
-import style from "./CompanyContacts.module.scss";
 
 const CompanyContacts = ({ phone, email, website, manager, city }) => {
   return (
-    <div className={style.company_contacts}>
+    <div>
       <div>{manager}</div>
       <div>{phone}</div>
       <div>{city}</div>
       <div>
-        <a href={"mailto:" + email} className={style.company_contacts_link}>
-          {email}
-        </a>
+        <a href={"mailto:" + email}>{email}</a>
       </div>
       <div>
-        <a
-          href={website}
-          target="_blank"
-          rel="noreferrer"
-          className={style.company_contacts_link}
-        >
+        <a href={website} target="_blank" rel="noreferrer">
           {website}
         </a>
       </div>

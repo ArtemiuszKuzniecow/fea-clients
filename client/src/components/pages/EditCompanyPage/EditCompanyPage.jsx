@@ -8,7 +8,6 @@ import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
 import Loader from "../../ui/Loader/Loader";
-import style from "./EditCompanyPage.module.scss";
 
 const EditCompanyPage = () => {
   const { id } = useParams();
@@ -45,8 +44,8 @@ const EditCompanyPage = () => {
           <MyButton text="Назад" />
         </Link>
       </div>
-      <div className={style.edit_company_container}>
-        <div className={style.edit_company_container_item}>
+      <div>
+        <div>
           <div>
             <h4>Название компании: </h4>
             <TextField
@@ -121,7 +120,7 @@ const EditCompanyPage = () => {
           </div>
         </div>
 
-        <div className={style.edit_company_container_item}>
+        <div>
           <div>
             <h4>Виды грузоперевозок: </h4>
             <DropDownList

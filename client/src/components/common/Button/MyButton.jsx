@@ -1,15 +1,9 @@
 import React from "react";
-import style from "./MyButton.module.scss";
 import PropTypes from "prop-types";
 
 const MyButton = ({ text, isDisabled, onClick, type }) => {
   return (
-    <button
-      className={style.myButton}
-      disabled={isDisabled}
-      onClick={onClick}
-      type={type}
-    >
+    <button disabled={isDisabled} onClick={onClick} type={type}>
       {text}
     </button>
   );

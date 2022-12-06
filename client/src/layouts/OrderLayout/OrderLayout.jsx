@@ -8,7 +8,6 @@ import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
-import style from "./OrderLayout.module.scss";
 
 const OrderLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -60,8 +59,8 @@ const OrderLayout = ({ children }) => {
   return (
     <>
       <h1>Запросы</h1>
-      <div className={style.order_layout_container}>
-        <div className={style.order_layout_container_item}>
+      <div>
+        <div>
           <DropDownList
             sampleText="Сортировать (открытые/закрытые запросы)"
             array={["Все", "Открытые", "Закрытые"]}
@@ -70,7 +69,7 @@ const OrderLayout = ({ children }) => {
           />
         </div>
 
-        <div className={style.order_layout_container_item}>
+        <div>
           <DropDownList
             sampleText="Сортировать по дате запроса"
             array={datesOfOrders}

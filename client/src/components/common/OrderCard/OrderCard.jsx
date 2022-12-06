@@ -9,7 +9,6 @@ import { getAllOrdersCommentsById } from "../../../store/OrdersComments/selector
 import MyButton from "../Button/MyButton";
 import ModalContent from "../ModalContent/ModalContent";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import style from "./OrderCard.module.scss";
 
 const OrderCard = ({ order, companyName }) => {
   const dispatch = useDispatch();
@@ -30,27 +29,20 @@ const OrderCard = ({ order, companyName }) => {
 
   return (
     <>
-      <div
-        className={
-          order.isClosed
-            ? style.orders_card_container_closed
-            : style.orders_card_container_opened
-        }
-        key={order.orderId}
-      >
-        <div className={style.orders_card_container_item}>
+      <div key={order.orderId}>
+        <div>
           <h3>{companyName}</h3>
           <span>{order.status}</span>
         </div>
-        <div className={style.orders_card_container_item}>
+        <div>
           <p>{order.contractType}</p>
           <p>{order.containersTypes}</p>
         </div>
-        <div className={style.orders_card_container_item}>
+        <div>
           <p>{order.incoterms}</p>
           <p>{order.typeOfCargo}</p>
         </div>
-        <div className={style.orders_card_container_item}>
+        <div>
           <p>Дата запроса: {getDateFormat(order.date, ".")}</p>
           <p>{order.isActual ? "Актуальный груз" : "Неактуальный груз"}</p>
           <MyButton

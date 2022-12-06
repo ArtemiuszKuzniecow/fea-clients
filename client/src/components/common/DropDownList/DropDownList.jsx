@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Loader from "../../ui/Loader/Loader";
 import MyButton from "../Button/MyButton";
-import style from "./DropDownList.module.scss";
 
 const DropDownList = ({ array, sampleText, onChange, name }) => {
   const [openList, setOpenList] = useState(false);
@@ -30,7 +29,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
   };
 
   return !isLoading ? (
-    <div className={style.dropdown_container}>
+    <div>
       <MyButton
         text={textSample}
         type="text"
@@ -39,12 +38,11 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
           toggleList();
         }}
       />
-      <ul hidden={!openList} className={style.dropdown_container_ul}>
+      <ul hidden={!openList}>
         {array.map((item) => {
           return (
             <li
               key={item}
-              className={style.dropdown_container_li}
               onClick={() => {
                 handleSampleText(item);
               }}

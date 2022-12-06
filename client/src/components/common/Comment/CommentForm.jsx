@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import style from "./Comment.module.scss";
 import PropTypes from "prop-types";
 
 const CommentForm = ({ onClick }) => {
@@ -10,15 +9,10 @@ const CommentForm = ({ onClick }) => {
   };
 
   return (
-    <div className={style.comment}>
-      <div className={style.comment_header}>Комментарий</div>
-      <textarea
-        className={style.comment_text}
-        value={commentData}
-        onChange={handleChange}
-      ></textarea>
+    <div>
+      <div>Комментарий</div>
+      <textarea value={commentData} onChange={handleChange}></textarea>
       <div
-        className={style.comment_footer}
         onClick={() => {
           commentData.length > 0 && onClick(commentData);
           setCommentData("");

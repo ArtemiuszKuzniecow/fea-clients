@@ -17,7 +17,6 @@ import CompanyContacts from "../CompanyContacts/CompanyContacts";
 import DropDownList from "../DropDownList/DropDownList";
 import ModalContent from "../ModalContent/ModalContent";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import style from "./CompanyCard.module.scss";
 
 const CompanyCard = ({ companyId }) => {
   const dispatch = useDispatch();
@@ -75,32 +74,24 @@ const CompanyCard = ({ companyId }) => {
   };
   return (
     company && (
-      <div className={style.company_card_container}>
-        <div className={style.company_card_title}>
+      <div>
+        <div>
           <h3>{company.company}</h3>
           <div>
             Направление:
-            <span className={style.company_card_title_frame}>
-              {company?.directions}
-            </span>
+            <span>{company?.directions}</span>
           </div>
           <div>
             Сфера деятельности:
-            <span className={style.company_card_title_frame}>
-              {company?.sphere}
-            </span>
+            <span>{company?.sphere}</span>
           </div>
           <div>
             Тип контракта:
-            <span className={style.company_card_title_frame}>
-              {company?.contractType}
-            </span>
+            <span>{company?.contractType}</span>
           </div>
           <div>
             Тип перевозки:
-            <span className={style.company_card_title_frame}>
-              {company?.containersTypes}
-            </span>
+            <span>{company?.containersTypes}</span>
           </div>
           <hr />
           <Link to={"/" + company.id}>
@@ -122,7 +113,7 @@ const CompanyCard = ({ companyId }) => {
             />
           </ModalWindow>
         </div>
-        <div className={style.company_card_contacts}>
+        <div>
           <CompanyContacts
             phone={company.contacts.phone}
             email={company.contacts.email}
@@ -132,8 +123,8 @@ const CompanyCard = ({ companyId }) => {
           />
         </div>
 
-        <div className={style.company_card_status}>
-          <div className={style.company_card_status_header}>
+        <div>
+          <div>
             <DropDownList
               array={
                 company.isRequested
@@ -148,17 +139,10 @@ const CompanyCard = ({ companyId }) => {
 
           <h5>
             <label htmlFor="date">Когда связаться: </label>
-            <input
-              className={style.company_card_status_calendar}
-              type="date"
-              id="date"
-              onChange={handleChangeData}
-            />
+            <input type="date" id="date" onChange={handleChangeData} />
             <MyButton text="OK" onClick={() => refreshStatus()} />
           </h5>
-          <div className={style.company_card_status_header}>
-            Связаться: {getDateFormat(company.status.date, ".")}
-          </div>
+          <div>Связаться: {getDateFormat(company.status.date, ".")}</div>
           {company.isRequested ? (
             <Link to={`${company.id}/orders`}>
               <MyButton
@@ -171,7 +155,7 @@ const CompanyCard = ({ companyId }) => {
           )}
         </div>
 
-        <div className={style.company_card_comment}>
+        <div>
           <Comments companyId={company.id} typeOfComments="company" />
         </div>
       </div>

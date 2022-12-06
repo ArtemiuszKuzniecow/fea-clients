@@ -5,7 +5,6 @@ import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
-import style from "./LeadLayout.module.scss";
 import { createSetArray } from "../../utils/createSetArray";
 
 const LeadLayout = ({ children }) => {
@@ -51,8 +50,8 @@ const LeadLayout = ({ children }) => {
     !isLeadsLoading && (
       <>
         <h1>Компании</h1>
-        <div className={style.lead_layout_container}>
-          <div className={style.lead_layout_container_item}>
+        <div>
+          <div>
             <DropDownList
               array={statusArray}
               sampleText="Фильтровать по статусу клиента"
@@ -60,7 +59,7 @@ const LeadLayout = ({ children }) => {
               onChange={handleChangeDropDownStatus}
             />
           </div>
-          <div className={style.lead_layout_container_item}>
+          <div>
             <DropDownList
               array={dateToContactWithClient}
               sampleText="Фильтровать по дате для связи с контактом "
