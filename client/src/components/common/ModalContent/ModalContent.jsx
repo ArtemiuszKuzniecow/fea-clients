@@ -7,7 +7,7 @@ const ModalContent = ({ deleteFunc, openFunc, item }) => {
     <>
       <div>
         Вы уверены, что хотите удалить {item} из базы?
-        <div>
+        <div className="flex justify-center">
           <MyButton onClick={deleteFunc}>Да</MyButton>
           <MyButton onClick={openFunc}>Нет</MyButton>
         </div>

@@ -49,8 +49,8 @@ const LeadLayout = ({ children }) => {
     companies &&
     !isLeadsLoading && (
       <>
-        <h1>Компании</h1>
-        <div>
+        <h1 className="flex justify-center">Компании</h1>
+        <div className="flex justify-around">
           <div>
             <DropDownList
               array={statusArray}

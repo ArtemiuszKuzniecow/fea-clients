@@ -39,7 +39,11 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
       >
         {textSample}
       </MyButton>
-      <ul hidden={!openList}>
+      <ul
+        hidden={!openList}
+        className="py-1 text-sm text-sky-700 dark:text-sky-200 "
+        aria-labelledby="dropdownDefault"
+      >
         {array.map((item) => {
           return (
             <li
@@ -47,6 +51,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
               onClick={() => {
                 handleSampleText(item);
               }}
+              className="block py-2 px-4 hover:bg-sky-100 dark:hover:bg-sky-600 dark:hover:text-white cursor-pointer"
             >
               {item}
             </li>

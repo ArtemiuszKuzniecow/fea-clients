@@ -58,8 +58,8 @@ const OrderLayout = ({ children }) => {
 
   return (
     <>
-      <h1>Запросы</h1>
-      <div>
+      <h1 className="flex justify-center">Запросы</h1>
+      <div className="flex justify-around">
         <div>
           <DropDownList
             sampleText="Сортировать (открытые/закрытые запросы)"
