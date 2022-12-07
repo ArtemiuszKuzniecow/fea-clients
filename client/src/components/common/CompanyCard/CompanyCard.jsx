@@ -95,13 +95,12 @@ const CompanyCard = ({ companyId }) => {
           </div>
           <hr />
           <Link to={"/" + company.id}>
-            <MyButton text="Информация о компании" />
+            <MyButton>Информация о компании</MyButton>
           </Link>
           <hr />
-          <MyButton
-            text="Удалить компанию из базы"
-            onClick={() => setIsOpen((prevState) => !prevState)}
-          />
+          <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
+            Удалить компанию из базы
+          </MyButton>
           <ModalWindow
             open={isOpen}
             onClose={() => setIsOpen((prevState) => !prevState)}
@@ -140,15 +139,14 @@ const CompanyCard = ({ companyId }) => {
           <h5>
             <label htmlFor="date">Когда связаться: </label>
             <input type="date" id="date" onChange={handleChangeData} />
-            <MyButton text="OK" onClick={() => refreshStatus()} />
+            <MyButton onClick={() => refreshStatus()}>OK</MyButton>
           </h5>
           <div>Связаться: {getDateFormat(company.status.date, ".")}</div>
           {company.isRequested ? (
             <Link to={`${company.id}/orders`}>
-              <MyButton
-                isDisabled={!company.isRequested}
-                text="Посмотреть все запросы"
-              />
+              <MyButton isDisabled={!company.isRequested}>
+                Посмотреть все запросы
+              </MyButton>
             </Link>
           ) : (
             <div>Запросов нет</div>

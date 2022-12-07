@@ -60,7 +60,7 @@ const CompaniesPage = () => {
           <>
             <h3>Добавтье первую компанию</h3>
             <Link to="/new-company">
-              <MyButton text="Добавить компанию" />
+              <MyButton>Добавить компанию</MyButton>
             </Link>
           </>
         )

@@ -41,7 +41,7 @@ const EditCompanyPage = () => {
       <div>
         <h1>Редактирвоать данные:</h1>
         <Link to={`/${id}`}>
-          <MyButton text="Назад" />
+          <MyButton>Назад</MyButton>
         </Link>
       </div>
       <div>
@@ -142,7 +142,7 @@ const EditCompanyPage = () => {
         </div>
       </div>
       <br />
-      <MyButton text="Сохранить изменения" onClick={handleSubmit} />
+      <MyButton onClick={handleSubmit}>Сохранить изменения</MyButton>
     </>
   ) : (
     <Loader />

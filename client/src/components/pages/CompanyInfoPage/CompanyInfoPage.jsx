@@ -82,13 +82,12 @@ const CompanyInfoPage = () => {
             </div>
             <hr />
             <Link to={`${id}/edit`}>
-              <MyButton text="Изменить информацию о компании" />
+              <MyButton>Изменить информацию о компании</MyButton>
             </Link>
             <hr />
-            <MyButton
-              text="Удалить компанию из базы"
-              onClick={() => setIsOpen((prevState) => !prevState)}
-            />
+            <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
+              Удалить компанию из базы
+            </MyButton>
             <ModalWindow
               open={isOpen}
               onClose={() => setIsOpen((prevState) => !prevState)}

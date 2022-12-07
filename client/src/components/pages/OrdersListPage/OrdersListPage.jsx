@@ -96,11 +96,11 @@ const OrdersListPage = () => {
             <h3>Добавтье первую компанию</h3>
             {companies && companies.length > 0 ? (
               <Link to="/new-order">
-                <MyButton text="Добавить запрос" />
+                <MyButton>Добавить запрос</MyButton>
               </Link>
             ) : (
               <Link to="/new-company">
-                <MyButton text="Добавить компанию" />
+                <MyButton>Добавить компанию</MyButton>
               </Link>
             )}
           </>

@@ -250,7 +250,7 @@ const NewOrderPage = () => {
         </div>
       </div>
 
-      <MyButton text="Отправить запрос" onClick={handleSubmit} />
+      <MyButton onClick={handleSubmit}>Отправить запрос</MyButton>
     </>
   ) : (
     <Loader />

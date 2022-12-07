@@ -125,7 +125,7 @@ const Form = ({ type, submitValue, submitFunction }) => {
         ) : null}
 
         <div>
-          <br /> <MyButton text={submitValue} />
+          <br /> <MyButton>{submitValue}</MyButton>
         </div>
       </form>
     </div>

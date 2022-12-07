@@ -8,8 +8,8 @@ const ModalContent = ({ deleteFunc, openFunc, item }) => {
       <div>
         Вы уверены, что хотите удалить {item} из базы?
         <div>
-          <MyButton text="Да" onClick={deleteFunc} />
-          <MyButton text="Нет" onClick={openFunc} />
+          <MyButton onClick={deleteFunc}>Да</MyButton>
+          <MyButton onClick={openFunc}>Нет</MyButton>
         </div>
       </div>
     </>

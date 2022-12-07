@@ -31,13 +31,14 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
   return !isLoading ? (
     <div>
       <MyButton
-        text={textSample}
         type="text"
         isDisabled={false}
         onClick={() => {
           toggleList();
         }}
-      />
+      >
+        {textSample}
+      </MyButton>
       <ul hidden={!openList}>
         {array.map((item) => {
           return (

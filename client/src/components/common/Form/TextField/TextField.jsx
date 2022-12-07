@@ -27,7 +27,7 @@ const TextField = ({
         disabled={disabled}
         value={content}
       />
-      {hasButton && <MyButton text={buttonText} onClick={onClick} />}
+      {hasButton && <MyButton onClick={onClick}>{buttonText}</MyButton>}
     </div>
   );
 };

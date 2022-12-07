@@ -45,15 +45,13 @@ const OrderCard = ({ order, companyName }) => {
         <div>
           <p>Дата запроса: {getDateFormat(order.date, ".")}</p>
           <p>{order.isActual ? "Актуальный груз" : "Неактуальный груз"}</p>
-          <MyButton
-            text="Открыть запрос"
-            onClick={() => handleRedirect(order.orderId)}
-          />
+          <MyButton onClick={() => handleRedirect(order.orderId)}>
+            Открыть запрос
+          </MyButton>
           <br />
-          <MyButton
-            text="Удалить запрос из базы"
-            onClick={() => setIsOpen((prevState) => !prevState)}
-          />
+          <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
+            Удалить запрос из базы
+          </MyButton>
           <ModalWindow
             open={isOpen}
             onClose={() => setIsOpen((prevState) => !prevState)}

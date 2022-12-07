@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.scss";
-import localStorageService from "./services/localStorageService";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage/CompaniesPage";
@@ -17,7 +15,8 @@ import OrdersListPage from "./components/pages/OrdersListPage/OrdersListPage";
 import Login from "./components/ui/Login/Login";
 import LogOut from "./components/ui/Login/LogOut";
 import Registration from "./components/ui/Login/Registration";
-import PageLayout from "./layouts/PageLayout/PageLayout";
+import PageLayout from "./layouts/PageLayout";
+import localStorageService from "./services/localStorageService";
 import { loadUserData } from "./store/Users/actions";
 import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
@@ -33,7 +32,7 @@ function App() {
   }, [localId]);
 
   return (
-    <div className="App">
+    <div className="bg-sky-50">
       <AppLoader>
         <BrowserRouter>
           <PageLayout>

@@ -163,7 +163,7 @@ const NewCompanyPage = () => {
         </div>
       </div>
       <br />
-      <MyButton text="Добавить компанию" onClick={handleSubmit} />
+      <MyButton onClick={handleSubmit}>Добавить компанию</MyButton>
     </>
   ) : (
     <Loader />

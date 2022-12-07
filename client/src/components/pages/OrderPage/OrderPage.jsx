@@ -190,9 +190,9 @@ const OrderPage = () => {
             <hr />
             <div>
               <Link to={"/" + currentCompany.id}>
-                <MyButton text="Информация о компании" />
+                <MyButton>Информация о компании</MyButton>
               </Link>
-              <MyButton text="Обновить ставку" onClick={toggleNewPrice} />
+              <MyButton onClick={toggleNewPrice}>Обновить ставку</MyButton>
             </div>
             {newPrice ? (
               <TextField
@@ -207,10 +207,9 @@ const OrderPage = () => {
             ) : null}
           </div>
           <hr />
-          <MyButton
-            text="Удалить запрос из базы"
-            onClick={() => setIsOpen((prevState) => !prevState)}
-          />
+          <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
+            Удалить запрос из базы
+          </MyButton>
           <ModalWindow
             open={isOpen}
             onClose={() => setIsOpen((prevState) => !prevState)}
