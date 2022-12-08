@@ -8,6 +8,7 @@ import { postNewLead } from "../../../store/Leads/actions";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
+import Headline from "../../common/Headline";
 import Loader from "../../ui/Loader/Loader";
 
 const NewCompanyPage = () => {
@@ -72,7 +73,7 @@ const NewCompanyPage = () => {
 
   return !isLoading ? (
     <>
-      <h1>Добавить новую компанию:</h1>
+      <Headline>Добавить новую компанию:</Headline>
       <div>
         <div>
           <div>

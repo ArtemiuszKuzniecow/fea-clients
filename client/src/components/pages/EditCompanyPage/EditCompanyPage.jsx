@@ -7,6 +7,7 @@ import { postNewLead } from "../../../store/Leads/actions";
 import MyButton from "../../common/Button/MyButton";
 import DropDownList from "../../common/DropDownList/DropDownList";
 import TextField from "../../common/Form/TextField/TextField";
+import Headline from "../../common/Headline";
 import Loader from "../../ui/Loader/Loader";
 
 const EditCompanyPage = () => {
@@ -39,7 +40,7 @@ const EditCompanyPage = () => {
   return currentCompany ? (
     <>
       <div>
-        <h1>Редактирвоать данные:</h1>
+        <Headline>Редактирвоать данные:</Headline>
         <Link to={`/${id}`}>
           <MyButton>Назад</MyButton>
         </Link>

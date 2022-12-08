@@ -5,6 +5,7 @@ import Loader from "../../ui/Loader/Loader";
 import { useEffect } from "react";
 import useUserData from "../../../hooks/useUserData";
 import { useParams } from "react-router-dom";
+import Headline from "../../common/Headline";
 
 const CurrentOrdersPage = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const CurrentOrdersPage = () => {
 
   return currentOrders ? (
     <>
-      <h1>Запросы компании {company.company}</h1>
+      <Headline>Запросы компании {company.company}</Headline>
       {currentOrders.map((currentOrder) => {
         return (
           <OrderCard

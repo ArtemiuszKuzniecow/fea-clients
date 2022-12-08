@@ -5,6 +5,7 @@ import useUserData from "../../../hooks/useUserData";
 import LeadLayout from "../../../layouts/LeadLayout/LeadLayout";
 import MyButton from "../../common/Button/MyButton";
 import CompanyCard from "../../common/CompanyCard/CompanyCard";
+import Headline from "../../common/Headline";
 import Loader from "../../ui/Loader/Loader";
 
 const CompaniesPage = () => {
@@ -58,7 +59,7 @@ const CompaniesPage = () => {
             })
         ) : (
           <>
-            <h3>Добавтье первую компанию</h3>
+            <Headline>Добавтье первую компанию</Headline>
             <Link to="/new-company">
               <MyButton>Добавить компанию</MyButton>
             </Link>

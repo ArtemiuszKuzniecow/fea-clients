@@ -6,6 +6,7 @@ import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
 import { createSetArray } from "../../utils/createSetArray";
+import Headline from "../../components/common/Headline";
 
 const LeadLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const LeadLayout = ({ children }) => {
     companies &&
     !isLeadsLoading && (
       <>
-        <h1 className="flex justify-center">Компании</h1>
+        <Headline>Компании</Headline>
         <div className="flex justify-around">
           <div>
             <DropDownList

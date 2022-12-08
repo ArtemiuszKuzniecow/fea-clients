@@ -12,6 +12,7 @@ import DropDownList from "../../common/DropDownList/DropDownList";
 import RadioButtons from "../../common/Form/RadioButtons/RadioButtons";
 import TextField from "../../common/Form/TextField/TextField";
 import Loader from "../../ui/Loader/Loader";
+import Headline from "../../common/Headline";
 
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading, currentUserData } =
@@ -97,7 +98,7 @@ const NewOrderPage = () => {
 
   return !isLoading && !isLeadsLoading && companies ? (
     <>
-      <h1>Добавить новый запрос:</h1>
+      <Headline>Добавить новый запрос:</Headline>
       <div>
         <div>
           <h4>Выберите компанию:</h4>

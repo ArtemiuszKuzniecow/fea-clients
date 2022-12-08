@@ -12,6 +12,7 @@ import TextField from "../../common/Form/TextField/TextField";
 import ModalContent from "../../common/ModalContent/ModalContent";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import Loader from "../../ui/Loader/Loader";
+import Headline from "../../common/Headline";
 
 const OrderPage = () => {
   const { id } = useParams();
@@ -64,7 +65,7 @@ const OrderPage = () => {
 
   return currentOrder && currentCompany ? (
     <>
-      <h1>{currentCompany.company}</h1>
+      <Headline>{currentCompany.company}</Headline>
 
       <div>
         <div>

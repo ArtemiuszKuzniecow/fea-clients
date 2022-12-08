@@ -8,6 +8,7 @@ import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../../components/common/DropDownList/DropDownList";
 import useUserData from "../../hooks/useUserData";
 import { UserSlice } from "../../store/Users/reducer";
+import Headline from "../../components/common/Headline";
 
 const OrderLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const OrderLayout = ({ children }) => {
 
   return (
     <>
-      <h1 className="flex justify-center">Запросы</h1>
+      <Headline>Запросы</Headline>
       <div className="flex justify-around">
         <div>
           <DropDownList

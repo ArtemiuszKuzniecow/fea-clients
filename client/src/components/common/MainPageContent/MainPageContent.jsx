@@ -6,6 +6,7 @@ import { getUserDataSelector } from "../../../store/Users/selectors";
 import Loader from "../../ui/Loader/Loader";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Headline from "../Headline";
 
 const MainPageContent = () => {
   const { userData: currentUser } = useSelector(getUserDataSelector());
@@ -46,7 +47,7 @@ const MainPageContent = () => {
 
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     <>
-      <h3>Добрый день, {currentUser.name}!</h3>
+      <Headline>Добрый день, {currentUser.name}!</Headline>
       <div>
         <div>
           <h4>

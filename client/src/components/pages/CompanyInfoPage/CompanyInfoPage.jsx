@@ -11,6 +11,7 @@ import { getAllOrdersComments } from "../../../store/OrdersComments/selectors";
 import MyButton from "../../common/Button/MyButton";
 import Comments from "../../common/Comment/Comments";
 import CompanyContacts from "../../common/CompanyContacts/CompanyContacts";
+import Headline from "../../common/Headline";
 import ModalContent from "../../common/ModalContent/ModalContent";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
 import OrderCard from "../../common/OrderCard/OrderCard";
@@ -54,8 +55,8 @@ const CompanyInfoPage = () => {
     currentCompany && (
       <>
         <div>
+          <Headline>{currentCompany.company}</Headline>
           <div>
-            <h1>{currentCompany.company}</h1>
             <CompanyContacts
               phone={currentCompany.contacts.phone}
               email={currentCompany.contacts.email}

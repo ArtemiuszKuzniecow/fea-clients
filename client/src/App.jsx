@@ -32,7 +32,7 @@ function App() {
   }, [localId]);
 
   return (
-    <div className="bg-sky-50">
+    <div>
       <AppLoader>
         <BrowserRouter>
           <PageLayout>

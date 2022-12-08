@@ -1,5 +1,6 @@
 import React from "react";
 import localStorageService from "../../../services/localStorageService";
+import Headline from "../../common/Headline";
 import MainPageContent from "../../common/MainPageContent/MainPageContent";
 
 const MainPage = () => {
@@ -12,7 +13,7 @@ const MainPage = () => {
       ) : (
         <div>
           <div>
-            <h3>Пожалуйста, зарегистрируйтесь в системе!</h3>
+            <Headline>Пожалуйста, зарегистрируйтесь в системе!</Headline>
           </div>
         </div>
       )}

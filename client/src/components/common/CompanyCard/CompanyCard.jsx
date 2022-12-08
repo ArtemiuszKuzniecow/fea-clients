@@ -74,87 +74,94 @@ const CompanyCard = ({ companyId }) => {
   };
   return (
     company && (
-      <div>
-        <div>
-          <h3>{company.company}</h3>
-          <div>
-            Направление:
-            <span>{company?.directions}</span>
-          </div>
-          <div>
-            Сфера деятельности:
-            <span>{company?.sphere}</span>
-          </div>
-          <div>
-            Тип контракта:
-            <span>{company?.contractType}</span>
-          </div>
-          <div>
-            Тип перевозки:
-            <span>{company?.containersTypes}</span>
-          </div>
-          <hr />
-          <Link to={"/" + company.id}>
-            <MyButton>Информация о компании</MyButton>
-          </Link>
-          <hr />
-          <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
-            Удалить компанию из базы
-          </MyButton>
-          <ModalWindow
-            open={isOpen}
-            onClose={() => setIsOpen((prevState) => !prevState)}
-          >
-            <ModalContent
-              deleteFunc={() => handleDeleteCompany(company)}
-              openFunc={() => setIsOpen((prevState) => !prevState)}
-              item="компанию"
-            />
-          </ModalWindow>
-        </div>
-        <div>
-          <CompanyContacts
-            phone={company.contacts.phone}
-            email={company.contacts.email}
-            website={company.contacts.website}
-            manager={company.manager}
-            city={company.city}
-          />
-        </div>
-
-        <div>
-          <div>
-            <DropDownList
-              array={
-                company.isRequested
-                  ? cargo.clientStatusArray.filter((s, i) => i > 2)
-                  : cargo.clientStatusArray.filter((s, i) => i !== 3)
-              }
-              sampleText={company.status.value}
-              onChange={handleChange}
-              name="value"
-            />
-          </div>
-
-          <h5>
-            <label htmlFor="date">Когда связаться: </label>
-            <input type="date" id="date" onChange={handleChangeData} />
-            <MyButton onClick={() => refreshStatus()}>OK</MyButton>
-          </h5>
-          <div>Связаться: {getDateFormat(company.status.date, ".")}</div>
-          {company.isRequested ? (
-            <Link to={`${company.id}/orders`}>
-              <MyButton isDisabled={!company.isRequested}>
-                Посмотреть все запросы
-              </MyButton>
+      <div className="p-5 mt-5 rounded-lg shadow-lg bg-sky-50">
+        <h3 className="flex justify-center rounded-lg font-medium leading-tight text-3xl mt-0 mb-2 text-sky-600 bg-white">
+          {company.company}
+        </h3>
+        <div className="container flex flex-wrap p-5 mt-5 bg-sky-50">
+          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
+            <div className="flex flex-row items-center gap-2">
+              Направление:
+              <span>{company?.directions}</span>
+            </div>
+            <div className="flex flex-row items-center gap-2">
+              Сфера деятельности:
+              <span>{company?.sphere}</span>
+            </div>
+            <div className="flex flex-row items-center gap-2">
+              Тип контракта:
+              <span>{company?.contractType}</span>
+            </div>
+            <div className="flex flex-row items-center gap-2">
+              Тип перевозки:
+              <span>{company?.containersTypes}</span>
+            </div>
+            <Link to={"/" + company.id}>
+              <MyButton color="green">Информация о компании</MyButton>
             </Link>
-          ) : (
-            <div>Запросов нет</div>
-          )}
-        </div>
+            <MyButton
+              onClick={() => setIsOpen((prevState) => !prevState)}
+              color="red"
+            >
+              Удалить компанию из базы
+            </MyButton>
+            <ModalWindow
+              open={isOpen}
+              onClose={() => setIsOpen((prevState) => !prevState)}
+            >
+              <ModalContent
+                deleteFunc={() => handleDeleteCompany(company)}
+                openFunc={() => setIsOpen((prevState) => !prevState)}
+                item="компанию"
+              />
+            </ModalWindow>
+          </div>
+          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
+            <CompanyContacts
+              phone={company.contacts.phone}
+              email={company.contacts.email}
+              website={company.contacts.website}
+              manager={company.manager}
+              city={company.city}
+            />
+          </div>
 
-        <div>
-          <Comments companyId={company.id} typeOfComments="company" />
+          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
+            <div>
+              <DropDownList
+                array={
+                  company.isRequested
+                    ? cargo.clientStatusArray.filter((s, i) => i > 2)
+                    : cargo.clientStatusArray.filter((s, i) => i !== 3)
+                }
+                sampleText={company.status.value}
+                onChange={handleChange}
+                name="value"
+              />
+            </div>
+
+            <h5>
+              <label htmlFor="date">Когда связаться: </label>
+              <input type="date" id="date" onChange={handleChangeData} />
+              <MyButton onClick={() => refreshStatus()} color="green">
+                OK
+              </MyButton>
+            </h5>
+            <div>Связаться: {getDateFormat(company.status.date, ".")}</div>
+            {company.isRequested ? (
+              <Link to={`${company.id}/orders`}>
+                <MyButton isDisabled={!company.isRequested} color="green">
+                  Посмотреть все запросы
+                </MyButton>
+              </Link>
+            ) : (
+              <div>Запросов нет</div>
+            )}
+          </div>
+
+          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
+            <Comments companyId={company.id} typeOfComments="company" />
+          </div>
         </div>
       </div>
     )

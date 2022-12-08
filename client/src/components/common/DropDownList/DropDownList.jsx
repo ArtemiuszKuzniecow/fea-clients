@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { ArrowDownImg, ArrowUpImg } from "../../../assets/styles/svg";
 import Loader from "../../ui/Loader/Loader";
 import MyButton from "../Button/MyButton";
 
@@ -29,34 +30,38 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
   };
 
   return !isLoading ? (
-    <div>
+    <div className="w-11/12">
       <MyButton
         type="text"
         isDisabled={false}
         onClick={() => {
           toggleList();
         }}
+        width={"full"}
       >
-        {textSample}
+        <div className="flex gap-3 justify-center">
+          {textSample} {openList ? <ArrowUpImg /> : <ArrowDownImg />}
+        </div>
       </MyButton>
       <ul
         hidden={!openList}
-        className="py-1 text-sm text-sky-700 dark:text-sky-200 "
-        aria-labelledby="dropdownDefault"
+        className="text-sm text-sky-700 dark:text-sky-200 "
       >
-        {array.map((item) => {
-          return (
-            <li
-              key={item}
-              onClick={() => {
-                handleSampleText(item);
-              }}
-              className="block py-2 px-4 hover:bg-sky-100 dark:hover:bg-sky-600 dark:hover:text-white cursor-pointer"
-            >
-              {item}
-            </li>
-          );
-        })}
+        <div className="border-solid border-2 border-sky-200 rounded-lg">
+          {array.map((item) => {
+            return (
+              <li
+                key={item}
+                onClick={() => {
+                  handleSampleText(item);
+                }}
+                className="block py-2 px-4 hover:bg-sky-200 dark:hover:bg-sky-600 dark:hover:text-white cursor-pointer"
+              >
+                {item}
+              </li>
+            );
+          })}
+        </div>
       </ul>
     </div>
   ) : (
