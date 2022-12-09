@@ -39,90 +39,91 @@ const EditCompanyPage = () => {
 
   return currentCompany ? (
     <>
-      <div>
+      <div className="flex flex-col justify-center p-3">
         <Headline>Редактирвоать данные:</Headline>
         <Link to={`/${id}`}>
           <MyButton>Назад</MyButton>
         </Link>
       </div>
-      <div>
-        <div>
-          <div>
-            <h4>Название компании: </h4>
-            <TextField
-              type="text"
-              name="company"
-              onChange={handleChange}
-              value={currentCompany.company}
-            />
+      <div className="container">
+        <div className="flex flex-row justify-around flex-wrap gap-3 py-3">
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                type="text"
+                name="company"
+                onChange={handleChange}
+                value={currentCompany.company}
+                label="Название компании:"
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="manager"
+                onChange={handleChange}
+                value={currentCompany.manager}
+                label="Имя сотрудника: "
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="phone"
+                onChange={handleContactsChange}
+                value={currentCompany.contacts.phone}
+                label="Телефоны: "
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="city"
+                onChange={handleChange}
+                value={currentCompany.city}
+                label="Город:"
+              />
+            </div>
           </div>
-          <div>
-            <h4>Имя сотрудника: </h4>
-            <TextField
-              type="text"
-              name="manager"
-              onChange={handleChange}
-              value={currentCompany.manager}
-            />
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                type="text"
+                name="email"
+                onChange={handleContactsChange}
+                value={currentCompany.contacts.email}
+                label="Электронная почта:"
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="website"
+                onChange={handleContactsChange}
+                value={currentCompany.contacts.website}
+                label="Сайт:"
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="directions"
+                onChange={handleChange}
+                value={currentCompany.directions}
+                label="Основные направления:"
+              />
+            </div>
+            <div>
+              <TextField
+                type="text"
+                name="sphere"
+                onChange={handleChange}
+                value={currentCompany.sphere}
+                label="Сфера деятельности:"
+              />
+            </div>
           </div>
-          <div>
-            <h4>Телефоны: </h4>
-            <TextField
-              type="text"
-              name="phone"
-              onChange={handleContactsChange}
-              value={currentCompany.contacts.phone}
-            />
-          </div>
-          <div>
-            <h4>Город: </h4>
-            <TextField
-              type="text"
-              name="city"
-              onChange={handleChange}
-              value={currentCompany.city}
-            />
-          </div>
-          <div>
-            <h4>Электронная почта: </h4>
-            <TextField
-              type="text"
-              name="email"
-              onChange={handleContactsChange}
-              value={currentCompany.contacts.email}
-            />
-          </div>
-          <div>
-            <h4>Сайт: </h4>
-            <TextField
-              type="text"
-              name="website"
-              onChange={handleContactsChange}
-              value={currentCompany.contacts.website}
-            />
-          </div>
-          <div>
-            <h4>Основные направления: </h4>
-            <TextField
-              type="text"
-              name="directions"
-              onChange={handleChange}
-              value={currentCompany.directions}
-            />
-          </div>
-          <div>
-            <h4>Сфера деятельности: </h4>
-            <TextField
-              type="text"
-              name="sphere"
-              onChange={handleChange}
-              value={currentCompany.sphere}
-            />
-          </div>
-        </div>
-
-        <div>
-          <div>
+          <div className="w-1/3 max-md:w-10/12">
             <h4>Виды грузоперевозок: </h4>
             <DropDownList
               sampleText={currentCompany.containersTypes}
@@ -130,8 +131,6 @@ const EditCompanyPage = () => {
               array={cargo.containersTypes}
               onChange={handleChangeDropDown}
             />
-          </div>
-          <div>
             <h4>Виды контрактов: </h4>
             <DropDownList
               array={cargo.contractType}
@@ -142,8 +141,9 @@ const EditCompanyPage = () => {
           </div>
         </div>
       </div>
-      <br />
-      <MyButton onClick={handleSubmit}>Сохранить изменения</MyButton>
+      <div className="container flex justify-center">
+        <MyButton onClick={handleSubmit}>Сохранить изменения</MyButton>
+      </div>
     </>
   ) : (
     <Loader />

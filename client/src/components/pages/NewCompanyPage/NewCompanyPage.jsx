@@ -74,97 +74,121 @@ const NewCompanyPage = () => {
   return !isLoading ? (
     <>
       <Headline>Добавить новую компанию:</Headline>
-      <div>
-        <div>
-          <div>
-            <h4>Название компании: </h4>
-            <TextField type="text" name="company" onChange={handleChange} />
-            {hasBeenSubmited && company.company === "" && (
-              <span>Это поле должно быть заполнено</span>
-            )}
+      <div className="container">
+        <div className="flex flex-row justify-around flex-wrap gap-3 py-3">
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                label="Название компании:"
+                type="text"
+                name="company"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && company.company === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Имя сотрудника:"
+                type="text"
+                name="manager"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && company.manager === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Телефоны:"
+                type="text"
+                name="phone"
+                onChange={handleContactsChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Город:"
+                type="text"
+                name="city"
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div>
-            <h4>Имя сотрудника: </h4>
-            <TextField type="text" name="manager" onChange={handleChange} />
-            {hasBeenSubmited && company.manager === "" && (
-              <span>Это поле должно быть заполнено</span>
-            )}
+
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                label="Электронная почта:"
+                type="text"
+                name="email"
+                onChange={handleContactsChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Сайт:"
+                type="text"
+                name="website"
+                onChange={handleContactsChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Основные направления:"
+                type="text"
+                name="directions"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && company.directions === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Сфера деятельности:"
+                type="text"
+                name="sphere"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && company.sphere === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
           </div>
-          <div>
-            <h4>Телефоны: </h4>
-            <TextField
-              type="text"
-              name="phone"
-              onChange={handleContactsChange}
-            />
-          </div>
-          <div>
-            <h4>Город: </h4>
-            <TextField type="text" name="city" onChange={handleChange} />
-          </div>
-          <div>
-            <h4>Электронная почта: </h4>
-            <TextField
-              type="text"
-              name="email"
-              onChange={handleContactsChange}
-            />
-          </div>
-          <div>
-            <h4>Сайт: </h4>
-            <TextField
-              type="text"
-              name="website"
-              onChange={handleContactsChange}
-            />
-          </div>
-          <div>
-            <h4>Основные направления: </h4>
-            <TextField type="text" name="directions" onChange={handleChange} />
-            {hasBeenSubmited && company.directions === "" && (
-              <span>Это поле должно быть заполнено</span>
-            )}
-          </div>
-          <div>
-            <h4>Сфера деятельности: </h4>
-            <TextField type="text" name="sphere" onChange={handleChange} />
-            {hasBeenSubmited && company.sphere === "" && (
-              <span>Это поле должно быть заполнено</span>
-            )}
-          </div>
-        </div>
-        <div>
-          <div>
-            <h4>Виды грузоперевозок: </h4>
-            <DropDownList
-              array={cargo.containersTypes}
-              sampleText="Виды грузоперевозок"
-              onChange={handleChangeDropDown}
-              name="containersTypes"
-            />
-          </div>
-          <div>
-            <h4>Виды контрактов: </h4>
-            <DropDownList
-              array={cargo.contractType}
-              sampleText="Виды контрактов"
-              onChange={handleChangeDropDown}
-              name="contractType"
-            />
-          </div>
-          <div>
-            <h4>Статус: </h4>
-            <DropDownList
-              array={cargo.clientStatusArray}
-              sampleText="Статус"
-              onChange={handleChangeStatus}
-              name="status"
-            />
+
+          <div className="w-1/2 max-md:w-10/12">
+            <div>
+              <DropDownList
+                array={cargo.containersTypes}
+                sampleText="Виды грузоперевозок"
+                onChange={handleChangeDropDown}
+                name="containersTypes"
+              />
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.contractType}
+                sampleText="Виды контрактов"
+                onChange={handleChangeDropDown}
+                name="contractType"
+              />
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.clientStatusArray}
+                sampleText="Статус"
+                onChange={handleChangeStatus}
+                name="status"
+              />
+            </div>
           </div>
         </div>
       </div>
-      <br />
-      <MyButton onClick={handleSubmit}>Добавить компанию</MyButton>
+      <div className="container flex justify-center">
+        <MyButton onClick={handleSubmit}>Добавить компанию</MyButton>
+      </div>
     </>
   ) : (
     <Loader />

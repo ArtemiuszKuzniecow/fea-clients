@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import getDateFormat from "../../../utils/getDateFormat";
 import { deleteOrder } from "../../../store/Orders/actions";
 import { deleteOrderComment } from "../../../store/OrdersComments/actions";
@@ -10,7 +10,7 @@ import MyButton from "../Button/MyButton";
 import ModalContent from "../ModalContent/ModalContent";
 import ModalWindow from "../ModalWindow/ModalWindow";
 
-const OrderCard = ({ order, companyName }) => {
+const OrderCard = ({ order, companyName, companyId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const orderComments = useSelector(getAllOrdersCommentsById(order.orderId));
@@ -29,60 +29,36 @@ const OrderCard = ({ order, companyName }) => {
 
   return (
     <>
-      <div className="p-5 mt-5 rounded-lg shadow-lg bg-sky-50 ">
-        <h3 className="flex justify-center rounded-lg font-medium leading-tight text-3xl mt-0 mb-2 text-sky-600 bg-white ">
-          {companyName}
-        </h3>
-        <div className="flex flex-row md:justify-around flex-wrap">
-          <div className="max-md:w-full max-sm:w-full">
-            <div className="flex flex-row items-center gap-2">
-              <h3>Статус запроса: </h3>
-              <span className="bg-yellow-200 px-2 rounded-lg">
-                {order.status}
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex flex-row items-center gap-2">
-                <h3>Вид контракта: </h3>
-                <p>{order.contractType}</p>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <h3>Вид перевозки: </h3>
-                <p>{order.containersTypes}</p>
-              </div>
-            </div>
-          </div>
-          <div className="max-md:w-full max-sm:w-full">
-            <div className="flex flex-col">
-              <div className="flex flex-row items-center gap-2">
-                <h3>Инкотермс: </h3>
-                <p>{order.incoterms}</p>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <h3>Характер груза: </h3>
-                <p>{order.typeOfCargo}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-row items-center gap-2">
-              <p>Дата запроса: {getDateFormat(order.date, ".")}</p>
-              <p
-                className={`bg-${
-                  order.isActual ? "green" : "red"
-                }-200 px-2 rounded-lg`}
-              >
-                {order.isActual ? "Актуальный груз" : "Неактуальный груз"}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-row justify-evenly py-2 flex-wrap">
+      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-700 "
+        >
+          <Link to={`/${companyId}`}>{companyName}</Link>
+        </th>
+        <td className="py-3 px-6 max-sm:hidden">{order.status}</td>
+        <td
+          className={`py-3 px-6 max-md:hidden ${
+            order.isActual ? "bg-green-300" : "bg-red-300"
+          }`}
+        >
+          {order.isActual ? "Актуальный груз" : "Неактуальный груз"}
+        </td>
+        <td className="py-3 px-6 max-sm:hidden">
+          {getDateFormat(order.date, ".")}
+        </td>
+        <td className="py-3 px-6 max-md:hidden">{order.containersTypes}</td>
+        <td className="py-3 px-6 max-xl:hidden">{order.incoterms}</td>
+        <td className="py-3 px-6 max-xl:hidden">{order.typeOfCargo}</td>
+        <td className="py-3 px-6 max-xl:hidden">{order.contractType}</td>
+        <td className="p-1">
           <MyButton onClick={() => handleRedirect(order.orderId)}>
-            Открыть запрос
+            Подробнее
           </MyButton>
-          <br />
+        </td>
+        <td className="p-1 max-lg:hidden">
           <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
-            Удалить запрос из базы
+            Удалить
           </MyButton>
           <ModalWindow
             open={isOpen}
@@ -94,9 +70,8 @@ const OrderCard = ({ order, companyName }) => {
               item="запрос"
             />
           </ModalWindow>
-        </div>
-      </div>
-      <br />
+        </td>
+      </tr>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { SortingArrowsImg } from "../../../assets/styles/svg";
 import useUserData from "../../../hooks/useUserData";
 import { deleteLead } from "../../../store/Leads/actions";
 import { deleteCompanyComment } from "../../../store/LeadsComments/actions";
@@ -56,68 +57,155 @@ const CompanyInfoPage = () => {
       <>
         <div>
           <Headline>{currentCompany.company}</Headline>
-          <div>
-            <CompanyContacts
-              phone={currentCompany.contacts.phone}
-              email={currentCompany.contacts.email}
-              website={currentCompany.contacts.website}
-              manager={currentCompany.manager}
-              city={currentCompany.city}
-            />
-            <div>
-              <h4>Основные направления компании </h4>
-              <p>{currentCompany.directions}</p>
+          <div className="container">
+            <div className="flex flex-wrap gap-3">
+              <div className="w-full">
+                <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                        <th scope="col" className="py-3 px-6">
+                          Основные направления компании
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                          Тип контракта
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                          Виды перевозок
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                          Вид контрактов
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td className="py-3 px-6">
+                          {currentCompany.directions}
+                        </td>
+                        <td className="py-3 px-6">
+                          {currentCompany.contractType}
+                        </td>
+                        <td className="py-3 px-6">
+                          {currentCompany.containersTypes}
+                        </td>
+                        <td className="py-3 px-6">
+                          {currentCompany.contractType}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <CompanyContacts
+                    phone={currentCompany.contacts.phone}
+                    email={currentCompany.contacts.email}
+                    website={currentCompany.contacts.website}
+                    manager={currentCompany.manager}
+                    city={currentCompany.city}
+                  />
+                  <div className="mt-3 mb-1">
+                    <Link to={`${id}/edit`}>
+                      <MyButton>Изменить информацию о компании</MyButton>
+                    </Link>
+                  </div>
+                  <MyButton
+                    onClick={() => setIsOpen((prevState) => !prevState)}
+                  >
+                    Удалить компанию из базы
+                  </MyButton>
+                  <ModalWindow
+                    open={isOpen}
+                    onClose={() => setIsOpen((prevState) => !prevState)}
+                  >
+                    <ModalContent
+                      deleteFunc={() => handleDeleteCompany(currentCompany)}
+                      openFunc={() => setIsOpen((prevState) => !prevState)}
+                      item="компанию"
+                    />
+                  </ModalWindow>
+                </div>
+                <div className="w-2/3">
+                  <Comments
+                    companyId={currentCompany.id}
+                    typeOfComments="company"
+                  />
+                </div>
+              </div>
             </div>
-            <hr />
-            <div>
-              <h4>Тип контракта:</h4>
-              <p>{currentCompany.contractType}</p>
-            </div>
-            <hr />
-            <div>
-              <h4>Виды перевозок </h4> <p>{currentCompany.containersTypes}</p>
-            </div>
-            <hr />
-            <div>
-              <h4>Вид контрактов </h4> <p>{currentCompany.contractType}</p>
-            </div>
-            <hr />
-            <Link to={`${id}/edit`}>
-              <MyButton>Изменить информацию о компании</MyButton>
-            </Link>
-            <hr />
-            <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
-              Удалить компанию из базы
-            </MyButton>
-            <ModalWindow
-              open={isOpen}
-              onClose={() => setIsOpen((prevState) => !prevState)}
-            >
-              <ModalContent
-                deleteFunc={() => handleDeleteCompany(currentCompany)}
-                openFunc={() => setIsOpen((prevState) => !prevState)}
-                item="компанию"
-              />
-            </ModalWindow>
-          </div>
-          <div>
-            <Comments companyId={currentCompany.id} typeOfComments="company" />
           </div>
         </div>
         <div>
-          {currentOrders.length >= 1 ? (
-            currentOrders.map((currentOrder) => {
-              return (
-                <OrderCard
-                  order={currentOrder}
-                  companyName={currentCompany.company}
-                  key={currentOrder.orderId}
-                />
-              );
-            })
-          ) : (
-            <h3>Запросов нет</h3>
-          )}
+          <div className="container">
+            <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="py-3 px-6">
+                      Компания
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-sm:hidden">
+                      <div className="flex items-center">
+                        Статус запроса <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-md:hidden">
+                      <div className="flex items-center">
+                        Статус груза <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-sm:hidden">
+                      <div className="flex items-center">
+                        Дата запроса <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-md:hidden">
+                      <div className="flex items-center">
+                        Вид перевозки <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-xl:hidden">
+                      <div className="flex items-center">
+                        Инкотермс <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-xl:hidden">
+                      <div className="flex items-center">
+                        Характер груза <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-xl:hidden">
+                      <div className="flex items-center">
+                        Вид контракта <SortingArrowsImg />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-6 lg:hidden">
+                      click
+                    </th>
+                    <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
+                    <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentOrders.length >= 1 ? (
+                    currentOrders.map((order) => {
+                      return (
+                        <OrderCard
+                          order={order}
+                          companyName={currentCompany.company}
+                          key={order.orderId}
+                        />
+                      );
+                    })
+                  ) : (
+                    <h3>Запросов нет</h3>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </>
     )

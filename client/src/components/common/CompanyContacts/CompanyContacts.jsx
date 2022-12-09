@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const CompanyContacts = ({ phone, email, website, manager, city }) => {
   return (
-    <div>
+    <div className="p-3 mb-2 rounded-lg border-solid border-2 border-sky-300">
       <div className="flex flex-row items-center gap-2">
         <PersonImg />
         {manager}

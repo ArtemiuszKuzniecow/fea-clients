@@ -42,7 +42,7 @@ const OrderLayout = ({ children }) => {
   useEffect(() => {
     if (orders) {
       setDatesOfOrders([
-        "Все запросы",
+        "Все",
         ...createSetArray(orders.map((o) => getDateFormat(o.date, "."))),
       ]);
 
@@ -60,10 +60,10 @@ const OrderLayout = ({ children }) => {
   return (
     <>
       <Headline>Запросы</Headline>
-      <div className="flex justify-around">
+      <div className="container flex justify-end">
         <div>
           <DropDownList
-            sampleText="Сортировать (открытые/закрытые запросы)"
+            sampleText="Фильтровать (открытые/закрытые запросы)"
             array={["Все", "Открытые", "Закрытые"]}
             name="isClosed"
             onChange={handleChangeDropDownStatusIsOpen}
@@ -72,7 +72,7 @@ const OrderLayout = ({ children }) => {
 
         <div>
           <DropDownList
-            sampleText="Сортировать по дате запроса"
+            sampleText="Фильтровать по дате запроса"
             array={datesOfOrders}
             name="date"
             onChange={handleChangeDropDownDate}

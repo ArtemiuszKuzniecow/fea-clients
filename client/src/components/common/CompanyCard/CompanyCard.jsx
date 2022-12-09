@@ -29,11 +29,16 @@ const CompanyCard = ({ companyId }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrders, setCurrentOrders] = useState();
+  const [changeDate, setChangeDate] = useState(false);
 
   const { orders, isLoading, isOrdersLoading } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(company?.id));
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
+
+  const handleChangeDate = () => {
+    setChangeDate((prevState) => !prevState);
+  };
 
   useEffect(() => {
     if (orders) {
@@ -80,7 +85,7 @@ const CompanyCard = ({ companyId }) => {
         </h3>
         <div className="container flex flex-wrap p-5 mt-5 bg-sky-50">
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
-            <div className="flex flex-row items-center gap-2">
+            {/* <div className="flex flex-row items-center gap-2">
               Направление:
               <span>{company?.directions}</span>
             </div>
@@ -95,13 +100,38 @@ const CompanyCard = ({ companyId }) => {
             <div className="flex flex-row items-center gap-2">
               Тип перевозки:
               <span>{company?.containersTypes}</span>
-            </div>
+            </div> */}
+            <CompanyContacts
+              phone={company.contacts.phone}
+              email={company.contacts.email}
+              website={company.contacts.website}
+              manager={company.manager}
+              city={company.city}
+            />
+          </div>
+          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
+            {company.isRequested ? (
+              <Link to={`${company.id}/orders`}>
+                <MyButton
+                  isDisabled={!company.isRequested}
+                  color="green"
+                  width="11/12"
+                >
+                  Посмотреть все запросы
+                </MyButton>
+              </Link>
+            ) : (
+              <div>Запросов нет</div>
+            )}
             <Link to={"/" + company.id}>
-              <MyButton color="green">Информация о компании</MyButton>
+              <MyButton color="green" width="11/12">
+                Информация о компании
+              </MyButton>
             </Link>
             <MyButton
               onClick={() => setIsOpen((prevState) => !prevState)}
               color="red"
+              width="11/12"
             >
               Удалить компанию из базы
             </MyButton>
@@ -115,15 +145,6 @@ const CompanyCard = ({ companyId }) => {
                 item="компанию"
               />
             </ModalWindow>
-          </div>
-          <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
-            <CompanyContacts
-              phone={company.contacts.phone}
-              email={company.contacts.email}
-              website={company.contacts.website}
-              manager={company.manager}
-              city={company.city}
-            />
           </div>
 
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
@@ -139,23 +160,26 @@ const CompanyCard = ({ companyId }) => {
                 name="value"
               />
             </div>
-
-            <h5>
-              <label htmlFor="date">Когда связаться: </label>
-              <input type="date" id="date" onChange={handleChangeData} />
-              <MyButton onClick={() => refreshStatus()} color="green">
-                OK
-              </MyButton>
-            </h5>
-            <div>Связаться: {getDateFormat(company.status.date, ".")}</div>
-            {company.isRequested ? (
-              <Link to={`${company.id}/orders`}>
-                <MyButton isDisabled={!company.isRequested} color="green">
-                  Посмотреть все запросы
+            {changeDate && (
+              <div>
+                <label htmlFor="date">Когда связаться: </label>
+                <input type="date" id="date" onChange={handleChangeData} />
+                <MyButton
+                  onClick={() => {
+                    refreshStatus();
+                    handleChangeDate();
+                  }}
+                  color="green"
+                >
+                  OK
                 </MyButton>
-              </Link>
-            ) : (
-              <div>Запросов нет</div>
+              </div>
+            )}
+            {!changeDate && (
+              <div className="flex gap-2 items-center">
+                Связаться: {getDateFormat(company.status.date, ".")}
+                <MyButton onClick={handleChangeDate}>Изменить</MyButton>
+              </div>
             )}
           </div>
 

@@ -99,159 +99,213 @@ const NewOrderPage = () => {
   return !isLoading && !isLeadsLoading && companies ? (
     <>
       <Headline>Добавить новый запрос:</Headline>
-      <div>
-        <div>
-          <h4>Выберите компанию:</h4>
-          <DropDownList
-            array={currentCompanies}
-            sampleText="Выберите компанию"
-            onChange={handleChooseCompany}
-            name="companyId"
-          />
-          {hasBeenSubmited && order.companyId === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Статус запроса:</h4>
-          <DropDownList
-            array={cargo.orderStatus}
-            sampleText="Статус запроса"
-            name="status"
-            onChange={handleChangeDropDown}
-          />
-        </div>
-        <div>
-          <h4>Вид перевозки:</h4>
-          <DropDownList
-            array={cargo.containersTypes}
-            sampleText="Вид перевозки"
-            onChange={handleChangeDropDown}
-            name="containersTypes"
-          />
-          {hasBeenSubmited && order.containersTypes === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Вид контракта:</h4>
-          <DropDownList
-            array={cargo.contractType}
-            sampleText="Вид контракта"
-            onChange={handleChangeDropDown}
-            name="contractType"
-          />
-          {hasBeenSubmited && order.contractType === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Инкотермс:</h4>
-          <DropDownList
-            array={cargo.incoterms}
-            sampleText="Инкотермс"
-            onChange={handleChangeDropDown}
-            name="incoterms"
-          />
-        </div>
-        <div>
-          <h4>Объём груза:</h4>
-          {order.containersTypes === "Сборный груз" ||
-          order.containersTypes === "Авиа" ? (
-            <TextField name="volume" type="text" onChange={handleChange} />
-          ) : (
-            <>
+      <div className="container">
+        <div className="flex flex-row justify-around flex-wrap gap-3 py-3">
+          <div className="w-10/12">
+            <div>
               <DropDownList
-                array={cargo.volume}
-                sampleText="Объём груза"
-                name="volume"
-                onChange={handleChangeDropDown}
+                array={currentCompanies}
+                sampleText="Выберите компанию"
+                onChange={handleChooseCompany}
+                name="companyId"
               />
-              {hasBeenSubmited && order.volume === "" && (
+              {hasBeenSubmited && order.companyId === "" && (
                 <span>Это поле должно быть заполнено</span>
               )}
-            </>
-          )}
-        </div>{" "}
-        <div>
-          <h4>Как часто возит:</h4>
-          <TextField name="howOften" type="text" onChange={handleChange} />
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.orderStatus}
+                sampleText="Статус запроса"
+                name="status"
+                onChange={handleChangeDropDown}
+              />
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.containersTypes}
+                sampleText="Вид перевозки"
+                onChange={handleChangeDropDown}
+                name="containersTypes"
+              />
+              {hasBeenSubmited && order.containersTypes === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.contractType}
+                sampleText="Вид контракта"
+                onChange={handleChangeDropDown}
+                name="contractType"
+              />
+              {hasBeenSubmited && order.contractType === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <DropDownList
+                array={cargo.incoterms}
+                sampleText="Инкотермс"
+                onChange={handleChangeDropDown}
+                name="incoterms"
+              />
+            </div>
+            <div>
+              {order.containersTypes === "Сборный груз" ||
+              order.containersTypes === "Авиа" ? (
+                <TextField
+                  label="Объём груза:"
+                  name="volume"
+                  type="text"
+                  onChange={handleChange}
+                />
+              ) : (
+                <>
+                  <DropDownList
+                    array={cargo.volume}
+                    sampleText="Объём груза"
+                    name="volume"
+                    onChange={handleChangeDropDown}
+                  />
+                  {hasBeenSubmited && order.volume === "" && (
+                    <span>Это поле должно быть заполнено</span>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                label="Как часто возит:"
+                name="howOften"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Вес груза:"
+                name="weight"
+                type="text"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && order.weight === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Характер груза:"
+                name="typeOfCargo"
+                type="text"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && order.typeOfCargo === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Код ТН ВЭД:"
+                name="hsCode"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Температурный режим:"
+                name="temperature"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Класс опасности:"
+                name="hazard"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="w-1/3 max-md:w-10/12">
+            <div>
+              <TextField
+                label="Вид упаковки:"
+                name="package"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Дополнительная информация:"
+                name="special"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Адрес забора груза:"
+                name="pickupAddress"
+                type="text"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && order.pickupAddress === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Место таможенного оформления:"
+                name="customs"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Адрес доставки груза:"
+                name="deliveryAddress"
+                type="text"
+                onChange={handleChange}
+              />
+              {hasBeenSubmited && order.deliveryAddress === "" && (
+                <span>Это поле должно быть заполнено</span>
+              )}
+            </div>
+            <div>
+              <TextField
+                label="Когда забирать:"
+                name="pickupDate"
+                type="text"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="w-10/12 flex justify-between">
+            <div>
+              <h4>Актуальность груза:</h4>
+              <RadioButtons onChange={handleChangeRadio} name="isActual" />
+            </div>
+            <div>
+              <h4>Можно ли штабелировать:</h4>
+              <RadioButtons onChange={handleChangeRadio} name="transshipment" />
+            </div>
+            <div>
+              <h4>Дата запроса:</h4>
+              <div>{getDateFormat(Date.now(), ".")}</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4>Вес груза:</h4>{" "}
-          <TextField name="weight" type="text" onChange={handleChange} />
-          {hasBeenSubmited && order.weight === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Характер груза:</h4>
-          <TextField name="typeOfCargo" type="text" onChange={handleChange} />
-          {hasBeenSubmited && order.typeOfCargo === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Код ТН ВЭД:</h4>
-          <TextField name="hsCode" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Температурный режим:</h4>
-          <TextField name="temperature" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Класс опасности:</h4>
-          <TextField name="hazard" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Вид упаковки:</h4>
-          <TextField name="package" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Дополнительная информация:</h4>
-          <TextField name="special" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Адрес забора груза:</h4>
-          <TextField name="pickupAddress" type="text" onChange={handleChange} />
-          {hasBeenSubmited && order.pickupAddress === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Место таможенного оформления:</h4>
-          <TextField name="customs" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Адрес доставки груза:</h4>
-          <TextField
-            name="deliveryAddress"
-            type="text"
-            onChange={handleChange}
-          />
-          {hasBeenSubmited && order.deliveryAddress === "" && (
-            <span>Это поле должно быть заполнено</span>
-          )}
-        </div>
-        <div>
-          <h4>Когда забирать:</h4>
-          <TextField name="pickupDate" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <h4>Актуальность груза:</h4>
-          <RadioButtons onChange={handleChangeRadio} name="isActual" />
-        </div>
-        <div>
-          <h4>Можно ли штабелировать:</h4>
-          <RadioButtons onChange={handleChangeRadio} name="transshipment" />
-        </div>
-        <div>
-          <h4>Дата запроса:</h4>
-          <div>{getDateFormat(Date.now(), ".")}</div>
+        <div className="flex justify-center">
+          <MyButton onClick={handleSubmit}>Отправить запрос</MyButton>
         </div>
       </div>
-
-      <MyButton onClick={handleSubmit}>Отправить запрос</MyButton>
     </>
   ) : (
     <Loader />
