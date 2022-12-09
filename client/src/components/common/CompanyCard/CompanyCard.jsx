@@ -85,22 +85,6 @@ const CompanyCard = ({ companyId }) => {
         </h3>
         <div className="container flex flex-wrap p-5 mt-5 bg-sky-50">
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
-            {/* <div className="flex flex-row items-center gap-2">
-              Направление:
-              <span>{company?.directions}</span>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              Сфера деятельности:
-              <span>{company?.sphere}</span>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              Тип контракта:
-              <span>{company?.contractType}</span>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              Тип перевозки:
-              <span>{company?.containersTypes}</span>
-            </div> */}
             <CompanyContacts
               phone={company.contacts.phone}
               email={company.contacts.email}
@@ -111,11 +95,11 @@ const CompanyCard = ({ companyId }) => {
           </div>
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
             {company.isRequested ? (
-              <Link to={`${company.id}/orders`}>
+              <Link to={`${company.id}/orders`} className="w-11/12">
                 <MyButton
                   isDisabled={!company.isRequested}
                   color="green"
-                  width="11/12"
+                  width="full"
                 >
                   Посмотреть все запросы
                 </MyButton>
@@ -123,11 +107,12 @@ const CompanyCard = ({ companyId }) => {
             ) : (
               <div>Запросов нет</div>
             )}
-            <Link to={"/" + company.id}>
-              <MyButton color="green" width="11/12">
+            <Link to={"/" + company.id} className="w-11/12">
+              <MyButton color="green" width="full">
                 Информация о компании
               </MyButton>
             </Link>
+
             <MyButton
               onClick={() => setIsOpen((prevState) => !prevState)}
               color="red"

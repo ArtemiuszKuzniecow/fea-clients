@@ -18,7 +18,7 @@ const PageLayout = ({ children }) => {
 
   //
   return (
-    <>
+    <div className="pb-7">
       <nav className="bg-white border-sky-200 px-2 sm:px-4 py-2.5 rounded dark:bg-sky-900 flex md:justify-around max-sm:justify-between sm:justify-between border-black drop-shadow-md items-center">
         <Link to="/">
           <img src={logo} alt="logo" width={60} />
@@ -91,7 +91,7 @@ const PageLayout = ({ children }) => {
         </>
       </nav>
       <div>{children}</div>
-    </>
+    </div>
   );
 };
 
