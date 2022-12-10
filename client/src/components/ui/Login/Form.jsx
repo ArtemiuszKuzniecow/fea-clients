@@ -55,75 +55,100 @@ const Form = ({ type, submitValue, submitFunction }) => {
   if (isLoggedIn) return <Redirect to="/" />;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="flex flex-row justify-center w-full max-w-xs">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
         {type === "registration" && (
-          <>
-            <label htmlFor="name">Имя</label>
+          <div className="mb-4">
+            <label
+              htmlFor="name"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Имя
+            </label>
             <input
               type="text"
               name="name"
               placeholder="Name"
               {...register("name", { required: "Пожалуста, введите имя" })}
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
             />
             {errors.login ? (
               <ErrorMessage errorText={errors.login.message} />
             ) : null}
-          </>
+          </div>
         )}
 
-        <label htmlFor="email">Электронная почта</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="E-mail"
-          {...register("email", {
-            required: "Пожалуста, введите E-mail",
-            pattern: {
-              value: /^\S+@\S+\.\S+$/g,
-              message: "Введите правильный E-mail",
-            },
-          })}
-        />
-        {errors.email ? (
-          <ErrorMessage errorText={errors.email.message} />
-        ) : null}
-
-        <label htmlFor="password">Пароль</label>
-        <div>
+        <div className="mb-6">
+          <label
+            htmlFor="email"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Электронная почта
+          </label>
           <input
-            type={inputType}
-            name="password"
-            placeholder="Password"
-            {...register("password", {
-              required: "Пожалуста, введите пароль",
+            type="text"
+            name="email"
+            placeholder="E-mail"
+            {...register("email", {
+              required: "Пожалуста, введите E-mail",
               pattern: {
-                value: /[A-Z]+/g,
-                message: "Пароль должен содержать хотя бы одну заглавную букву",
-              },
-              pattern: {
-                value: /\d+/g,
-                message: "Пароль должен содержать хотя бы одно число",
-              },
-              pattern: {
-                value: /[A-Za-z]/,
-                message: "Данные должны быть написаны латиницей",
-              },
-              minLength: {
-                value: 8,
-                message: "Пароль должен содержать минимум восемь символов",
+                value: /^\S+@\S+\.\S+$/g,
+                message: "Введите правильный E-mail",
               },
             })}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
           />
-          <img src={img} width={20} onClick={togglePassword} />
+          {errors.email ? (
+            <ErrorMessage errorText={errors.email.message} />
+          ) : null}
         </div>
-        {asyncErrors?.error && (
-          <ErrorMessage errorText={asyncErrors?.error?.message} />
-        )}
-        {errors.password ? (
-          <ErrorMessage errorText={errors.password.message} />
-        ) : null}
 
+        <div className="mb-6">
+          <label
+            htmlFor="password"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Пароль
+          </label>
+          <div className="flex justify-between items-center">
+            <input
+              type={inputType}
+              name="password"
+              placeholder="Password"
+              {...register("password", {
+                required: "Пожалуста, введите пароль",
+                pattern: {
+                  value: /[A-Z]+/g,
+                  message:
+                    "Пароль должен содержать хотя бы одну заглавную букву",
+                },
+                pattern: {
+                  value: /\d+/g,
+                  message: "Пароль должен содержать хотя бы одно число",
+                },
+                pattern: {
+                  value: /[A-Za-z]/,
+                  message: "Данные должны быть написаны латиницей",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Пароль должен содержать минимум восемь символов",
+                },
+              })}
+              className="block py-2.5 px-0 w-3/4 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+            />
+            <img src={img} className="w-7 h-7" onClick={togglePassword} />
+          </div>
+          {asyncErrors?.error && (
+            <ErrorMessage errorText={asyncErrors?.error?.message} />
+          )}
+          {errors.password ? (
+            <ErrorMessage errorText={errors.password.message} />
+          ) : null}
+        </div>
         <div>
           <br /> <MyButton>{submitValue}</MyButton>
         </div>
