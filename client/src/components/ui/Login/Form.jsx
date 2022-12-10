@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import MyButton from "../../common/Button/MyButton";
+import MyButton from "../../common/MyButton";
 import closedEye from "../../../assets/icons/free-icon-eye-2311537.png";
 import openedEye from "../../../assets/icons/free-icon-visible-eye-57122.png";
 import PropTypes from "prop-types";
