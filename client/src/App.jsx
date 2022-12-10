@@ -1,23 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.scss";
-import localStorageService from "./services/localStorageService";
-import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
-import CompaniesPage from "./components/pages/CompaniesPage/CompaniesPage";
-import CompanyInfoPage from "./components/pages/CompanyInfoPage/CompanyInfoPage";
-import CurrentOrdersPage from "./components/pages/CurrentOrdersPage/CurrentOrdersPage";
-import EditCompanyPage from "./components/pages/EditCompanyPage/EditCompanyPage";
-import MainPage from "./components/pages/MainPage/MainPage";
-import NewCompanyPage from "./components/pages/NewCompanyPage/NewCompanyPage";
-import NewOrderPage from "./components/pages/NewOrderPage/NewOrderPage";
-import OrderPage from "./components/pages/OrderPage/OrderPage";
-import OrdersListPage from "./components/pages/OrdersListPage/OrdersListPage";
+import CompaniesPage from "./components/pages/CompaniesPage";
+import CompanyInfoPage from "./components/pages/CompanyInfoPage";
+import CurrentOrdersPage from "./components/pages/CurrentOrdersPage";
+import EditCompanyPage from "./components/pages/EditCompanyPage";
+import MainPage from "./components/pages/MainPage";
+import NewCompanyPage from "./components/pages/NewCompanyPage";
+import NewOrderPage from "./components/pages/NewOrderPage";
+import OrderPage from "./components/pages/OrderPage";
+import OrdersListPage from "./components/pages/OrdersListPage";
 import Login from "./components/ui/Login/Login";
 import LogOut from "./components/ui/Login/LogOut";
 import Registration from "./components/ui/Login/Registration";
-import PageLayout from "./layouts/PageLayout/PageLayout";
+import PageLayout from "./layouts/PageLayout";
+import localStorageService from "./services/localStorageService";
 import { loadUserData } from "./store/Users/actions";
 import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
@@ -33,7 +32,7 @@ function App() {
   }, [localId]);
 
   return (
-    <div className="App">
+    <div>
       <AppLoader>
         <BrowserRouter>
           <PageLayout>

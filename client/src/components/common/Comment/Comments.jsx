@@ -130,7 +130,9 @@ const Comments = ({ companyId, typeOfComments }) => {
           <Loader />
         )
       ) : (
-        <h4>Комментариев нет, добавьте первый комментарий!</h4>
+        <p className="flex p-4 bg-white rounded-lg dark:bg-gray-700 mb-2">
+          Комментариев нет, добавьте первый комментарий!
+        </p>
       )}
       <CommentForm onClick={handleAddComment} />
     </>

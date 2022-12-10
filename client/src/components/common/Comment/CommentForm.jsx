@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import style from "./Comment.module.scss";
 import PropTypes from "prop-types";
 
 const CommentForm = ({ onClick }) => {
@@ -10,21 +9,31 @@ const CommentForm = ({ onClick }) => {
   };
 
   return (
-    <div className={style.comment}>
-      <div className={style.comment_header}>Комментарий</div>
-      <textarea
-        className={style.comment_text}
-        value={commentData}
-        onChange={handleChange}
-      ></textarea>
-      <div
-        className={style.comment_footer}
-        onClick={() => {
-          commentData.length > 0 && onClick(commentData);
-          setCommentData("");
-        }}
-      >
-        Добавить комментарий
+    <div className="w-full mb-4 border border-sky-200 rounded-lg bg-sky-50 dark:bg-sky-700 dark:border-sky-600">
+      <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-sky-800">
+        <label htmlFor="comment" className="sr-only">
+          Комментарий
+        </label>
+        <textarea
+          value={commentData}
+          onChange={handleChange}
+          id="comment"
+          rows="4"
+          className="w-full px-0 text-sm  bg-white border-0 dark:bg-sky-800 focus:ring-0 dark:text-white dark:placeholder-sky-400"
+          placeholder="Напишите комментарий..."
+          required
+        ></textarea>
+      </div>
+      <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600s">
+        <div
+          onClick={() => {
+            commentData.length > 0 && onClick(commentData);
+            setCommentData("");
+          }}
+          className="flex-1 px-6 py-1 font-semibold select-none rounded-md text-sky-700 bg-sky-100 hover:bg-sky-200 cursor-pointer"
+        >
+          Добавить комментарий
+        </div>
       </div>
     </div>
   );

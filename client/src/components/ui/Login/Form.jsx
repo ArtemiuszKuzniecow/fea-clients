@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import MyButton from "../../common/Button/MyButton";
-import style from "./Login.module.scss";
+import MyButton from "../../common/MyButton";
 import closedEye from "../../../assets/icons/free-icon-eye-2311537.png";
 import openedEye from "../../../assets/icons/free-icon-visible-eye-57122.png";
 import PropTypes from "prop-types";
@@ -56,11 +55,8 @@ const Form = ({ type, submitValue, submitFunction }) => {
   if (isLoggedIn) return <Redirect to="/" />;
 
   return (
-    <div className={style.form_container}>
-      <form
-        className={style.form_container_items}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {type === "registration" && (
           <>
             <label htmlFor="name">Имя</label>
@@ -94,7 +90,7 @@ const Form = ({ type, submitValue, submitFunction }) => {
         ) : null}
 
         <label htmlFor="password">Пароль</label>
-        <div className={style.field_style_usual_icon}>
+        <div>
           <input
             type={inputType}
             name="password"
@@ -128,8 +124,8 @@ const Form = ({ type, submitValue, submitFunction }) => {
           <ErrorMessage errorText={errors.password.message} />
         ) : null}
 
-        <div className={style.form_container_button}>
-          <br /> <MyButton text={submitValue} />
+        <div>
+          <br /> <MyButton>{submitValue}</MyButton>
         </div>
       </form>
     </div>
