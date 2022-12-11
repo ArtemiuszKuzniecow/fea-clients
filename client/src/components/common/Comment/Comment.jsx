@@ -51,7 +51,7 @@ const Comment = ({
 };
 
 Comment.propTypes = {
-  date: PropTypes.number,
+  date: PropTypes.string,
   text: PropTypes.string,
   collapse: PropTypes.bool,
   onCollapse: PropTypes.func,

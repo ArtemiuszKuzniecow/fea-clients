@@ -25,7 +25,7 @@ const OrdersListPage = () => {
     let array = [];
     for (const company of companies) {
       orders.forEach((order) => {
-        if (order.companyId === company.id) {
+        if (order.companyId === company._id) {
           array.push({
             direction: company.directions,
             incoterms: order.incoterms,
@@ -34,7 +34,7 @@ const OrdersListPage = () => {
             typeOfCargo: order.typeOfCargo,
             company: company.company,
             date: order.date,
-            orderId: order.orderId,
+            _id: order._id,
             status: order.status,
             isActual: order.isActual,
             isClosed: order.isClosed,
@@ -137,7 +137,7 @@ const OrdersListPage = () => {
                     <OrderCard
                       order={order}
                       companyName={order.company}
-                      key={order.orderId}
+                      key={order._id}
                       companyId={order.companyId}
                     />
                   );

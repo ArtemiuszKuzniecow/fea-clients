@@ -25,7 +25,9 @@ export const postCompanyComment = createAsyncThunk(
   "leadComment/created",
   async (commentsPayload, thunkAPI) => {
     try {
-      const { content } = await commentsService.putLeadComment(commentsPayload);
+      const { content } = await commentsService.postLeadComment(
+        commentsPayload
+      );
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

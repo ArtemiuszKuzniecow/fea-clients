@@ -1,18 +1,16 @@
-import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { postNewLead } from "../../store/Leads/actions";
-import MyButton from "../common/MyButton";
 import DropDownList from "../common/DropDownList";
-import TextField from "../common/TextField";
 import Headline from "../common/Headline";
+import MyButton from "../common/MyButton";
+import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
 
 const NewCompanyPage = () => {
-  const currentCompanyId = nanoid();
   const dispatch = useDispatch();
   const history = useHistory();
   const { isLoading, currentUserData } = useUserData();
@@ -32,12 +30,11 @@ const NewCompanyPage = () => {
         containersTypes: "",
         contractType: "",
         directions: "",
-        id: currentCompanyId,
         isRequested: false,
         manager: "",
         sphere: "",
         status: { date: Date.now(), value: "Отправил КП" },
-        userID: currentUserData.userData.id,
+        userID: currentUserData.userData._id,
       });
   }, [isLoading]);
 

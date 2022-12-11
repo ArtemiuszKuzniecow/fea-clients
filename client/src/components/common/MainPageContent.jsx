@@ -83,7 +83,7 @@ const MainPageContent = () => {
                 <div>
                   <span>Свернуть</span>{" "}
                   {companiesToConnect.map((c) => (
-                    <Link to={c.id} key={c.id}>
+                    <Link to={c._id} key={c._id}>
                       {c.company}
                     </Link>
                   ))}

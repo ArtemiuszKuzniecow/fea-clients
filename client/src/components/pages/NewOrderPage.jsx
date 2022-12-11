@@ -1,18 +1,17 @@
-import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import getDateFormat from "../../utils/getDateFormat";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { editLeadParameter } from "../../store/Leads/actions";
 import { postNewOrder } from "../../store/Orders/actions";
-import MyButton from "../common/MyButton";
+import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../common/DropDownList";
+import Headline from "../common/Headline";
+import MyButton from "../common/MyButton";
 import RadioButtons from "../common/RadioButtons";
 import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
-import Headline from "../common/Headline";
 
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading, currentUserData } =
@@ -20,7 +19,6 @@ const NewOrderPage = () => {
   const currentCompanies = companies && companies.map((c) => c.company);
   const dispatch = useDispatch();
   const history = useHistory();
-  const currentOrderId = nanoid();
   const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
   const [order, setOrder] = useState({
     companyId: "",
@@ -35,7 +33,6 @@ const NewOrderPage = () => {
     incoterms: "",
     isActual: false,
     isClosed: false,
-    orderId: currentOrderId,
     package: "",
     pickupAddress: "",
     pickupDate: "",
@@ -47,7 +44,7 @@ const NewOrderPage = () => {
     typeOfCargo: "",
     volume: "",
     weight: "",
-    userID: currentUserData.userData.id,
+    userID: currentUserData.userData._id,
   });
 
   const handleSubmit = (e) => {
@@ -82,7 +79,7 @@ const NewOrderPage = () => {
   const handleChooseCompany = (data) => {
     setOrder((prevState) => ({
       ...prevState,
-      companyId: companies.find((c) => c.company === data.companyId).id,
+      companyId: companies.find((c) => c.company === data.companyId)._id,
     }));
   };
   const handleChangeDropDown = (data) => {

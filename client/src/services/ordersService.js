@@ -1,21 +1,18 @@
 import httpService from "./httpService";
 
-export const ordersEndpoint = "orders/";
+export const ordersEndpoint = "order/";
 
 const ordersService = {
   get: async () => {
     const { data } = await httpService.get(ordersEndpoint);
     return data;
   },
-  putNewOrder: async (payload) => {
-    const { data } = await httpService.put(
-      ordersEndpoint + payload.orderId,
-      payload
-    );
+  postNewOrder: async (payload) => {
+    const { data } = await httpService.post(ordersEndpoint, payload);
     return data;
   },
   editOrderParam: async (id, param, payload) => {
-    const { data } = await httpService.put(
+    const { data } = await httpService.patch(
       `${ordersEndpoint}${id}/${param}`,
       payload
     );
@@ -23,7 +20,7 @@ const ordersService = {
   },
   removeOrder: async (payload) => {
     const { data } = await httpService.delete(
-      ordersEndpoint + payload.orderId,
+      ordersEndpoint + payload._id,
       payload
     );
     return data;

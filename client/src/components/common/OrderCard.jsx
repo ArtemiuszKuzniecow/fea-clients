@@ -13,7 +13,7 @@ import ModalWindow from "./ModalWindow/ModalWindow";
 const OrderCard = ({ order, companyName, companyId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const orderComments = useSelector(getAllOrdersCommentsById(order.orderId));
+  const orderComments = useSelector(getAllOrdersCommentsById(order._id));
 
   const [isOpen, setIsOpen] = useState(false);
   const handleRedirect = (id) => {

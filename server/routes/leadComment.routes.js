@@ -32,7 +32,7 @@ router
     try {
       const { leadCommentId } = req.params;
       const removedLeadComment = LeadComment.findById(leadCommentId);
-      await removedLeadComment.remove();
+      await removedLeadComment.deleteOne();
       return res.send(null);
     } catch (error) {
       res.status(500).json({

@@ -21,15 +21,15 @@ import { loadUserData } from "./store/Users/actions";
 import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
 function App() {
-  const localId = localStorageService.getUserId();
+  const userId = localStorageService.getUserId();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getLoggedInStatusSelector());
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(loadUserData(localId));
+      dispatch(loadUserData(userId));
     }
-  }, [localId]);
+  }, [userId]);
 
   return (
     <div>
@@ -58,15 +58,15 @@ function App() {
                 exact
                 component={OrdersListPage}
               />
-              <ProtectedRoute path="/orders-list/:id" component={OrderPage} />
+              <ProtectedRoute path="/orders-list/:_id" component={OrderPage} />
               <ProtectedRoute
-                path="/:id/orders"
+                path="/:_id/orders"
                 exact
                 component={CurrentOrdersPage}
               />
-              <ProtectedRoute path="/:id" exact component={CompanyInfoPage} />
+              <ProtectedRoute path="/:_id" exact component={CompanyInfoPage} />
               <ProtectedRoute
-                path="/:id/edit"
+                path="/:_id/edit"
                 exact
                 component={EditCompanyPage}
               />

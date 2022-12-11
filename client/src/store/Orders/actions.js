@@ -23,7 +23,7 @@ export const postNewOrder = createAsyncThunk(
   "newOrder/created",
   async (payload, thunkAPI) => {
     try {
-      const { content } = await ordersService.putNewOrder(payload);
+      const { content } = await ordersService.postNewOrder(payload);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,15 +34,15 @@ export const postNewOrder = createAsyncThunk(
 export const editOrderParameter = createAsyncThunk(
   "order/paramEdited",
   async (orderPayload, thunkAPI) => {
-    const { payload, id, parameter } = orderPayload;
+    const { payload, _id, parameter } = orderPayload;
     try {
       const { content } = await ordersService.editOrderParam(
-        id,
+        _id,
         parameter,
         payload
       );
 
-      return { content, id: id, parameter: parameter };
+      return { content, _id, parameter };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -54,7 +54,7 @@ export const deleteOrder = createAsyncThunk(
   async (orderPayload, thunkAPI) => {
     try {
       const { content } = await ordersService.removeOrder(orderPayload);
-      return orderPayload.orderId;
+      return orderPayload._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

@@ -53,7 +53,7 @@ const CompaniesPage = () => {
       {!isLoading && !isLeadsLoading ? (
         currentCompanies && currentCompanies.length > 0 ? (
           currentCompanies
-            .map((company) => company.id)
+            .map((company) => company._id)
             .map((c) => {
               return <CompanyCard companyId={c} key={c} />;
             })

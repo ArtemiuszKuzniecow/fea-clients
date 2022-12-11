@@ -11,9 +11,9 @@ import Headline from "../common/Headline";
 import Loader from "../ui/Loader/Loader";
 
 const EditCompanyPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { getCompanyById } = useUserData();
-  const currentCompany = getCompanyById(id);
+  const currentCompany = getCompanyById(_id);
   const dispatch = useDispatch();
   const history = useHistory();
   const [company, setCompany] = useState(currentCompany);
@@ -21,7 +21,7 @@ const EditCompanyPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewLead(company));
-    history.push(`/${id}`);
+    history.push(`/${_id}`);
   };
 
   const handleChangeDropDown = (data) => {
@@ -41,7 +41,7 @@ const EditCompanyPage = () => {
     <>
       <div className="flex flex-col justify-center p-3">
         <Headline>Редактирвоать данные:</Headline>
-        <Link to={`/${id}`}>
+        <Link to={`/${_id}`}>
           <MyButton>Назад</MyButton>
         </Link>
       </div>

@@ -16,12 +16,12 @@ import Headline from "../common/Headline";
 import TableLayout from "../common/TableLayout";
 
 const OrderPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
     useUserData();
-  const orderComments = useSelector(getAllOrdersCommentsById(id));
+  const orderComments = useSelector(getAllOrdersCommentsById(_id));
 
   const [newPrice, setNewPrice] = useState(false);
   const [currentCompany, setCurrentCompany] = useState(null);
@@ -31,13 +31,13 @@ const OrderPage = () => {
 
   useEffect(() => {
     if (orders && companies) {
-      setCurrentOrder(orders.find((order) => order.orderId === id));
+      setCurrentOrder(orders.find((order) => order._id === _id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
   useEffect(() => {
     if (currentOrder) {
       setCurrentCompany(
-        companies.find((company) => company.id === currentOrder.companyId)
+        companies.find((company) => company._id === currentOrder.companyId)
       );
     }
   }, [currentOrder]);
@@ -52,7 +52,7 @@ const OrderPage = () => {
 
   const handleRefreshPrice = () => {
     dispatch(
-      editOrderParameter({ payload: price, id: id, parameter: "price" })
+      editOrderParameter({ payload: price, id: _id, parameter: "price" })
     );
     toggleNewPrice();
   };
@@ -219,7 +219,7 @@ const OrderPage = () => {
         <div className="flex flex-wrap">
           <div className="w-1/2 max-lg:w-full ">
             <div className="flex flex-col w-3/4 max-lg:w-full">
-              <Link to={"/" + currentCompany.id}>
+              <Link to={"/" + currentCompany._id}>
                 <MyButton width="full">Информация о компании</MyButton>
               </Link>
               <MyButton onClick={toggleNewPrice}>Обновить ставку</MyButton>
@@ -269,7 +269,7 @@ const OrderPage = () => {
             </Headline>
           </div>
           <div className="w-1/2 max-lg:w-full">
-            <Comments companyId={currentCompany.id} typeOfComments="order" />
+            <Comments companyId={currentCompany._id} typeOfComments="order" />
           </div>
         </div>
       </div>

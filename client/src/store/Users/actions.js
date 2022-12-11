@@ -16,13 +16,9 @@ export const loadUserData = createAsyncThunk(
 
 export const logIn = createAsyncThunk(
   "user/logIn",
-  async ({ email, password }, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      const data = await authService.logIn({
-        email,
-        password,
-        returnSecureToken: true,
-      });
+      const data = await authService.logIn(payload);
       return data;
     } catch (error) {
       const { code, message } = error.response.data.error;
@@ -52,22 +48,10 @@ export const logIn = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   "user/signUp",
-  async ({ email, password, ...rest }, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      const data = await authService.register({
-        email,
-        password,
-        returnSecureToken: true,
-      });
-      const { content } = await userService.create({
-        id: data.localId,
-        ...rest,
-      });
-      const result = await authService.logIn({
-        email,
-        password,
-        returnSecureToken: true,
-      });
+      const data = await authService.register(payload);
+      const result = await authService.logIn(payload);
 
       return result;
     } catch (error) {

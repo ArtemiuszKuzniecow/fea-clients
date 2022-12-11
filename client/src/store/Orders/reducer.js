@@ -39,7 +39,7 @@ export const OrdersSlice = createSlice({
       state.isLoading = true;
     },
     [postNewOrder.fulfilled.type]: (state, { payload }) => {
-      state.orderData = { ...state.orderData, [payload.orderId]: payload };
+      state.orderData = { ...state.orderData, [payload._id]: payload };
       state.isLoading = false;
     },
     [postNewOrder.rejected.type]: (state, { payload }) => {
@@ -54,8 +54,8 @@ export const OrdersSlice = createSlice({
       state.isLoading = false;
       state.orderData = {
         ...state.orderData,
-        [payload.id]: {
-          ...state.orderData[payload.id],
+        [payload._id]: {
+          ...state.orderData[payload._id],
           [payload.parameter]: payload.content,
         },
       };

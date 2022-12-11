@@ -1,19 +1,19 @@
 const TOKEN_KEY = "fea-cl-jwt-token";
 const REFRESH_KEY = "fea-cl-jwt-refresh-token";
 const EXPIRES_KEY = "fea-cl-jwt-expires";
-const USERID_KEY = "fea-cl-user-local-id";
+const USERID_KEY = "fea-cl-user-user-id";
 
 export function setTokens({
   refreshToken,
-  idToken,
+  accessToken,
   expiresIn = 3600,
-  localId,
+  userId,
 }) {
   const expiresDate = new Date().getTime() + expiresIn * 1000;
-  localStorage.setItem(TOKEN_KEY, idToken);
+  localStorage.setItem(TOKEN_KEY, accessToken);
   localStorage.setItem(REFRESH_KEY, refreshToken);
   localStorage.setItem(EXPIRES_KEY, expiresDate);
-  localStorage.setItem(USERID_KEY, localId);
+  localStorage.setItem(USERID_KEY, userId);
 }
 
 export function removeAuthData() {

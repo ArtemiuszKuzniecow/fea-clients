@@ -39,7 +39,7 @@ export const LeadsSlice = createSlice({
       state.isLoading = true;
     },
     [postNewLead.fulfilled.type]: (state, { payload }) => {
-      state.leadData = { ...state.leadData, [payload.id]: payload };
+      state.leadData = { ...state.leadData, [payload._id]: payload };
       state.isLoading = false;
     },
     [postNewLead.rejected.type]: (state, { payload }) => {
@@ -55,7 +55,7 @@ export const LeadsSlice = createSlice({
       state.leadData = {
         ...state.leadData,
         [payload.id]: {
-          ...state.leadData[payload.id],
+          ...state.leadData[payload._id],
           [payload.parameter]: payload.content,
         },
       };

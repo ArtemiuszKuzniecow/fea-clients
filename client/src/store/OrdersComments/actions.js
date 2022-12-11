@@ -25,7 +25,7 @@ export const postOrderComment = createAsyncThunk(
   "ordersComment/created",
   async (commentsPayload, thunkAPI) => {
     try {
-      const { content } = await commentsService.putOrderComment(
+      const { content } = await commentsService.postOrderComment(
         commentsPayload
       );
       return content;

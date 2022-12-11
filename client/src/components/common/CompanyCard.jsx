@@ -32,7 +32,7 @@ const CompanyCard = ({ companyId }) => {
   const [changeDate, setChangeDate] = useState(false);
 
   const { orders, isLoading, isOrdersLoading } = useUserData();
-  const leadsComments = useSelector(getAllCompanyComments(company?.id));
+  const leadsComments = useSelector(getAllCompanyComments(company?._id));
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
 
@@ -42,7 +42,7 @@ const CompanyCard = ({ companyId }) => {
 
   useEffect(() => {
     if (orders) {
-      setCurrentOrders(orders.filter((o) => o.companyId === company?.id));
+      setCurrentOrders(orders.filter((o) => o.companyId === company?._id));
     }
   }, [isLoading, isOrdersLoading]);
 
@@ -72,7 +72,7 @@ const CompanyCard = ({ companyId }) => {
     dispatch(
       editLeadParameter({
         payload: status,
-        id: company.id,
+        _id: company._id,
         parameter: "status",
       })
     );
@@ -95,7 +95,7 @@ const CompanyCard = ({ companyId }) => {
           </div>
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
             {company.isRequested ? (
-              <Link to={`${company.id}/orders`} className="w-11/12">
+              <Link to={`${company._id}/orders`} className="w-11/12">
                 <MyButton
                   isDisabled={!company.isRequested}
                   color="green"
@@ -107,7 +107,7 @@ const CompanyCard = ({ companyId }) => {
             ) : (
               <div>Запросов нет</div>
             )}
-            <Link to={"/" + company.id} className="w-11/12">
+            <Link to={"/" + company._id} className="w-11/12">
               <MyButton color="green" width="full">
                 Информация о компании
               </MyButton>
@@ -169,7 +169,7 @@ const CompanyCard = ({ companyId }) => {
           </div>
 
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5">
-            <Comments companyId={company.id} typeOfComments="company" />
+            <Comments companyId={company._id} typeOfComments="company" />
           </div>
         </div>
       </div>

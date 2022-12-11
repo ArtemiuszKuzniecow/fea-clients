@@ -10,14 +10,14 @@ import { SortingArrowsImg } from "../../assets/styles/svg";
 import TableLayout from "../common/TableLayout";
 
 const CurrentOrdersPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { orders, isLoading, isOrdersLoading, getCompanyById } = useUserData();
-  const company = getCompanyById(id);
+  const company = getCompanyById(_id);
   const [currentOrders, setCurrentOrders] = useState(null);
 
   useEffect(() => {
     !isOrdersLoading &&
-      setCurrentOrders(orders.filter((o) => o.companyId === company.id));
+      setCurrentOrders(orders.filter((o) => o.companyId === company._id));
   }, [isLoading, isOrdersLoading]);
 
   return currentOrders ? (

@@ -3,12 +3,12 @@ import leadService from "../../services/leadService";
 
 export const loadLeadsData = createAsyncThunk(
   "lead/loadLead",
-  async (id, thunkApi) => {
+  async (_id, thunkApi) => {
     try {
       const { content } = await leadService.get();
       const result = {};
       for (const key in content) {
-        if (content[key].userID === id) {
+        if (content[key].userID === _id) {
           result[key] = content[key];
         }
       }
@@ -23,7 +23,7 @@ export const postNewLead = createAsyncThunk(
   "newLead/created",
   async (payload, thunkAPI) => {
     try {
-      const { content } = await leadService.putNewLead(payload);
+      const { content } = await leadService.postNewLead(payload);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,14 +34,14 @@ export const postNewLead = createAsyncThunk(
 export const editLeadParameter = createAsyncThunk(
   "lead/paramEdited",
   async (leadPayload, thunkAPI) => {
-    const { payload, id, parameter } = leadPayload;
+    const { payload, _id, parameter } = leadPayload;
     try {
       const { content } = await leadService.editLeadParam(
-        id,
+        _id,
         parameter,
         payload
       );
-      return { content, id: id, parameter: parameter };
+      return { content, _id, parameter };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -53,7 +53,7 @@ export const deleteLead = createAsyncThunk(
   async (leadPayload, thunkAPI) => {
     try {
       const { content } = await leadService.removeLead(leadPayload);
-      return leadPayload.id;
+      return leadPayload._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
