@@ -34,14 +34,10 @@ export const postNewLead = createAsyncThunk(
 export const editLeadParameter = createAsyncThunk(
   "lead/paramEdited",
   async (leadPayload, thunkAPI) => {
-    const { payload, _id, parameter } = leadPayload;
+    const { payload, _id } = leadPayload;
     try {
-      const { content } = await leadService.editLeadParam(
-        _id,
-        parameter,
-        payload
-      );
-      return { content, _id, parameter };
+      const { content } = await leadService.editLeadParam(_id, payload);
+      return { content, _id };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

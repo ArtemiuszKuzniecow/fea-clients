@@ -52,7 +52,7 @@ const OrderCard = ({ order, companyName, companyId }) => {
         <td className="py-3 px-6 max-xl:hidden">{order.typeOfCargo}</td>
         <td className="py-3 px-6 max-xl:hidden">{order.contractType}</td>
         <td className="p-1">
-          <MyButton onClick={() => handleRedirect(order.orderId)}>
+          <MyButton onClick={() => handleRedirect(order._id)}>
             Подробнее
           </MyButton>
         </td>
