@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
-import { postNewLead } from "../../store/Leads/actions";
+import { editLead, postNewLead } from "../../store/Leads/actions";
 import MyButton from "../common/MyButton";
 import DropDownList from "../common/DropDownList";
 import TextField from "../common/TextField";
@@ -20,7 +20,7 @@ const EditCompanyPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postNewLead(company));
+    dispatch(editLead(company));
     history.push(`/${_id}`);
   };
 

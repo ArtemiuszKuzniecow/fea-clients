@@ -8,16 +8,13 @@ const ordersService = {
     return data;
   },
   postNewOrder: async (payload) => {
-    console.log("payload service", payload);
     const { data } = await httpService.post(ordersEndpoint, payload);
-    console.log("data", data);
     return data;
   },
   editOrderParam: async (id, param, payload) => {
-    const { data } = await httpService.patch(
-      `${ordersEndpoint}${id}/${param}`,
-      payload
-    );
+    const { data } = await httpService.patch(`${ordersEndpoint}${id}`, {
+      [param]: payload,
+    });
     return data;
   },
   removeOrder: async (payload) => {

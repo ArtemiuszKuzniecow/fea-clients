@@ -34,7 +34,7 @@ router
     try {
       const { leadId } = req.params;
       const removedLead = Lead.findById(leadId);
-      await removedLead.remove();
+      await removedLead.deleteOne();
       return res.send(null);
     } catch (error) {
       res.status(500).json({

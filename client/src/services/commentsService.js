@@ -13,7 +13,6 @@ const commentsService = {
   },
   postLeadComment: async (payload) => {
     const { data } = await httpService.post(leadsCommentsEndpoint, payload);
-    console.log(data);
     return data;
   },
   postOrderComment: async (payload) => {

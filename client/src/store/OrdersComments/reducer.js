@@ -38,10 +38,7 @@ export const OrdersCommentsSlice = createSlice({
       state.isLoading = true;
     },
     [postOrderComment.fulfilled.type]: (state, { payload }) => {
-      state.ordersCommentsData = {
-        ...state.ordersCommentsData,
-        [payload._id]: payload,
-      };
+      state.ordersCommentsData = [...state.ordersCommentsData, payload];
       state.isLoading = false;
     },
     [postOrderComment.rejected.type]: (state, { payload }) => {
@@ -54,7 +51,9 @@ export const OrdersCommentsSlice = createSlice({
     },
     [deleteOrderComment.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      delete state.ordersCommentsData[payload];
+      state.ordersCommentsData = state.ordersCommentsData.filter(
+        (item) => item._id !== payload
+      );
     },
     [deleteOrderComment.rejected.type]: (state, { payload }) => {
       state.isLoading = false;

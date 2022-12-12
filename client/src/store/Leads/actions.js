@@ -3,16 +3,10 @@ import leadService from "../../services/leadService";
 
 export const loadLeadsData = createAsyncThunk(
   "lead/loadLead",
-  async (_id, thunkApi) => {
+  async (thunkApi) => {
     try {
       const { content } = await leadService.get();
-      const result = {};
-      for (const key in content) {
-        if (content[key].userID === _id) {
-          result[key] = content[key];
-        }
-      }
-      return result;
+      return content;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -34,10 +28,26 @@ export const postNewLead = createAsyncThunk(
 export const editLeadParameter = createAsyncThunk(
   "lead/paramEdited",
   async (leadPayload, thunkAPI) => {
-    const { payload, _id } = leadPayload;
+    const { payload, _id, parameter } = leadPayload;
     try {
-      const { content } = await leadService.editLeadParam(_id, payload);
-      return { content, _id };
+      const { content } = await leadService.editLeadParam(
+        _id,
+        parameter,
+        payload
+      );
+      return content;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const editLead = createAsyncThunk(
+  "lead/edited",
+  async (leadPayload, thunkAPI) => {
+    try {
+      const { content } = await leadService.editLead(leadPayload);
+      return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

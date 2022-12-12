@@ -18,7 +18,7 @@ router
   .post(auth, async (req, res) => {
     try {
       const newOrderComment = await OrderComment.create({ ...req.body });
-      req.status(201).send(newOrderComment);
+      res.status(201).send(newOrderComment);
     } catch (error) {
       res.status(500).json({
         message: "Something was wrong, try it later.",
@@ -32,7 +32,7 @@ router
     try {
       const { orderCommentId } = req.params;
       const removedOrderComment = OrderComment.findById(orderCommentId);
-      await removedOrderComment.remove();
+      await removedOrderComment.deleteOne();
       return res.send(null);
     } catch (error) {
       res.status(500).json({

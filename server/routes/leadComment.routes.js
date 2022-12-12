@@ -18,7 +18,7 @@ router
   .post(auth, async (req, res) => {
     try {
       const newLeadComment = await LeadComment.create({ ...req.body });
-      req.status(201).send(newLeadComment);
+      res.status(201).send(newLeadComment);
     } catch (error) {
       res.status(500).json({
         message: "Something was wrong, try it later.",

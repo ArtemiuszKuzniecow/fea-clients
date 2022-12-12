@@ -13,12 +13,18 @@ const leadService = {
     return data;
   },
 
-  editLeadParam: async (id, payload) => {
-    console.log("payload", payload);
+  editLeadParam: async (id, parameter, payload) => {
     const { data } = await httpService.patch(leadEndpoint + id, {
-      status: payload,
+      [parameter]: payload,
     });
-    console.log("data", data);
+    return data;
+  },
+
+  editLead: async (payload) => {
+    const { data } = await httpService.patch(
+      leadEndpoint + payload._id,
+      payload
+    );
     return data;
   },
 

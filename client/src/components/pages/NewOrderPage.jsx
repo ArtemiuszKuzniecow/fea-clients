@@ -64,7 +64,7 @@ const NewOrderPage = () => {
       dispatch(
         editLeadParameter({
           payload: true,
-          id: order.companyId,
+          _id: order.companyId,
           parameter: "isRequested",
         })
       );
