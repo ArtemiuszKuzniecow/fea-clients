@@ -311,7 +311,7 @@ const NewOrderPage = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <MyButton onClick={handleSubmit} isDisabled={order.userID !== ""}>
+          <MyButton onClick={handleSubmit} isDisabled={order.userID === ""}>
             Отправить запрос
           </MyButton>
         </div>

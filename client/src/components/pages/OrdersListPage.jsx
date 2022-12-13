@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SortingArrowsImg } from "../../assets/styles/svg";
 import useUserData from "../../hooks/useUserData";
 import OrderLayout from "../../layouts/OrderLayout";
+import Headline from "../common/Headline";
 import MyButton from "../common/MyButton";
 import OrderCard from "../common/OrderCard";
 import TableLayout from "../common/TableLayout";
@@ -146,18 +147,18 @@ const OrdersListPage = () => {
             </TableLayout>
           )
         ) : (
-          <>
-            <h3>Добавтье первую компанию</h3>
+          <div className="flex flex-col">
+            <Headline>Добавтье компанию или запрос</Headline>
             {companies && companies.length > 0 ? (
               <Link to="/new-order">
                 <MyButton>Добавить запрос</MyButton>
               </Link>
             ) : (
-              <Link to="/new-company">
+              <Link to="/new-company" className="text-center m-2">
                 <MyButton>Добавить компанию</MyButton>
               </Link>
             )}
-          </>
+          </div>
         )
       ) : (
         <Loader />

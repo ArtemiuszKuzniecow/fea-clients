@@ -7,6 +7,7 @@ import Loader from "../ui/Loader/Loader";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Headline from "./Headline";
+import MyButton from "./MyButton";
 
 const MainPageContent = () => {
   const { userData: currentUser } = useSelector(getUserDataSelector());
@@ -48,77 +49,94 @@ const MainPageContent = () => {
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     <>
       <Headline>Добрый день, {currentUser.name}!</Headline>
-      <div>
+      <div className="flex justify-evenly">
         <div>
-          <h4>
-            У Вас всего {companies.length}{" "}
-            {declOfNum(companies.length, companiesEndingsArray)}:
-          </h4>
-          <div>
-            <Link to="companies/">Посмотреть</Link>
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
+              У Вас всего {companies.length}{" "}
+              {declOfNum(companies.length, companiesEndingsArray)}:
+            </h4>
+            <Link to={companies.length > 0 ? "companies/" : "new-company"}>
+              <MyButton>
+                {companies.length > 0
+                  ? "Посмотреть"
+                  : "Добавьте новую компанию"}
+              </MyButton>
+            </Link>
           </div>
-          <h4>
-            У Вас всего {orders.length}{" "}
-            {declOfNum(orders.length, ordersEndingsArray)}:
-          </h4>
-          <div>
-            <Link to="orders-list">Посмотреть</Link>
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
+              У Вас всего {orders.length}{" "}
+              {declOfNum(orders.length, ordersEndingsArray)}:
+            </h4>
+            <Link to={orders.length > 0 ? "orders/" : "new-order"}>
+              <MyButton>
+                {companies.length > 0 ? "Посмотреть" : "Добавьте новый запрос"}
+              </MyButton>
+            </Link>
           </div>
         </div>
         <div>
-          <h4>
-            {companiesToConnect.length > 0
-              ? `У Вас всего ${companiesToConnect.length}
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
+              {companiesToConnect.length > 0
+                ? `У Вас всего ${companiesToConnect.length}
                 ${declOfNum(
                   companiesToConnect.length,
                   companiesEndingsArray
                 )} для связи сегодня:`
-              : "Сегодня нет компаний для связи"}
-          </h4>
-          <div onClick={() => handleCompaniesCollapse()}>
-            {companiesToConnect.length > 0 ? (
-              isCompaniesCollapsed ? (
-                <span>Посмотреть</span>
+                : "Сегодня нет компаний для связи"}
+            </h4>
+            <div onClick={() => handleCompaniesCollapse()}>
+              {companiesToConnect.length > 0 ? (
+                isCompaniesCollapsed ? (
+                  <MyButton>Посмотреть</MyButton>
+                ) : (
+                  <div>
+                    <MyButton>Свернуть</MyButton>{" "}
+                    {companiesToConnect.map((c) => (
+                      <Link to={c._id} key={c._id}>
+                        {c.company}
+                      </Link>
+                    ))}
+                  </div>
+                )
               ) : (
-                <div>
-                  <span>Свернуть</span>{" "}
-                  {companiesToConnect.map((c) => (
-                    <Link to={c._id} key={c._id}>
-                      {c.company}
-                    </Link>
-                  ))}
-                </div>
-              )
-            ) : (
-              <Link to="companies">Посмотреть все компании</Link>
-            )}
+                <Link to="companies">
+                  <MyButton>Посмотреть все компании</MyButton>
+                </Link>
+              )}
+            </div>
           </div>
-
-          <h4>
-            {openedOrders.length > 0
-              ? `У Вас всего ${orders.length} открытых 
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
+              {openedOrders.length > 0
+                ? `У Вас всего ${orders.length} открытых 
                 ${declOfNum(orders.length, ordersEndingsArray)}:`
-              : "У Вас нет открытых запросов"}
-          </h4>
-          <div onClick={() => handleOrdersCollapse()}>
-            {openedOrders.length > 0 ? (
-              isOrdersCollapsed ? (
-                <span>Посмотреть</span>
+                : "У Вас нет открытых запросов"}
+            </h4>
+            <div onClick={() => handleOrdersCollapse()}>
+              {openedOrders.length > 0 ? (
+                isOrdersCollapsed ? (
+                  <MyButton>Посмотреть</MyButton>
+                ) : (
+                  <div>
+                    <MyButton>Свернуть</MyButton>
+                    {openedOrders.map((o) => (
+                      <Link to={`orders-list/${o.orderId}`} key={o.orderId}>
+                        {`Компания: ${getCompanyById(o.companyId).company}`}
+                        <br />
+                        {`Дата запроса: ${getDateFormat(o.date, ".")}`}
+                      </Link>
+                    ))}
+                  </div>
+                )
               ) : (
-                <div>
-                  <span>Свернуть</span>
-                  {openedOrders.map((o) => (
-                    <Link to={`orders-list/${o.orderId}`} key={o.orderId}>
-                      {`Компания: ${getCompanyById(o.companyId).company}`}
-                      <br />
-                      {`Дата запроса: ${getDateFormat(o.date, ".")}`}
-                    </Link>
-                  ))}
-                </div>
-              )
-            ) : (
-              "Посмотреть все запросы"
-            )}
+                <Link to="/orders-list">
+                  <MyButton>Посмотреть все запросы</MyButton>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

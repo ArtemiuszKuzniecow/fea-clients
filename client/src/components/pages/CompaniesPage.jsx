@@ -58,12 +58,12 @@ const CompaniesPage = () => {
               return <CompanyCard companyId={c} key={c} />;
             })
         ) : (
-          <>
+          <div className="flex flex-col">
             <Headline>Добавтье первую компанию</Headline>
-            <Link to="/new-company">
+            <Link to="/new-company" className="text-center m-2">
               <MyButton>Добавить компанию</MyButton>
             </Link>
-          </>
+          </div>
         )
       ) : (
         <Loader />
