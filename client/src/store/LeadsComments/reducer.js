@@ -38,10 +38,7 @@ export const LeadsCommentsSlice = createSlice({
       state.isLoading = true;
     },
     [postCompanyComment.fulfilled.type]: (state, { payload }) => {
-      state.leadsCommentData = {
-        ...state.leadsCommentData,
-        [payload._id]: payload,
-      };
+      state.leadsCommentData = [...state.leadsCommentData, payload];
       state.isLoading = false;
     },
     [postCompanyComment.rejected.type]: (state, { payload }) => {
@@ -54,7 +51,9 @@ export const LeadsCommentsSlice = createSlice({
     },
     [deleteCompanyComment.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      delete state.leadsCommentData[payload];
+      state.leadsCommentData = state.leadsCommentData.filter(
+        (item) => item._id !== payload
+      );
     },
     [deleteCompanyComment.rejected.type]: (state, [payload]) => {
       state.isLoading = false;

@@ -39,7 +39,7 @@ export const OrdersSlice = createSlice({
       state.isLoading = true;
     },
     [postNewOrder.fulfilled.type]: (state, { payload }) => {
-      state.orderData = { ...state.orderData, [payload.orderId]: payload };
+      state.orderData = [...state.orderData, payload];
       state.isLoading = false;
     },
     [postNewOrder.rejected.type]: (state, { payload }) => {
@@ -52,13 +52,9 @@ export const OrdersSlice = createSlice({
     },
     [editOrderParameter.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      state.orderData = {
-        ...state.orderData,
-        [payload.id]: {
-          ...state.orderData[payload.id],
-          [payload.parameter]: payload.content,
-        },
-      };
+      state.orderData = state.orderData.map((item) =>
+        item._id === payload._id ? payload : item
+      );
     },
     [editOrderParameter.rejected.type]: (state, { payload }) => {
       state.isLoading = false;
@@ -70,7 +66,7 @@ export const OrdersSlice = createSlice({
     },
     [deleteOrder.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      delete state.orderData[payload];
+      state.orderData = state.orderData.filter((item) => item._id !== payload);
     },
     [deleteOrder.rejected.type]: (state, { payload }) => {
       state.isLoading = false;

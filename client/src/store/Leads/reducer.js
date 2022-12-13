@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteLead,
+  editLead,
   editLeadParameter,
   loadLeadsData,
   postNewLead,
@@ -39,7 +40,7 @@ export const LeadsSlice = createSlice({
       state.isLoading = true;
     },
     [postNewLead.fulfilled.type]: (state, { payload }) => {
-      state.leadData = { ...state.leadData, [payload.id]: payload };
+      state.leadData = [...state.leadData, payload];
       state.isLoading = false;
     },
     [postNewLead.rejected.type]: (state, { payload }) => {
@@ -52,15 +53,38 @@ export const LeadsSlice = createSlice({
     },
     [editLeadParameter.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      state.leadData = {
-        ...state.leadData,
-        [payload.id]: {
-          ...state.leadData[payload.id],
-          [payload.parameter]: payload.content,
-        },
-      };
+      state.leadData = state.leadData.map((item) =>
+        item._id === payload._id ? payload : item
+      );
     },
     [editLeadParameter.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [editLeadParameter.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [editLeadParameter.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.leadData = state.leadData.map((item) =>
+        item._id === payload._id ? payload : item
+      );
+    },
+    [editLeadParameter.rejected.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    [editLead.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [editLead.fulfilled.type]: (state, { payload }) => {
+      state.isLoading = false;
+      state.leadData = state.leadData.map((item) =>
+        item._id === payload._id ? payload : item
+      );
+    },
+    [editLead.rejected.type]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
@@ -70,7 +94,7 @@ export const LeadsSlice = createSlice({
     },
     [deleteLead.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
-      delete state.leadData[payload];
+      state.leadData = state.leadData.filter((item) => item._id !== payload);
     },
     [deleteLead.rejected.type]: (state, { payload }) => {
       state.isLoading = false;

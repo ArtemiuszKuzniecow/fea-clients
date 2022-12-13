@@ -1,18 +1,18 @@
-import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import getDateFormat from "../../utils/getDateFormat";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { editLeadParameter } from "../../store/Leads/actions";
 import { postNewOrder } from "../../store/Orders/actions";
-import MyButton from "../common/MyButton";
+import getDateFormat from "../../utils/getDateFormat";
 import DropDownList from "../common/DropDownList";
+import Headline from "../common/Headline";
+import MyButton from "../common/MyButton";
 import RadioButtons from "../common/RadioButtons";
 import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
-import Headline from "../common/Headline";
 
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading, currentUserData } =
@@ -20,7 +20,6 @@ const NewOrderPage = () => {
   const currentCompanies = companies && companies.map((c) => c.company);
   const dispatch = useDispatch();
   const history = useHistory();
-  const currentOrderId = nanoid();
   const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
   const [order, setOrder] = useState({
     companyId: "",
@@ -35,7 +34,6 @@ const NewOrderPage = () => {
     incoterms: "",
     isActual: false,
     isClosed: false,
-    orderId: currentOrderId,
     package: "",
     pickupAddress: "",
     pickupDate: "",
@@ -47,8 +45,16 @@ const NewOrderPage = () => {
     typeOfCargo: "",
     volume: "",
     weight: "",
-    userID: currentUserData.userData.id,
+    userID: "",
   });
+
+  useEffect(() => {
+    !isLoading &&
+      setOrder((prevState) => ({
+        ...prevState,
+        ...{ userID: currentUserData.userData._id },
+      }));
+  }, [isLoading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +73,7 @@ const NewOrderPage = () => {
       dispatch(
         editLeadParameter({
           payload: true,
-          id: order.companyId,
+          _id: order.companyId,
           parameter: "isRequested",
         })
       );
@@ -82,7 +88,7 @@ const NewOrderPage = () => {
   const handleChooseCompany = (data) => {
     setOrder((prevState) => ({
       ...prevState,
-      companyId: companies.find((c) => c.company === data.companyId).id,
+      companyId: companies.find((c) => c.company === data.companyId)._id,
     }));
   };
   const handleChangeDropDown = (data) => {
@@ -101,7 +107,7 @@ const NewOrderPage = () => {
       <Headline>Добавить новый запрос:</Headline>
       <div className="container">
         <div className="flex flex-row justify-around flex-wrap gap-3 py-3">
-          <div className="w-10/12">
+          <div className="w-4/12 max-md:w-10/12">
             <div>
               <DropDownList
                 array={currentCompanies}
@@ -132,6 +138,8 @@ const NewOrderPage = () => {
                 <span>Это поле должно быть заполнено</span>
               )}
             </div>
+          </div>
+          <div className="w-4/12 max-md:w-10/12">
             <div>
               <DropDownList
                 array={cargo.contractType}
@@ -303,7 +311,9 @@ const NewOrderPage = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <MyButton onClick={handleSubmit}>Отправить запрос</MyButton>
+          <MyButton onClick={handleSubmit} isDisabled={order.userID !== ""}>
+            Отправить запрос
+          </MyButton>
         </div>
       </div>
     </>

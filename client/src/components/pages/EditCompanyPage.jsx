@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
-import { postNewLead } from "../../store/Leads/actions";
+import { editLead, postNewLead } from "../../store/Leads/actions";
 import MyButton from "../common/MyButton";
 import DropDownList from "../common/DropDownList";
 import TextField from "../common/TextField";
@@ -11,17 +11,17 @@ import Headline from "../common/Headline";
 import Loader from "../ui/Loader/Loader";
 
 const EditCompanyPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { getCompanyById } = useUserData();
-  const currentCompany = getCompanyById(id);
+  const currentCompany = getCompanyById(_id);
   const dispatch = useDispatch();
   const history = useHistory();
   const [company, setCompany] = useState(currentCompany);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postNewLead(company));
-    history.push(`/${id}`);
+    dispatch(editLead(company));
+    history.push(`/${_id}`);
   };
 
   const handleChangeDropDown = (data) => {
@@ -41,7 +41,7 @@ const EditCompanyPage = () => {
     <>
       <div className="flex flex-col justify-center p-3">
         <Headline>Редактирвоать данные:</Headline>
-        <Link to={`/${id}`}>
+        <Link to={`/${_id}`}>
           <MyButton>Назад</MyButton>
         </Link>
       </div>

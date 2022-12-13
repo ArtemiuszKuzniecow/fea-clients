@@ -5,16 +5,10 @@ import commentsService, {
 
 export const loadLeadsCommentsData = createAsyncThunk(
   "leadsComment/loadleadsComment",
-  async (id, thunkApi) => {
+  async (thunkApi) => {
     try {
       const { content } = await commentsService.getLeadsComments();
-      const result = {};
-      for (const key in content) {
-        if (content[key].userID === id) {
-          result[key] = content[key];
-        }
-      }
-      return result;
+      return content;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -25,7 +19,9 @@ export const postCompanyComment = createAsyncThunk(
   "leadComment/created",
   async (commentsPayload, thunkAPI) => {
     try {
-      const { content } = await commentsService.putLeadComment(commentsPayload);
+      const { content } = await commentsService.postLeadComment(
+        commentsPayload
+      );
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

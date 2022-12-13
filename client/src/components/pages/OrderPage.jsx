@@ -16,12 +16,12 @@ import Headline from "../common/Headline";
 import TableLayout from "../common/TableLayout";
 
 const OrderPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
     useUserData();
-  const orderComments = useSelector(getAllOrdersCommentsById(id));
+  const orderComments = useSelector(getAllOrdersCommentsById(_id));
 
   const [newPrice, setNewPrice] = useState(false);
   const [currentCompany, setCurrentCompany] = useState(null);
@@ -31,13 +31,13 @@ const OrderPage = () => {
 
   useEffect(() => {
     if (orders && companies) {
-      setCurrentOrder(orders.find((order) => order.orderId === id));
+      setCurrentOrder(orders.find((order) => order._id === _id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
   useEffect(() => {
     if (currentOrder) {
       setCurrentCompany(
-        companies.find((company) => company.id === currentOrder.companyId)
+        companies.find((company) => company._id === currentOrder.companyId)
       );
     }
   }, [currentOrder]);
@@ -52,7 +52,7 @@ const OrderPage = () => {
 
   const handleRefreshPrice = () => {
     dispatch(
-      editOrderParameter({ payload: price, id: id, parameter: "price" })
+      editOrderParameter({ payload: price, id: _id, parameter: "price" })
     );
     toggleNewPrice();
   };
@@ -125,6 +125,35 @@ const OrderPage = () => {
                   </tr>
                 </tbody>
               </TableLayout>
+              {!newPrice ? (
+                <div className="shadow-md my-3">
+                  <h4 className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-3  sm:rounded-t-lg">
+                    Ставка:{" "}
+                  </h4>
+                  <p className="bg-white p-5">{currentOrder?.price?.price}</p>
+                </div>
+              ) : null}
+              {newPrice ? (
+                <div className="m-3">
+                  <TextField
+                    type="text"
+                    name="price"
+                    value={currentOrder.price?.price}
+                    hasButton={true}
+                    buttonText="Обновить"
+                    onChange={handleChangePrice}
+                    onClick={handleRefreshPrice}
+                  />
+                </div>
+              ) : null}
+              <div className="flex flex-col w-3/4 max-lg:w-full">
+                <MyButton onClick={toggleNewPrice}>Обновить ставку</MyButton>
+                <Link to={"/" + currentCompany._id}>
+                  <MyButton width="full" color="green">
+                    Информация о компании
+                  </MyButton>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -218,32 +247,10 @@ const OrderPage = () => {
         </div>
         <div className="flex flex-wrap">
           <div className="w-1/2 max-lg:w-full ">
-            <div className="flex flex-col w-3/4 max-lg:w-full">
-              <Link to={"/" + currentCompany.id}>
-                <MyButton width="full">Информация о компании</MyButton>
-              </Link>
-              <MyButton onClick={toggleNewPrice}>Обновить ставку</MyButton>
-            </div>
-            {!newPrice ? (
-              <div className="m-3">
-                <h4>Ставка: </h4>
-                <p>{currentOrder?.price?.price}</p>
-              </div>
-            ) : null}
-            {newPrice ? (
-              <div className="m-3">
-                <TextField
-                  type="text"
-                  name="price"
-                  value={currentOrder.price?.price}
-                  hasButton={true}
-                  buttonText="Обновить"
-                  onChange={handleChangePrice}
-                  onClick={handleRefreshPrice}
-                />
-              </div>
-            ) : null}
-            <MyButton onClick={() => setIsOpen((prevState) => !prevState)}>
+            <MyButton
+              onClick={() => setIsOpen((prevState) => !prevState)}
+              color="red"
+            >
               Удалить запрос из базы
             </MyButton>
             <ModalWindow
@@ -269,7 +276,7 @@ const OrderPage = () => {
             </Headline>
           </div>
           <div className="w-1/2 max-lg:w-full">
-            <Comments companyId={currentCompany.id} typeOfComments="order" />
+            <Comments companyId={currentCompany._id} typeOfComments="order" />
           </div>
         </div>
       </div>

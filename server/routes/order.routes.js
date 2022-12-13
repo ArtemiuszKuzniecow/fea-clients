@@ -34,7 +34,7 @@ router
     try {
       const { orderId } = req.params;
       const removedOrder = Order.findById(orderId);
-      await removedOrder.remove();
+      await removedOrder.deleteOne();
       return res.send(null);
     } catch (error) {
       res.status(500).json({

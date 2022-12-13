@@ -20,7 +20,7 @@ import TableLayout from "../common/TableLayout";
 import Loader from "../ui/Loader/Loader";
 
 const CompanyInfoPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { isLoading, isLeadsLoading, isOrdersLoading, companies, orders } =
     useUserData();
   const dispatch = useDispatch();
@@ -29,13 +29,13 @@ const CompanyInfoPage = () => {
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const leadsComments = useSelector(getAllCompanyComments(id));
+  const leadsComments = useSelector(getAllCompanyComments(_id));
   const ordersComments = useSelector(getAllOrdersComments());
 
   useEffect(() => {
     if (companies && orders) {
-      setCurrentCompany(companies.find((item) => item.id === id));
-      setCurrentOrders(orders.filter((o) => o.companyId === id));
+      setCurrentCompany(companies.find((item) => item._id === _id));
+      setCurrentOrders(orders.filter((o) => o.companyId === _id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
 
@@ -45,7 +45,7 @@ const CompanyInfoPage = () => {
       leadsComments.forEach((c) => dispatch(deleteCompanyComment(c)));
     ordersComments &&
       ordersComments.forEach((c) => {
-        if (currentOrders.map((o) => o.orderId).includes(c.orderId)) {
+        if (currentOrders.map((o) => o._id).includes(c.orderId)) {
           dispatch(deleteOrderComment(c));
         }
       });
@@ -108,7 +108,7 @@ const CompanyInfoPage = () => {
                     city={currentCompany.city}
                   />
                   <div className="mt-3 mb-1">
-                    <Link to={`${id}/edit`}>
+                    <Link to={`${_id}/edit`}>
                       <MyButton>Изменить информацию о компании</MyButton>
                     </Link>
                   </div>
@@ -130,7 +130,7 @@ const CompanyInfoPage = () => {
                 </div>
                 <div className="w-2/3">
                   <Comments
-                    companyId={currentCompany.id}
+                    companyId={currentCompany._id}
                     typeOfComments="company"
                   />
                 </div>
@@ -139,70 +139,70 @@ const CompanyInfoPage = () => {
           </div>
         </div>
         <div>
-          <TableLayout>
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="py-3 px-6">
-                  Компания
-                </th>
-                <th scope="col" className="py-3 px-6 max-sm:hidden">
-                  <div className="flex items-center">
-                    Статус запроса <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-md:hidden">
-                  <div className="flex items-center">
-                    Статус груза <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-sm:hidden">
-                  <div className="flex items-center">
-                    Дата запроса <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-md:hidden">
-                  <div className="flex items-center">
-                    Вид перевозки <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-xl:hidden">
-                  <div className="flex items-center">
-                    Инкотермс <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-xl:hidden">
-                  <div className="flex items-center">
-                    Характер груза <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 max-xl:hidden">
-                  <div className="flex items-center">
-                    Вид контракта <SortingArrowsImg />
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6 lg:hidden">
-                  click
-                </th>
-                <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
-                <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentOrders.length >= 1 ? (
-                currentOrders.map((order) => {
+          {currentOrders.length >= 1 ? (
+            <TableLayout>
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="py-3 px-6">
+                    Компания
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-sm:hidden">
+                    <div className="flex items-center">
+                      Статус запроса <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-md:hidden">
+                    <div className="flex items-center">
+                      Статус груза <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-sm:hidden">
+                    <div className="flex items-center">
+                      Дата запроса <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-md:hidden">
+                    <div className="flex items-center">
+                      Вид перевозки <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-xl:hidden">
+                    <div className="flex items-center">
+                      Инкотермс <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-xl:hidden">
+                    <div className="flex items-center">
+                      Характер груза <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-xl:hidden">
+                    <div className="flex items-center">
+                      Вид контракта <SortingArrowsImg />
+                    </div>
+                  </th>
+                  <th scope="col" className="py-3 px-6 lg:hidden">
+                    click
+                  </th>
+                  <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
+                  <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentOrders.map((order) => {
                   return (
                     <OrderCard
                       order={order}
                       companyName={currentCompany.company}
-                      key={order.orderId}
+                      key={order._id}
                     />
                   );
-                })
-              ) : (
-                <h3>Запросов нет</h3>
-              )}
-            </tbody>
-          </TableLayout>
+                })}
+              </tbody>
+            </TableLayout>
+          ) : (
+            <h3>Запросов нет</h3>
+          )}
         </div>
       </>
     )

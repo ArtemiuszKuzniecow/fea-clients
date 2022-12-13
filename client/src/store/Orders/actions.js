@@ -3,16 +3,11 @@ import ordersService from "../../services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",
-  async (id, thunkApi) => {
+  async (thunkApi) => {
     try {
       const { content } = await ordersService.get();
-      const result = {};
-      for (const key in content) {
-        if (content[key].userID === id) {
-          result[key] = content[key];
-        }
-      }
-      return result;
+
+      return content;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -23,7 +18,7 @@ export const postNewOrder = createAsyncThunk(
   "newOrder/created",
   async (payload, thunkAPI) => {
     try {
-      const { content } = await ordersService.putNewOrder(payload);
+      const { content } = await ordersService.postNewOrder(payload);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -41,8 +36,7 @@ export const editOrderParameter = createAsyncThunk(
         parameter,
         payload
       );
-
-      return { content, id: id, parameter: parameter };
+      return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -54,7 +48,7 @@ export const deleteOrder = createAsyncThunk(
   async (orderPayload, thunkAPI) => {
     try {
       const { content } = await ordersService.removeOrder(orderPayload);
-      return orderPayload.orderId;
+      return orderPayload._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

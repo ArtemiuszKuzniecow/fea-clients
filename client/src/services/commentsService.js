@@ -1,6 +1,6 @@
 import httpService from "./httpService";
-export const leadsCommentsEndpoint = "leadsComments/";
-export const ordersCommentsEndpoint = "ordersComments/";
+export const leadsCommentsEndpoint = "leadComments/";
+export const ordersCommentsEndpoint = "orderComments/";
 
 const commentsService = {
   getLeadsComments: async () => {
@@ -11,18 +11,12 @@ const commentsService = {
     const { data } = await httpService.get(ordersCommentsEndpoint);
     return data;
   },
-  putLeadComment: async (payload) => {
-    const { data } = await httpService.put(
-      leadsCommentsEndpoint + payload._id,
-      payload
-    );
+  postLeadComment: async (payload) => {
+    const { data } = await httpService.post(leadsCommentsEndpoint, payload);
     return data;
   },
-  putOrderComment: async (payload) => {
-    const { data } = await httpService.put(
-      ordersCommentsEndpoint + payload._id,
-      payload
-    );
+  postOrderComment: async (payload) => {
+    const { data } = await httpService.post(ordersCommentsEndpoint, payload);
     return data;
   },
   removeComment: async (payload, endpoint) => {

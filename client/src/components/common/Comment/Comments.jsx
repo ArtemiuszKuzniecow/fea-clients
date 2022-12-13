@@ -20,9 +20,9 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
 const Comments = ({ companyId, typeOfComments }) => {
-  const localId = localStorageService.getUserId();
+  const userId = localStorageService.getUserId();
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { _id } = useParams();
   const {
     isLoading,
     isLeadsLoading,
@@ -32,7 +32,7 @@ const Comments = ({ companyId, typeOfComments }) => {
     orders,
   } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(companyId));
-  const ordersComments = useSelector(getAllOrdersCommentsById(id));
+  const ordersComments = useSelector(getAllOrdersCommentsById(_id));
   const [currentComments, setCurrentComments] = useState(null);
   const [allCommentsShown, setAllCommentsShown] = useState(false);
 
@@ -66,18 +66,16 @@ const Comments = ({ companyId, typeOfComments }) => {
     const comment =
       typeOfComments === "company"
         ? {
-            _id: nanoid(),
             date: Date.now(),
             value: data,
             companyId: companyId,
-            userID: localId,
+            userID: userId,
           }
         : {
-            _id: nanoid(),
             date: Date.now(),
             value: data,
-            orderId: id,
-            userID: localId,
+            orderId: _id,
+            userID: userId,
           };
     if (typeOfComments === "company") {
       dispatch(postCompanyComment(comment));

@@ -13,6 +13,9 @@ const schema = new Schema(
     value: {
       type: String,
     },
+    date: {
+      type: Number,
+    },
   },
   {
     timestamps: { createdAt: "date" },

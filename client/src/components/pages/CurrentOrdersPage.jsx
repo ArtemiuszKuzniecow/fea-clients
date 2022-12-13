@@ -10,17 +10,18 @@ import { SortingArrowsImg } from "../../assets/styles/svg";
 import TableLayout from "../common/TableLayout";
 
 const CurrentOrdersPage = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { orders, isLoading, isOrdersLoading, getCompanyById } = useUserData();
-  const company = getCompanyById(id);
+  const company = getCompanyById(_id);
   const [currentOrders, setCurrentOrders] = useState(null);
 
   useEffect(() => {
     !isOrdersLoading &&
-      setCurrentOrders(orders.filter((o) => o.companyId === company.id));
-  }, [isLoading, isOrdersLoading]);
+      company &&
+      setCurrentOrders(orders.filter((o) => o.companyId === company._id));
+  }, [isLoading, isOrdersLoading, company]);
 
-  return currentOrders ? (
+  return currentOrders && company ? (
     <>
       <Headline>Запросы компании {company.company}</Headline>
       <TableLayout>
@@ -75,7 +76,7 @@ const CurrentOrdersPage = () => {
               <OrderCard
                 order={currentOrder}
                 companyName={company.company}
-                key={currentOrder.orderId}
+                key={currentOrder._id}
                 companyId={currentOrder.companyId}
               />
             );
