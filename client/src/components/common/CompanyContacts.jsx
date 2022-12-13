@@ -12,6 +12,9 @@ import { Link } from "react-router-dom";
 const CompanyContacts = ({ phone, email, website, manager, city }) => {
   return (
     <div className="p-3 mb-2 rounded-lg border-solid border-2 border-sky-300">
+      <h5 className="font-medium leading-tight text-xl mt-0 mb-2 text-sky-600">
+        Контактная информация:
+      </h5>
       <div className="flex flex-row items-center gap-2">
         <PersonImg />
         {manager}

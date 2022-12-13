@@ -60,7 +60,7 @@ const OrderLayout = ({ children }) => {
   return (
     <>
       <Headline>Запросы</Headline>
-      <div className="container flex justify-end">
+      <div className="container flex justify-end gap-3">
         <div>
           <DropDownList
             sampleText="Фильтровать (открытые/закрытые запросы)"

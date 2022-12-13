@@ -17,10 +17,11 @@ const CurrentOrdersPage = () => {
 
   useEffect(() => {
     !isOrdersLoading &&
+      company &&
       setCurrentOrders(orders.filter((o) => o.companyId === company._id));
-  }, [isLoading, isOrdersLoading]);
+  }, [isLoading, isOrdersLoading, company]);
 
-  return currentOrders ? (
+  return currentOrders && company ? (
     <>
       <Headline>Запросы компании {company.company}</Headline>
       <TableLayout>
@@ -75,7 +76,7 @@ const CurrentOrdersPage = () => {
               <OrderCard
                 order={currentOrder}
                 companyName={company.company}
-                key={currentOrder.orderId}
+                key={currentOrder._id}
                 companyId={currentOrder.companyId}
               />
             );

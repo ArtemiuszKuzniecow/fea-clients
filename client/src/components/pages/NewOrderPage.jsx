@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import cargo from "../../cargo.json";
@@ -44,8 +45,16 @@ const NewOrderPage = () => {
     typeOfCargo: "",
     volume: "",
     weight: "",
-    userID: currentUserData.userData._id,
+    userID: "",
   });
+
+  useEffect(() => {
+    !isLoading &&
+      setOrder((prevState) => ({
+        ...prevState,
+        ...{ userID: currentUserData.userData._id },
+      }));
+  }, [isLoading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,7 +107,7 @@ const NewOrderPage = () => {
       <Headline>Добавить новый запрос:</Headline>
       <div className="container">
         <div className="flex flex-row justify-around flex-wrap gap-3 py-3">
-          <div className="w-10/12">
+          <div className="w-4/12 max-md:w-10/12">
             <div>
               <DropDownList
                 array={currentCompanies}
@@ -129,6 +138,8 @@ const NewOrderPage = () => {
                 <span>Это поле должно быть заполнено</span>
               )}
             </div>
+          </div>
+          <div className="w-4/12 max-md:w-10/12">
             <div>
               <DropDownList
                 array={cargo.contractType}
@@ -300,7 +311,9 @@ const NewOrderPage = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <MyButton onClick={handleSubmit}>Отправить запрос</MyButton>
+          <MyButton onClick={handleSubmit} isDisabled={order.userID !== ""}>
+            Отправить запрос
+          </MyButton>
         </div>
       </div>
     </>

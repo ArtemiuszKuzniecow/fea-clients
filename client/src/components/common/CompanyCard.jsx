@@ -95,7 +95,7 @@ const CompanyCard = ({ companyId }) => {
           </div>
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
             {company.isRequested ? (
-              <Link to={`${company._id}/orders`} className="w-11/12">
+              <Link to={`${company._id}/orders`} className="w-full">
                 <MyButton
                   isDisabled={!company.isRequested}
                   color="green"
@@ -107,7 +107,7 @@ const CompanyCard = ({ companyId }) => {
             ) : (
               <div>Запросов нет</div>
             )}
-            <Link to={"/" + company._id} className="w-11/12">
+            <Link to={"/" + company._id} className="w-full">
               <MyButton color="green" width="full">
                 Информация о компании
               </MyButton>
@@ -116,7 +116,7 @@ const CompanyCard = ({ companyId }) => {
             <MyButton
               onClick={() => setIsOpen((prevState) => !prevState)}
               color="red"
-              width="11/12"
+              width="full"
             >
               Удалить компанию из базы
             </MyButton>

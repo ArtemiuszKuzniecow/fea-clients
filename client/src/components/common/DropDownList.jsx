@@ -30,7 +30,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
   };
 
   return !isLoading ? (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center mb-2">
       <MyButton
         type="text"
         isDisabled={false}
