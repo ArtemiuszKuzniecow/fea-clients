@@ -94,19 +94,11 @@ const CompanyCard = ({ companyId }) => {
             />
           </div>
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
-            {company.isRequested ? (
-              <Link to={`${company._id}/orders`} className="w-full">
-                <MyButton
-                  isDisabled={!company.isRequested}
-                  color="green"
-                  width="full"
-                >
-                  Посмотреть все запросы
-                </MyButton>
-              </Link>
-            ) : (
-              <div>Запросов нет</div>
-            )}
+            <Link to={`${company._id}/orders`} className="w-full">
+              <MyButton color="green" width="full">
+                Посмотреть все запросы
+              </MyButton>
+            </Link>
             <Link to={"/" + company._id} className="w-full">
               <MyButton color="green" width="full">
                 Информация о компании

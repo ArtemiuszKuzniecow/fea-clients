@@ -150,7 +150,7 @@ const OrdersListPage = () => {
           <div className="flex flex-col">
             <Headline>Добавтье компанию или запрос</Headline>
             {companies && companies.length > 0 ? (
-              <Link to="/new-order">
+              <Link to="/new-order" className="text-center m-2">
                 <MyButton>Добавить запрос</MyButton>
               </Link>
             ) : (

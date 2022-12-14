@@ -16,7 +16,6 @@ const PageLayout = ({ children }) => {
     setIsCollapsed((prevState) => !prevState);
   };
 
-  //
   return (
     <div className="pb-7">
       <nav className="bg-white border-sky-200 px-2 sm:px-4 py-2.5 rounded dark:bg-sky-900 flex md:justify-around max-sm:justify-between sm:justify-between border-black drop-shadow-md items-center">
@@ -31,8 +30,12 @@ const PageLayout = ({ children }) => {
         <>
           {accessToken ? (
             currentUser ? (
-              <div className="flex flex-col">
-                <Hamburger func={toggleCollapse} />
+              <div
+                className={`flex flex-col ${isCollapsed ? "" : "items-end"}`}
+              >
+                <div className="w-1/4">
+                  <Hamburger func={toggleCollapse} />
+                </div>
                 <div
                   className={`w-full md:block md:w-auto ${
                     isCollapsed && "hidden"

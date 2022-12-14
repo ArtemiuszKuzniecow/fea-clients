@@ -12,7 +12,7 @@ const schema = new Schema(
     contractType: {
       type: String,
     },
-    custom: {
+    customs: {
       type: String,
     },
     deliveryAddress: {

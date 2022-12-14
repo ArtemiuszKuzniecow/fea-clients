@@ -27,9 +27,6 @@ const schema = new Schema({
   directions: {
     type: String,
   },
-  isRequested: {
-    type: Boolean,
-  },
   manager: {
     type: String,
   },

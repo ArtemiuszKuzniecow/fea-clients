@@ -32,11 +32,19 @@ const OrderCard = ({ order, companyName, companyId }) => {
       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <th
           scope="row"
-          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-700 "
+          className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-700 ${
+            order.isClosed ? "bg-red-200" : ""
+          }`}
         >
           <Link to={`/${companyId}`}>{companyName}</Link>
         </th>
-        <td className="py-3 px-6 max-sm:hidden">{order.status}</td>
+        <td
+          className={`py-3 px-6 max-sm:hidden ${
+            order.isClosed ? "bg-red-200" : ""
+          }`}
+        >
+          {order.isClosed ? "Запрос закрыт" : order.status}
+        </td>
         <td
           className={`py-3 px-6 max-md:hidden ${
             order.isActual ? "bg-green-300" : "bg-red-300"

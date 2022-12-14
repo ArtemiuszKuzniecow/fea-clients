@@ -49,9 +49,9 @@ const MainPageContent = () => {
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
     <>
       <Headline>Добрый день, {currentUser.name}!</Headline>
-      <div className="flex justify-evenly">
+      <div className="flex justify-evenly flex-wrap">
         <div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 h-44">
             <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
               У Вас всего {companies.length}{" "}
               {declOfNum(companies.length, companiesEndingsArray)}:
@@ -64,12 +64,12 @@ const MainPageContent = () => {
               </MyButton>
             </Link>
           </div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 h-44">
             <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
               У Вас всего {orders.length}{" "}
               {declOfNum(orders.length, ordersEndingsArray)}:
             </h4>
-            <Link to={orders.length > 0 ? "orders/" : "new-order"}>
+            <Link to={orders.length > 0 ? "orders-list/" : "new-order"}>
               <MyButton>
                 {companies.length > 0 ? "Посмотреть" : "Добавьте новый запрос"}
               </MyButton>
@@ -77,7 +77,11 @@ const MainPageContent = () => {
           </div>
         </div>
         <div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+          <div
+            className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 ${
+              !isCompaniesCollapsed ? "min-h-44" : "h-44"
+            }`}
+          >
             <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
               {companiesToConnect.length > 0
                 ? `У Вас всего ${companiesToConnect.length}
@@ -94,11 +98,17 @@ const MainPageContent = () => {
                 ) : (
                   <div>
                     <MyButton>Свернуть</MyButton>{" "}
-                    {companiesToConnect.map((c) => (
-                      <Link to={c._id} key={c._id}>
-                        {c.company}
-                      </Link>
-                    ))}
+                    <div className="flex flex-col">
+                      {companiesToConnect.map((c) => (
+                        <Link
+                          to={c._id}
+                          key={c._id}
+                          className="hover:bg-sky-50 color-sky-900 p-1 rounded-md"
+                        >
+                          {c.company}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )
               ) : (
@@ -108,7 +118,11 @@ const MainPageContent = () => {
               )}
             </div>
           </div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center">
+          <div
+            className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 ${
+              !isOrdersCollapsed ? "min-h-44" : "h-44"
+            }`}
+          >
             <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
               {openedOrders.length > 0
                 ? `У Вас всего ${orders.length} открытых 
@@ -122,13 +136,19 @@ const MainPageContent = () => {
                 ) : (
                   <div>
                     <MyButton>Свернуть</MyButton>
-                    {openedOrders.map((o) => (
-                      <Link to={`orders-list/${o.orderId}`} key={o.orderId}>
-                        {`Компания: ${getCompanyById(o.companyId).company}`}
-                        <br />
-                        {`Дата запроса: ${getDateFormat(o.date, ".")}`}
-                      </Link>
-                    ))}
+                    <div className="flex flex-col">
+                      {openedOrders.map((o) => (
+                        <Link
+                          to={`orders-list/${o._id}`}
+                          key={o._id}
+                          className="hover:bg-sky-50 color-sky-900 p-1 rounded-md"
+                        >
+                          {`Компания: ${getCompanyById(o.companyId).company}`}
+                          <br />
+                          {`Дата запроса: ${getDateFormat(o.date, ".")}`}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )
               ) : (

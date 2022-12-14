@@ -19,6 +19,7 @@ export const postNewOrder = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { content } = await ordersService.postNewOrder(payload);
+      console.log(content);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

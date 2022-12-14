@@ -28,7 +28,6 @@ const OrderPage = () => {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [price, setPrice] = useState({ price: "" });
-
   useEffect(() => {
     if (orders && companies) {
       setCurrentOrder(orders.find((order) => order._id === _id));
@@ -55,6 +54,12 @@ const OrderPage = () => {
       editOrderParameter({ payload: price, id: _id, parameter: "price" })
     );
     toggleNewPrice();
+  };
+
+  const handleCloseOrder = () => {
+    dispatch(
+      editOrderParameter({ payload: true, id: _id, parameter: "isClosed" })
+    );
   };
 
   const handleDeleteOrder = () => {
@@ -236,9 +241,17 @@ const OrderPage = () => {
                       {getDateFormat(currentOrder.date, ".")}
                     </td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr
+                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${
+                      currentOrder.isClosed ? "bg-red-200" : ""
+                    }`}
+                  >
                     <th className="py-3 px-6">Статус запроса</th>
-                    <td className="py-3 px-6">{currentOrder.status}</td>
+                    <td className="py-3 px-6">
+                      {currentOrder.isClosed
+                        ? "Запрос закрыт"
+                        : currentOrder.status}
+                    </td>
                   </tr>
                 </tbody>
               </TableLayout>
@@ -265,15 +278,18 @@ const OrderPage = () => {
             </ModalWindow>
             <Headline>
               <div
-                className={
-                  "rounded-xl" + !currentOrder.isClosed
-                    ? "bg-green-100"
-                    : "bg-red-100"
-                }
+                className={`rounded-xl ${
+                  !currentOrder.isClosed ? "bg-green-100" : "bg-red-300"
+                }`}
               >
                 {currentOrder.isClosed ? "Запрос закрыт" : "Запрос открыт"}
               </div>
             </Headline>
+            {!currentOrder.isClosed && (
+              <MyButton color="red" onClick={handleCloseOrder}>
+                Закрыть запрос
+              </MyButton>
+            )}
           </div>
           <div className="w-1/2 max-lg:w-full">
             <Comments companyId={currentCompany._id} typeOfComments="order" />

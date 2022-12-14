@@ -47,7 +47,7 @@ class TokenService {
 
   async findToken(refreshToken) {
     try {
-      return await Token.find({ refreshToken });
+      return await Token.findOne({ refreshToken });
     } catch (error) {
       return null;
     }

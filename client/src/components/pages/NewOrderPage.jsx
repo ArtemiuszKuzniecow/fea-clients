@@ -56,6 +56,8 @@ const NewOrderPage = () => {
       }));
   }, [isLoading]);
 
+  console.log(order);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setHasBeenSubmited(true);
@@ -70,13 +72,6 @@ const NewOrderPage = () => {
       order.weight !== ""
     ) {
       dispatch(postNewOrder(order));
-      dispatch(
-        editLeadParameter({
-          payload: true,
-          _id: order.companyId,
-          parameter: "isRequested",
-        })
-      );
       history.push("orders-list");
     }
   };
