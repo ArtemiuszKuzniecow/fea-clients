@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { SortingArrowsImg } from "../../assets/styles/svg";
+// import { SortingArrowsImg } from "../../assets/styles/svg";
 import useUserData from "../../hooks/useUserData";
 import { deleteLead } from "../../store/Leads/actions";
 import { deleteCompanyComment } from "../../store/LeadsComments/actions";
@@ -147,39 +147,25 @@ const CompanyInfoPage = () => {
                     Компания
                   </th>
                   <th scope="col" className="py-3 px-6 max-sm:hidden">
-                    <div className="flex items-center">
-                      Статус запроса <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Статус запроса</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-md:hidden">
-                    <div className="flex items-center">
-                      Статус груза <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Статус груза</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-sm:hidden">
-                    <div className="flex items-center">
-                      Дата запроса <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Дата запроса</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-md:hidden">
-                    <div className="flex items-center">
-                      Вид перевозки <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Вид перевозки</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-xl:hidden">
-                    <div className="flex items-center">
-                      Инкотермс <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Инкотермс</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-xl:hidden">
-                    <div className="flex items-center">
-                      Характер груза <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Характер груза</div>
                   </th>
                   <th scope="col" className="py-3 px-6 max-xl:hidden">
-                    <div className="flex items-center">
-                      Вид контракта <SortingArrowsImg />
-                    </div>
+                    <div className="flex items-center">Вид контракта</div>
                   </th>
                   <th scope="col" className="py-3 px-6 lg:hidden">
                     click

@@ -56,8 +56,6 @@ const NewOrderPage = () => {
       }));
   }, [isLoading]);
 
-  console.log(order);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setHasBeenSubmited(true);

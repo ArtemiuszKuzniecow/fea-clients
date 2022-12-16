@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import getDateFormat from "../../utils/getDateFormat";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
@@ -35,6 +35,7 @@ const CompanyCard = ({ companyId }) => {
   const leadsComments = useSelector(getAllCompanyComments(company?._id));
   const ordersComments = useSelector(getAllOrdersComments());
   const history = useHistory();
+  history.location.pathname = "/";
 
   const handleChangeDate = () => {
     setChangeDate((prevState) => !prevState);
@@ -94,7 +95,7 @@ const CompanyCard = ({ companyId }) => {
             />
           </div>
           <div className="xl:w-1/4 lg:w-2/4 md:w-full sm:w-full max-sm:w-full p-5 flex flex-col">
-            <Link to={`${company._id}/orders`} className="w-full">
+            <Link to={`/${company._id}/orders`} className="w-full">
               <MyButton color="green" width="full">
                 Посмотреть все запросы
               </MyButton>

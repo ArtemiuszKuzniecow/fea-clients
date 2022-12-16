@@ -7,9 +7,12 @@ import {
   PhoneImg,
   WebsiteImg,
 } from "../../assets/styles/svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const CompanyContacts = ({ phone, email, website, manager, city }) => {
+  const history = useHistory();
+  history.location.pathname = "";
+
   return (
     <div className="p-3 mb-2 rounded-lg border-solid border-2 border-sky-300">
       <h5 className="font-medium leading-tight text-xl mt-0 mb-2 text-sky-600">

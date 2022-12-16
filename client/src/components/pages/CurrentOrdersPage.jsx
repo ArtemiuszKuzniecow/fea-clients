@@ -6,22 +6,19 @@ import { useEffect } from "react";
 import useUserData from "../../hooks/useUserData";
 import { useParams } from "react-router-dom";
 import Headline from "../common/Headline";
-import { SortingArrowsImg } from "../../assets/styles/svg";
 import TableLayout from "../common/TableLayout";
 
 const CurrentOrdersPage = () => {
+  const [currentOrders, setCurrentOrders] = useState(null);
   const { _id } = useParams();
   const { orders, isLoading, isOrdersLoading, getCompanyById } = useUserData();
   const company = getCompanyById(_id);
-  const [currentOrders, setCurrentOrders] = useState(null);
 
   useEffect(() => {
     !isOrdersLoading &&
       company &&
       setCurrentOrders(orders.filter((o) => o.companyId === company._id));
-  }, [isLoading, isOrdersLoading, company]);
-
-  console.log(currentOrders);
+  }, [isLoading, isOrdersLoading]);
 
   return currentOrders && company ? (
     currentOrders.length > 0 ? (
@@ -34,39 +31,25 @@ const CurrentOrdersPage = () => {
                 Компания
               </th>
               <th scope="col" className="py-3 px-6 max-sm:hidden">
-                <div className="flex items-center">
-                  Статус запроса <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Статус запроса</div>
               </th>
               <th scope="col" className="py-3 px-6 max-md:hidden">
-                <div className="flex items-center">
-                  Статус груза <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Статус груза</div>
               </th>
               <th scope="col" className="py-3 px-6 max-sm:hidden">
-                <div className="flex items-center">
-                  Дата запроса <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Дата запроса</div>
               </th>
               <th scope="col" className="py-3 px-6 max-md:hidden">
-                <div className="flex items-center">
-                  Вид перевозки <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Вид перевозки</div>
               </th>
               <th scope="col" className="py-3 px-6 max-xl:hidden">
-                <div className="flex items-center">
-                  Инкотермс <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Инкотермс</div>
               </th>
               <th scope="col" className="py-3 px-6 max-xl:hidden">
-                <div className="flex items-center">
-                  Характер груза <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Характер груза</div>
               </th>
               <th scope="col" className="py-3 px-6 max-xl:hidden">
-                <div className="flex items-center">
-                  Вид контракта <SortingArrowsImg />
-                </div>
+                <div className="flex items-center">Вид контракта</div>
               </th>
               <th scope="col" className="py-3 px-6 lg:hidden"></th>
               <th scope="col" className="py-3 px-6 max-lg:hidden"></th>

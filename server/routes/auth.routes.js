@@ -131,6 +131,7 @@ router.post("/token", async (req, res) => {
     const tokens = await tokenService.generate({
       _id: data._id,
     });
+    console.log(tokens);
     await tokenService.save(data._id, tokens.refreshToken);
 
     res.status(200).send({ ...tokens, userId: data._id });

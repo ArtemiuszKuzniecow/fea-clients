@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage";
