@@ -7,14 +7,16 @@ const http = axios.create({ baseURL: config.apiEndpoint });
 
 http.interceptors.request.use(
   async function (config) {
-    const expiresDate = localStorageService.getTokenExpiresDate();
-    const refreshToken = localStorageService.getRefreshToken();
-    const isExpired = refreshToken && expiresDate < Date.now();
+    const isExpired =
+      localStorageService.getRefreshToken() &&
+      Number(localStorageService.getTokenExpiresDate()) < Date.now();
 
     if (isExpired) {
       const data = await authService.refresh();
       localStorageService.setTokens(data);
+      console.log(data);
     }
+
     const accessToken = localStorageService.getAccessToken();
     if (accessToken) {
       config.headers = {

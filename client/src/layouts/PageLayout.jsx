@@ -56,7 +56,7 @@ const PageLayout = ({ children }) => {
                       <Link to="/new-company">Добавить компанию</Link>
                     </li>
                     <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
-                      <Link to="new-order">Добавить запрос</Link>
+                      <Link to="/new-order">Добавить запрос</Link>
                     </li>
                     <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
                       <Link to="/logout">Выход</Link>

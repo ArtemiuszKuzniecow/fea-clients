@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
-import { editLead, postNewLead } from "../../store/Leads/actions";
-import MyButton from "../common/MyButton";
+import { editLead } from "../../store/Leads/actions";
 import DropDownList from "../common/DropDownList";
-import TextField from "../common/TextField";
 import Headline from "../common/Headline";
+import MyButton from "../common/MyButton";
+import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
 
 const EditCompanyPage = () => {

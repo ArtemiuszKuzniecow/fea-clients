@@ -21,7 +21,7 @@ const AppLoader = ({ children }) => {
       dispatch(loadLeadsCommentsData(userId));
       dispatch(loadOrdersCommentsData(userId));
     }
-  }, [isLoggedIn, userId]);
+  }, [isLoggedIn]);
 
   return children;
 };

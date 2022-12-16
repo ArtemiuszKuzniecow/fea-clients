@@ -108,7 +108,7 @@ const CompanyInfoPage = () => {
                     city={currentCompany.city}
                   />
                   <div className="mt-3 mb-1">
-                    <Link to={`${_id}/edit`}>
+                    <Link to={`/${_id}/edit`}>
                       <MyButton>Изменить информацию о компании</MyButton>
                     </Link>
                   </div>
