@@ -13,6 +13,7 @@ const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getLoggedInStatusSelector());
   const userId = localStorageService.getUserId();
+
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(loadUserData(userId));

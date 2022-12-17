@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage";
@@ -16,65 +14,46 @@ import Login from "./components/ui/Login/Login";
 import LogOut from "./components/ui/Login/LogOut";
 import Registration from "./components/ui/Login/Registration";
 import PageLayout from "./layouts/PageLayout";
-import localStorageService from "./services/localStorageService";
-import { loadUserData } from "./store/Users/actions";
-import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
 function App() {
-  const userId = localStorageService.getUserId();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(getLoggedInStatusSelector());
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(loadUserData(userId));
-    }
-  }, [userId]);
-
   return (
-    <div>
-      <AppLoader>
-        <BrowserRouter>
-          <PageLayout>
-            <Switch>
-              <Route path="/" exact component={MainPage} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/logout" component={LogOut} />
-              <Route path="/registration" component={Registration} />
+    <AppLoader>
+      <BrowserRouter>
+        <PageLayout>
+          <Switch>
+            <Route path="/" exact component={MainPage} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/logout" component={LogOut} />
+            <Route path="/registration" component={Registration} />
 
-              <ProtectedRoute
-                path="/companies"
-                exact
-                component={CompaniesPage}
-              />
-              <ProtectedRoute
-                path="/new-company"
-                exact
-                component={NewCompanyPage}
-              />
-              <ProtectedRoute path="/new-order" component={NewOrderPage} />
-              <ProtectedRoute
-                path="/orders-list"
-                exact
-                component={OrdersListPage}
-              />
-              <ProtectedRoute path="/orders-list/:_id" component={OrderPage} />
-              <ProtectedRoute
-                path="/:_id/orders"
-                exact
-                component={CurrentOrdersPage}
-              />
-              <ProtectedRoute path="/:_id" exact component={CompanyInfoPage} />
-              <ProtectedRoute
-                path="/:_id/edit"
-                exact
-                component={EditCompanyPage}
-              />
-            </Switch>
-          </PageLayout>
-        </BrowserRouter>
-      </AppLoader>
-    </div>
+            <ProtectedRoute path="/companies" exact component={CompaniesPage} />
+            <ProtectedRoute
+              path="/new-company"
+              exact
+              component={NewCompanyPage}
+            />
+            <ProtectedRoute path="/new-order" component={NewOrderPage} />
+            <ProtectedRoute
+              path="/orders-list"
+              exact
+              component={OrdersListPage}
+            />
+            <ProtectedRoute path="/orders-list/:_id" component={OrderPage} />
+            <ProtectedRoute
+              path="/:_id/orders"
+              exact
+              component={CurrentOrdersPage}
+            />
+            <ProtectedRoute path="/:_id" exact component={CompanyInfoPage} />
+            <ProtectedRoute
+              path="/:_id/edit"
+              exact
+              component={EditCompanyPage}
+            />
+          </Switch>
+        </PageLayout>
+      </BrowserRouter>
+    </AppLoader>
   );
 }
 
