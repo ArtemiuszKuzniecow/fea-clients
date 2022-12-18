@@ -5,10 +5,10 @@ import commentsService, {
 
 export const loadLeadsCommentsData = createAsyncThunk(
   "leadsComment/loadleadsComment",
-  async (thunkApi) => {
+  async (id, thunkApi) => {
     try {
       const { content } = await commentsService.getLeadsComments();
-      return content;
+      return content.filter((item) => item.userID === id);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }

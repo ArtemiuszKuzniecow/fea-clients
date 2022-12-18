@@ -14,6 +14,8 @@ import ModalWindow from "../common/ModalWindow/ModalWindow";
 import Loader from "../ui/Loader/Loader";
 import Headline from "../common/Headline";
 import TableLayout from "../common/TableLayout";
+import DropDownList from "../common/DropDownList";
+import cargo from "../../cargo.json";
 
 const OrderPage = () => {
   const { _id } = useParams();
@@ -47,6 +49,16 @@ const OrderPage = () => {
 
   const handleChangePrice = (target) => {
     setPrice({ price: target.value });
+  };
+  const handleChangeOrderStatus = (data) => {
+    dispatch(
+      editOrderParameter({
+        payload: Object.values(data)[0],
+        id: _id,
+        parameter: "status",
+      })
+    );
+    console.log(Object.values(data)[0]);
   };
 
   const handleRefreshPrice = () => {
@@ -214,10 +226,10 @@ const OrderPage = () => {
               <TableLayout>
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" className="py-3 px-6">
-                      Данные о компании и запросе
+                    <th scope="col" className="py-3 px-6 w-1/3l">
+                      Данные о компании
                     </th>
-                    <th scope="col" className="py-3 px-6"></th>
+                    <th scope="col" className="py-3 px-6 w-2/3"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -247,10 +259,16 @@ const OrderPage = () => {
                     }`}
                   >
                     <th className="py-3 px-6">Статус запроса</th>
-                    <td className="py-3 px-6">
-                      {currentOrder.isClosed
-                        ? "Запрос закрыт"
-                        : currentOrder.status}
+                    <td>
+                      <DropDownList
+                        onChange={handleChangeOrderStatus}
+                        array={cargo.orderStatus}
+                        sampleText={
+                          currentOrder.isClosed
+                            ? "Запрос закрыт"
+                            : currentOrder.status
+                        }
+                      />
                     </td>
                   </tr>
                 </tbody>

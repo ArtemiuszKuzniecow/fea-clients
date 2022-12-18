@@ -3,11 +3,11 @@ import ordersService from "../../services/ordersService";
 
 export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",
-  async (thunkApi) => {
+  async (id, thunkApi) => {
     try {
       const { content } = await ordersService.get();
 
-      return content;
+      return content.filter((item) => item.userID === id);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -37,6 +37,7 @@ export const editOrderParameter = createAsyncThunk(
         parameter,
         payload
       );
+      console.log(content);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

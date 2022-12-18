@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import AppLoader from "./components/HOC/AppLoader";
 import CompaniesPage from "./components/pages/CompaniesPage";
@@ -23,22 +23,25 @@ function App() {
           <Switch>
             <Route path="/" exact component={MainPage} />
             <Route path="/login" exact component={Login} />
-            <Route path="/logout" component={LogOut} />
-            <Route path="/registration" component={Registration} />
-
+            <Route path="/logout" exact component={LogOut} />
+            <Route path="/registration" exact component={Registration} />
             <ProtectedRoute path="/companies" exact component={CompaniesPage} />
             <ProtectedRoute
               path="/new-company"
               exact
               component={NewCompanyPage}
             />
-            <ProtectedRoute path="/new-order" component={NewOrderPage} />
+            <ProtectedRoute path="/new-order" exact component={NewOrderPage} />
             <ProtectedRoute
               path="/orders-list"
               exact
               component={OrdersListPage}
             />
-            <ProtectedRoute path="/orders-list/:_id" component={OrderPage} />
+            <ProtectedRoute
+              path="/orders-list/:_id"
+              exact
+              component={OrderPage}
+            />
             <ProtectedRoute
               path="/:_id/orders"
               exact
@@ -50,6 +53,7 @@ function App() {
               exact
               component={EditCompanyPage}
             />
+            <Redirect to="/" />
           </Switch>
         </PageLayout>
       </BrowserRouter>

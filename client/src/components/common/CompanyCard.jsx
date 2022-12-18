@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import getDateFormat from "../../utils/getDateFormat";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";

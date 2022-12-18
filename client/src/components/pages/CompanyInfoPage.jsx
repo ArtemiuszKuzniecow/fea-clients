@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-// import { SortingArrowsImg } from "../../assets/styles/svg";
 import useUserData from "../../hooks/useUserData";
 import { deleteLead } from "../../store/Leads/actions";
 import { deleteCompanyComment } from "../../store/LeadsComments/actions";
@@ -9,15 +8,16 @@ import { getAllCompanyComments } from "../../store/LeadsComments/selecetors";
 import { deleteOrder } from "../../store/Orders/actions";
 import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { getAllOrdersComments } from "../../store/OrdersComments/selectors";
-import MyButton from "../common/MyButton";
 import Comments from "../common/Comment/Comments";
 import CompanyContacts from "../common/CompanyContacts";
 import Headline from "../common/Headline";
 import ModalContent from "../common/ModalContent";
 import ModalWindow from "../common/ModalWindow/ModalWindow";
+import MyButton from "../common/MyButton";
 import OrderCard from "../common/OrderCard";
 import TableLayout from "../common/TableLayout";
 import Loader from "../ui/Loader/Loader";
+import PageNotFound from "./PageNotFound";
 
 const CompanyInfoPage = () => {
   const { _id } = useParams();
@@ -38,6 +38,11 @@ const CompanyInfoPage = () => {
       setCurrentOrders(orders.filter((o) => o.companyId === _id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
+
+  if (!isLoading && !isLeadsLoading) {
+    if (companies.find((item) => item._id === _id) === undefined)
+      return <PageNotFound />;
+  }
 
   const handleDeleteCompany = (currentCompany) => {
     dispatch(deleteLead(currentCompany));
@@ -98,8 +103,8 @@ const CompanyInfoPage = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex flex-row justify-between w-full">
-                <div>
+              <div className="flex flex-row flex-wrap justify-between w-full">
+                <div className="max-sm:w-full">
                   <CompanyContacts
                     phone={currentCompany.contacts.phone}
                     email={currentCompany.contacts.email}
@@ -128,7 +133,7 @@ const CompanyInfoPage = () => {
                     />
                   </ModalWindow>
                 </div>
-                <div className="w-2/3">
+                <div className="lg:w-2/3 md:w-1/2 max-sm:w-full">
                   <Comments
                     companyId={currentCompany._id}
                     typeOfComments="company"
@@ -167,9 +172,7 @@ const CompanyInfoPage = () => {
                   <th scope="col" className="py-3 px-6 max-xl:hidden">
                     <div className="flex items-center">Вид контракта</div>
                   </th>
-                  <th scope="col" className="py-3 px-6 lg:hidden">
-                    click
-                  </th>
+                  <th scope="col" className="py-3 px-6 lg:hidden"></th>
                   <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
                   <th scope="col" className="py-3 px-6 max-lg:hidden"></th>
                 </tr>
@@ -187,7 +190,11 @@ const CompanyInfoPage = () => {
               </tbody>
             </TableLayout>
           ) : (
-            <h3>Запросов нет</h3>
+            <div className="flex justify-center">
+              <h5 className="font-medium leading-tight text-xl m-5 text-sky-600">
+                Запросов нет
+              </h5>
+            </div>
           )}
         </div>
       </>

@@ -3,10 +3,10 @@ import leadService from "../../services/leadService";
 
 export const loadLeadsData = createAsyncThunk(
   "lead/loadLead",
-  async (thunkApi) => {
+  async (id, thunkApi) => {
     try {
       const { content } = await leadService.get();
-      return content;
+      return content.filter((item) => item.userID === id);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
