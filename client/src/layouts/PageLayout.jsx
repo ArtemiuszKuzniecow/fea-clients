@@ -18,7 +18,7 @@ const PageLayout = ({ children }) => {
 
   return (
     <div className="pb-7">
-      <nav className="bg-white border-sky-200 px-2 sm:px-4 py-2.5 rounded dark:bg-sky-900 flex md:justify-around max-sm:justify-between sm:justify-between border-black drop-shadow-md items-center">
+      <nav className="bg-white border-sky-200 px-2 sm:px-4 py-2.5 rounded flex md:justify-around max-sm:justify-between sm:justify-between border-black drop-shadow-md items-center">
         <Link to="/">
           <img src={logo} alt="logo" width={60} />
         </Link>
@@ -44,21 +44,21 @@ const PageLayout = ({ children }) => {
                 >
                   <ul
                     onClick={() => setIsCollapsed(true)}
-                    className="flex flex-col p-4 mt-4 border border-sky-100 rounded-lg bg-sky-60 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-sky dark:bg-sky-800 md:dark:bg-sky-900 dark:border-sky-700 items-center"
+                    className="flex flex-col p-4 mt-4 border border-sky-100 rounded-lg bg-sky-60 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-sky items-center"
                   >
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparents">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       <Link to="/companies">Компании</Link>
                     </li>
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       <Link to="/orders-list">Запросы</Link>
                     </li>
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       <Link to="/new-company">Добавить компанию</Link>
                     </li>
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       <Link to="/new-order">Добавить запрос</Link>
                     </li>
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       <Link to="/logout">Выход</Link>
                     </li>
                   </ul>
@@ -68,7 +68,7 @@ const PageLayout = ({ children }) => {
               <Loader />
             )
           ) : (
-            <div className="flex flex-col">
+            <div className="flex flex-col w-1/4">
               <Hamburger func={toggleCollapse} />
               <div
                 className={`w-full md:block md:w-auto ${
@@ -76,14 +76,14 @@ const PageLayout = ({ children }) => {
                 }`}
                 id="navbar-default"
               >
-                <ul className="flex flex-col p-4 mt-4 border border-sky-100 rounded-lg bg-sky-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-sky dark:bg-sky-800 md:dark:bg-sky-900 dark:border-sky-700">
+                <ul className="flex flex-col p-4 mt-4 border border-sky-100 rounded-lg bg-sky-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-sky">
                   <Link to="/login">
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       Вход
                     </li>
                   </Link>
                   <Link to="/registration">
-                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-sky-400 md:dark:hover:text-sky dark:hover:bg-sky-700 dark:hover:text-sky md:dark:hover:bg-transparent">
+                    <li className="block py-2 pl-3 pr-4 text-sky-700 rounded hover:bg-sky-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                       Регистрация
                     </li>
                   </Link>

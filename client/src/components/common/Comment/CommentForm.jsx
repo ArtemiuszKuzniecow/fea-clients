@@ -9,8 +9,8 @@ const CommentForm = ({ onClick }) => {
   };
 
   return (
-    <div className="w-full mb-4 border border-sky-200 rounded-lg bg-sky-50 dark:bg-sky-700 dark:border-sky-600">
-      <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-sky-800">
+    <div className="w-full mb-4 border border-sky-200 rounded-lg bg-sky-50">
+      <div className="px-4 py-2 bg-white rounded-t-lg">
         <label htmlFor="comment" className="sr-only">
           Комментарий
         </label>
@@ -19,12 +19,12 @@ const CommentForm = ({ onClick }) => {
           onChange={handleChange}
           id="comment"
           rows="4"
-          className="w-full px-0 text-sm  bg-white border-0 dark:bg-sky-800 focus:ring-0 dark:text-white dark:placeholder-sky-400"
+          className="w-full px-0 text-sm  bg-white border-0"
           placeholder="Напишите комментарий..."
           required
         ></textarea>
       </div>
-      <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600s">
+      <div className="flex items-center justify-between px-3 py-2 border-t">
         <div
           onClick={() => {
             commentData.length > 0 && onClick(commentData);

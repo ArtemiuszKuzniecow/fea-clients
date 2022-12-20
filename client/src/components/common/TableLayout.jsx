@@ -5,7 +5,7 @@ const TableLayout = ({ children }) => {
   return (
     <div className="container">
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-5">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-gray-500">
           {children}
         </table>
       </div>

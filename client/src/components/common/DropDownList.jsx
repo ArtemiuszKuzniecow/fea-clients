@@ -43,10 +43,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
           {textSample} {openList ? <ArrowUpImg /> : <ArrowDownImg />}
         </div>
       </MyButton>
-      <ul
-        hidden={!openList}
-        className="text-sm text-sky-700 dark:text-sky-200 "
-      >
+      <ul hidden={!openList} className="text-sm text-sky-700">
         <div className="border-solid border-2 border-sky-200 rounded-lg">
           {array.map((item) => {
             return (
@@ -55,7 +52,7 @@ const DropDownList = ({ array, sampleText, onChange, name }) => {
                 onClick={() => {
                   handleSampleText(item);
                 }}
-                className="block py-2 px-4 hover:bg-sky-200 dark:hover:bg-sky-600 dark:hover:text-white cursor-pointer"
+                className="block py-2 px-4 hover:bg-sky-200 cursor-pointer"
               >
                 {item}
               </li>

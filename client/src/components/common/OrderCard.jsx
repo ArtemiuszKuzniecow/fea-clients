@@ -29,10 +29,10 @@ const OrderCard = ({ order, companyName, companyId }) => {
 
   return (
     <>
-      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <tr className="bg-white border-b">
         <th
           scope="row"
-          className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-700 ${
+          className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap hover:text-blue-700 ${
             order.isClosed ? "bg-red-200" : ""
           }`}
         >

@@ -4,7 +4,7 @@ WORKDIR /app/client/
 
 COPY client/package.json /app/client/
 
-RUN npm install
+RUN npm install 
 
 COPY client /app/client/
 
@@ -24,4 +24,4 @@ COPY --from=client /app/client/build /app/client/
 
 EXPOSE 8080
 
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]

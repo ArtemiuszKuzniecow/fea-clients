@@ -1,10 +1,9 @@
-import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import localStorageService from "../../../services/localStorageService";
 import useUserData from "../../../hooks/useUserData";
+import localStorageService from "../../../services/localStorageService";
 import {
   deleteCompanyComment,
   postCompanyComment,
@@ -128,7 +127,7 @@ const Comments = ({ companyId, typeOfComments }) => {
           <Loader />
         )
       ) : (
-        <p className="flex p-4 bg-white rounded-lg dark:bg-gray-700 mb-2">
+        <p className="flex p-4 bg-white rounded-lg mb-2">
           Комментариев нет, добавьте первый комментарий!
         </p>
       )}

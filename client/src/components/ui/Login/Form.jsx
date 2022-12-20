@@ -73,7 +73,7 @@ const Form = ({ type, submitValue, submitFunction }) => {
               name="name"
               placeholder="Name"
               {...register("name", { required: "Пожалуста, введите имя" })}
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-sky-600 peer"
             />
             {errors.login ? (
               <ErrorMessage errorText={errors.login.message} />
@@ -99,7 +99,7 @@ const Form = ({ type, submitValue, submitFunction }) => {
                 message: "Введите правильный E-mail",
               },
             })}
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-sky-600 peer"
           />
           {errors.email ? (
             <ErrorMessage errorText={errors.email.message} />
@@ -138,7 +138,7 @@ const Form = ({ type, submitValue, submitFunction }) => {
                   message: "Пароль должен содержать минимум восемь символов",
                 },
               })}
-              className="block py-2.5 px-0 w-3/4 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+              className="block py-2.5 px-0 w-3/4 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-sky-600 peer"
             />
             <img src={img} className="w-7 h-7" onClick={togglePassword} />
           </div>

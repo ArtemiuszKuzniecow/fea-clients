@@ -91,7 +91,7 @@ const OrderPage = () => {
           <div className="w-1/2 max-lg:w-full">
             <div className="lg:mr-2">
               <TableLayout>
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
                     <th scope="col" className="py-3 px-6">
                       Данные о грузе
@@ -100,41 +100,41 @@ const OrderPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Вес груза</th>
                     <td className="py-3 px-6">{currentOrder.weight}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Объём груза</th>
                     <td className="py-3 px-6">{currentOrder.volume}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Характер груза</th>
                     <td className="py-3 px-6">{currentOrder.typeOfCargo}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Код ТН ВЭД</th>
                     <td className="py-3 px-6">{currentOrder.hsCode}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Температурный режим</th>
                     <td className="py-3 px-6">{currentOrder.temperature}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Класс опасности</th>
                     <td className="py-3 px-6">{currentOrder.hazard}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Вид упаковки</th>
                     <td className="py-3 px-6">{currentOrder.package}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Можно ли штабелировать</th>
                     <td className="py-3 px-6">
                       {currentOrder.transshipment ? "Да" : "Нет"}
                     </td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">
                       Дополнительная информация по запросу
                     </th>
@@ -144,7 +144,7 @@ const OrderPage = () => {
               </TableLayout>
               {!newPrice ? (
                 <div className="shadow-md my-3">
-                  <h4 className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-3  sm:rounded-t-lg">
+                  <h4 className="text-xs text-gray-700 uppercase bg-gray-50 p-3 sm:rounded-t-lg">
                     Ставка:{" "}
                   </h4>
                   <p className="bg-white p-5">{currentOrder?.price?.price}</p>
@@ -178,7 +178,7 @@ const OrderPage = () => {
           <div className="w-1/2 max-lg:w-full">
             <div className="lg:ml-2">
               <TableLayout>
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
                     <th scope="col" className="py-3 px-6">
                       Данные о маршруте
@@ -187,25 +187,25 @@ const OrderPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Инкотермс</th>
                     <td className="py-3 px-6">{currentOrder.incoterms}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Адрес забора груза</th>
                     <td className="py-3 px-6">{currentOrder.pickupAddress}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Место таможенного оформления</th>
                     <td className="py-3 px-6">{currentOrder.customs}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Адрес доставки груза</th>
                     <td className="py-3 px-6">
                       {currentOrder.deliveryAddress}
                     </td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Актуальность груза</th>
                     <td
                       className={`py-3 px-6 ${
@@ -217,14 +217,14 @@ const OrderPage = () => {
                         : "Неактуальный груз"}
                     </td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Когда забирать</th>
                     <td className="py-3 px-6">{currentOrder.pickupDate}</td>
                   </tr>
                 </tbody>
               </TableLayout>
               <TableLayout>
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
                     <th scope="col" className="py-3 px-6 w-1/3l">
                       Данные о компании
@@ -233,28 +233,28 @@ const OrderPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Вид перевозки</th>
                     <td className="py-3 px-6">
                       {currentOrder.containersTypes}
                     </td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Вид контракта</th>
                     <td className="py-3 px-6">{currentOrder.contractType}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Как часто возит</th>
                     <td className="py-3 px-6">{currentOrder.howOften}</td>
                   </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b">
                     <th className="py-3 px-6">Дата запроса</th>
                     <td className="py-3 px-6">
                       {getDateFormat(currentOrder.date, ".")}
                     </td>
                   </tr>
                   <tr
-                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${
+                    className={`bg-white border-b ${
                       currentOrder.isClosed ? "bg-red-200" : ""
                     }`}
                   >

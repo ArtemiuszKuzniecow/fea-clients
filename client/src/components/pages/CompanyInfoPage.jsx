@@ -67,8 +67,8 @@ const CompanyInfoPage = () => {
             <div className="flex flex-wrap gap-3">
               <div className="w-full">
                 <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <table className="w-full text-sm text-left text-gray-500">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                       <tr>
                         <th scope="col" className="py-3 px-6">
                           Основные направления компании
@@ -85,7 +85,7 @@ const CompanyInfoPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <tr className="bg-white border-b">
                         <td className="py-3 px-6">
                           {currentCompany.directions}
                         </td>
@@ -146,7 +146,7 @@ const CompanyInfoPage = () => {
         <div>
           {currentOrders.length >= 1 ? (
             <TableLayout>
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th scope="col" className="py-3 px-6">
                     Компания

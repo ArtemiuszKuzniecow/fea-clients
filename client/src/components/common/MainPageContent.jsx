@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Headline from "./Headline";
 import MyButton from "./MyButton";
+import MainPageCard from "./MainPageCard";
 
 const MainPageContent = () => {
   const { userData: currentUser } = useSelector(getUserDataSelector());
@@ -51,11 +52,10 @@ const MainPageContent = () => {
       <Headline>Добрый день, {currentUser.name}!</Headline>
       <div className="flex justify-evenly flex-wrap">
         <div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 h-44">
-            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
-              У Вас всего {companies.length}{" "}
-              {declOfNum(companies.length, companiesEndingsArray)}:
-            </h4>
+          <MainPageCard
+            header={`У Вас всего ${companies.length}
+              ${declOfNum(companies.length, companiesEndingsArray)}:`}
+          >
             <Link to={companies.length > 0 ? "companies/" : "new-company"}>
               <MyButton>
                 {companies.length > 0
@@ -63,34 +63,31 @@ const MainPageContent = () => {
                   : "Добавьте новую компанию"}
               </MyButton>
             </Link>
-          </div>
-          <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 h-44">
-            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
-              У Вас всего {orders.length}{" "}
-              {declOfNum(orders.length, ordersEndingsArray)}:
-            </h4>
+          </MainPageCard>
+          <MainPageCard
+            header={`У Вас всего ${orders.length}
+              ${declOfNum(orders.length, ordersEndingsArray)}:`}
+          >
             <Link to={orders.length > 0 ? "orders-list/" : "new-order"}>
               <MyButton>
                 {companies.length > 0 ? "Посмотреть" : "Добавьте новый запрос"}
               </MyButton>
             </Link>
-          </div>
+          </MainPageCard>
         </div>
         <div>
-          <div
-            className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 ${
-              !isCompaniesCollapsed ? "min-h-44" : "h-44"
-            }`}
-          >
-            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
-              {companiesToConnect.length > 0
+          <MainPageCard
+            header={
+              companiesToConnect.length > 0
                 ? `У Вас всего ${companiesToConnect.length}
                 ${declOfNum(
                   companiesToConnect.length,
                   companiesEndingsArray
                 )} для связи сегодня:`
-                : "Сегодня нет компаний для связи"}
-            </h4>
+                : "Сегодня нет компаний для связи"
+            }
+            isCompaniesCollapsed={isCompaniesCollapsed}
+          >
             <div onClick={() => handleCompaniesCollapse()}>
               {companiesToConnect.length > 0 ? (
                 isCompaniesCollapsed ? (
@@ -117,18 +114,15 @@ const MainPageContent = () => {
                 </Link>
               )}
             </div>
-          </div>
-          <div
-            className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm flex flex-col justify-center mb-2 w-96 ${
-              !isOrdersCollapsed ? "min-h-44" : "h-44"
-            }`}
-          >
-            <h4 className="text-gray-900 text-xl leading-tight font-medium mb-2">
-              {openedOrders.length > 0
+          </MainPageCard>
+          <MainPageCard
+            header={
+              openedOrders.length > 0
                 ? `У Вас всего ${orders.length} открытых 
                 ${declOfNum(orders.length, ordersEndingsArray)}:`
-                : "У Вас нет открытых запросов"}
-            </h4>
+                : "У Вас нет открытых запросов"
+            }
+          >
             <div onClick={() => handleOrdersCollapse()}>
               {openedOrders.length > 0 ? (
                 isOrdersCollapsed ? (
@@ -157,7 +151,7 @@ const MainPageContent = () => {
                 </Link>
               )}
             </div>
-          </div>
+          </MainPageCard>
         </div>
       </div>
     </>
