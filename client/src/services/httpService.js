@@ -12,7 +12,10 @@ http.interceptors.request.use(
       Number(localStorageService.getTokenExpiresDate()) < Date.now();
 
     if (isExpired) {
-      const data = await authService.refresh();
+      const data = await authService.refresh(
+        localStorageService.getRefreshToken()
+      );
+      console.log(data);
       localStorageService.setTokens(data);
     }
 
@@ -26,6 +29,7 @@ http.interceptors.request.use(
     return config;
   },
   function (error) {
+    alert(error);
     return Promise.reject(error);
   }
 );

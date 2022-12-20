@@ -118,21 +118,23 @@ function isTokenInvalid(data, dbToken) {
 router.post("/token", async (req, res) => {
   try {
     const { refreshToken } = req.body;
+    console.log(refreshToken);
     const data = tokenService.validateRefresh(refreshToken);
     const dbToken = await tokenService.findToken(refreshToken);
+    console.log("router", refreshToken);
 
     if (isTokenInvalid(data, dbToken)) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ dbToken, message: "Unauthorized" });
     }
 
-    const tokens = await tokenService.generate({
+    const tokens = tokenService.generate({
       _id: data._id,
     });
     await tokenService.save(data._id, tokens.refreshToken);
 
     res.status(200).send({ ...tokens, userId: data._id });
-    return tokens;
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Something was wrong, try it later.",
     });

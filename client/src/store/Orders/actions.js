@@ -5,6 +5,7 @@ export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",
   async (id, thunkApi) => {
     try {
+      console.log(new Date().toUTCString());
       const { content } = await ordersService.get();
 
       return content.filter((item) => item.userID === id);
@@ -19,7 +20,6 @@ export const postNewOrder = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { content } = await ordersService.postNewOrder(payload);
-      console.log(content);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -37,7 +37,6 @@ export const editOrderParameter = createAsyncThunk(
         parameter,
         payload
       );
-      console.log(content);
       return content;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

@@ -18,8 +18,8 @@ const AppLoader = ({ children }) => {
     if (isLoggedIn) {
       dispatch(loadUserData(userId));
       dispatch(loadLeadsData(userId));
-      dispatch(loadOrdersData(userId));
       dispatch(loadLeadsCommentsData(userId));
+      dispatch(loadOrdersData(userId));
       dispatch(loadOrdersCommentsData(userId));
     }
   }, [isLoggedIn]);
