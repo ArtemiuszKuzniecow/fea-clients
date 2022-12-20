@@ -68,8 +68,10 @@ const PageLayout = ({ children }) => {
               <Loader />
             )
           ) : (
-            <div className="flex flex-col w-1/4">
-              <Hamburger func={toggleCollapse} />
+            <div className={`flex flex-col ${isCollapsed ? "" : "items-end"}`}>
+              <div className={`w-1/4  ${isCollapsed ? "" : "mr-4"}`}>
+                <Hamburger func={toggleCollapse} />
+              </div>
               <div
                 className={`w-full md:block md:w-auto ${
                   isCollapsed && "hidden"
