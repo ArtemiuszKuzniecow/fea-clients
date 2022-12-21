@@ -5,7 +5,6 @@ export const loadLeadsData = createAsyncThunk(
   "lead/loadLead",
   async (id, thunkApi) => {
     try {
-      console.log(new Date().toUTCString());
       const { content } = await leadService.get();
       return content.filter((item) => item.userID === id);
     } catch (error) {

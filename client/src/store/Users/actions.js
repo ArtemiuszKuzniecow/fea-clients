@@ -6,7 +6,6 @@ export const loadUserData = createAsyncThunk(
   "user/loadUser",
   async (id, thunkApi) => {
     try {
-      console.log(new Date().toUTCString());
       const { content } = await userService.get(id);
       return content;
     } catch (error) {

@@ -5,7 +5,6 @@ export const loadOrdersData = createAsyncThunk(
   "order/loadOrder",
   async (id, thunkApi) => {
     try {
-      console.log(new Date().toUTCString());
       const { content } = await ordersService.get();
 
       return content.filter((item) => item.userID === id);

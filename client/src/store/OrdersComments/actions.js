@@ -7,7 +7,6 @@ export const loadOrdersCommentsData = createAsyncThunk(
   "ordersComment/loadOrdersComment",
   async (id, thunkApi) => {
     try {
-      console.log(new Date().toUTCString());
       const { content } = await commentsService.getOrdersComments();
       const result = content && content.filter((item) => item.userID === id);
       return result;

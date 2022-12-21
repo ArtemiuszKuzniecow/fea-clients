@@ -7,7 +7,6 @@ export const loadLeadsCommentsData = createAsyncThunk(
   "leadsComment/loadleadsComment",
   async (id, thunkApi) => {
     try {
-      console.log(new Date().toUTCString());
       const { content } = await commentsService.getLeadsComments();
       const result = content && content.filter((item) => item.userID === id);
       return result;

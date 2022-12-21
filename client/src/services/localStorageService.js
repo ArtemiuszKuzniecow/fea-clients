@@ -6,11 +6,10 @@ const USERID_KEY = "fea-cl-user-user-id";
 export function setTokens({
   refreshToken,
   accessToken,
-  expiresIn = 10000,
+  expiresIn = 10800,
   userId,
 }) {
-  const expiresDate = Date.now() + expiresIn;
-  // * 1000;
+  const expiresDate = Date.now() + expiresIn * 1000;
   localStorage.setItem(TOKEN_KEY, accessToken);
   localStorage.setItem(REFRESH_KEY, refreshToken);
   localStorage.setItem(EXPIRES_KEY, expiresDate);

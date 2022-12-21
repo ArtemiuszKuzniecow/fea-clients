@@ -58,7 +58,6 @@ const OrderPage = () => {
         parameter: "status",
       })
     );
-    console.log(Object.values(data)[0]);
   };
 
   const handleRefreshPrice = () => {
