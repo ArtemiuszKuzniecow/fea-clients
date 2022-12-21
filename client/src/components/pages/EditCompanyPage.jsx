@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { editLead } from "../../store/Leads/actions";
@@ -11,17 +11,17 @@ import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
 
 const EditCompanyPage = () => {
-  const { _id } = useParams();
+  const { id } = useParams();
   const { getCompanyById } = useUserData();
-  const currentCompany = getCompanyById(_id);
+  const currentCompany = getCompanyById(id);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [company, setCompany] = useState(currentCompany);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editLead(company));
-    history.push(`/${_id}`);
+    navigate.push(`/${id}`);
   };
 
   const handleChangeDropDown = (data) => {
@@ -41,7 +41,7 @@ const EditCompanyPage = () => {
     <>
       <div className="flex flex-col justify-center p-3">
         <Headline>Редактирвоать данные:</Headline>
-        <Link to={`/${_id}`}>
+        <Link to={`/${id}`}>
           <MyButton>Назад</MyButton>
         </Link>
       </div>

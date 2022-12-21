@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { postNewOrder } from "../../store/Orders/actions";
@@ -11,13 +11,14 @@ import MyButton from "../common/MyButton";
 import RadioButtons from "../common/RadioButtons";
 import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
+import ErrorMessage from "../ui/Login/ErrorMessage";
 
 const NewOrderPage = () => {
   const { companies, isLoading, isLeadsLoading, currentUserData } =
     useUserData();
   const currentCompanies = companies && companies.map((c) => c.company);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
   const [order, setOrder] = useState({
     companyId: "",
@@ -68,7 +69,7 @@ const NewOrderPage = () => {
       order.weight !== ""
     ) {
       dispatch(postNewOrder(order));
-      history.push("orders-list");
+      navigate.push("orders-list");
     }
   };
 
@@ -107,7 +108,7 @@ const NewOrderPage = () => {
                 name="companyId"
               />
               {hasBeenSubmited && order.companyId === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -126,7 +127,7 @@ const NewOrderPage = () => {
                 name="containersTypes"
               />
               {hasBeenSubmited && order.containersTypes === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
           </div>
@@ -139,7 +140,7 @@ const NewOrderPage = () => {
                 name="contractType"
               />
               {hasBeenSubmited && order.contractType === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -168,7 +169,7 @@ const NewOrderPage = () => {
                     onChange={handleChangeDropDown}
                   />
                   {hasBeenSubmited && order.volume === "" && (
-                    <span>Это поле должно быть заполнено</span>
+                    <ErrorMessage errorText="Это поле должно быть заполнено" />
                   )}
                 </>
               )}
@@ -191,7 +192,7 @@ const NewOrderPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && order.weight === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -202,7 +203,7 @@ const NewOrderPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && order.typeOfCargo === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -255,7 +256,7 @@ const NewOrderPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && order.pickupAddress === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -274,7 +275,7 @@ const NewOrderPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && order.deliveryAddress === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>

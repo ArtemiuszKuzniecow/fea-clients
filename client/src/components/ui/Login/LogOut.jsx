@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import localStorageService from "../../../services/localStorageService";
 import { LeadsSlice } from "../../../store/Leads/reducer";
 import { LeadsCommentsSlice } from "../../../store/LeadsComments/reducer";
@@ -10,7 +10,7 @@ import { UserSlice } from "../../../store/Users/reducer";
 import Loader from "../Loader/Loader";
 
 const LogOut = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const LogOut = () => {
     dispatch(LeadsCommentsSlice.actions.clearData());
     dispatch(OrdersSlice.actions.clearData());
     dispatch(OrdersCommentsSlice.actions.clearData());
-    history.push("/");
+    navigate.push("/");
   }, []);
   return <Loader />;
 };

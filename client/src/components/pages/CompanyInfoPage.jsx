@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../hooks/useUserData";
 import { deleteLead } from "../../store/Leads/actions";
 import { deleteCompanyComment } from "../../store/LeadsComments/actions";
@@ -20,27 +20,28 @@ import Loader from "../ui/Loader/Loader";
 import PageNotFound from "./PageNotFound";
 
 const CompanyInfoPage = () => {
-  const { _id } = useParams();
+  const params = useParams();
+  const { id } = useParams();
   const { isLoading, isLeadsLoading, isOrdersLoading, companies, orders } =
     useUserData();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const leadsComments = useSelector(getAllCompanyComments(_id));
+  const leadsComments = useSelector(getAllCompanyComments(id));
   const ordersComments = useSelector(getAllOrdersComments());
 
   useEffect(() => {
     if (companies && orders) {
-      setCurrentCompany(companies.find((item) => item._id === _id));
-      setCurrentOrders(orders.filter((o) => o.companyId === _id));
+      setCurrentCompany(companies.find((item) => item._id === id));
+      setCurrentOrders(orders.filter((o) => o.companyId === id));
     }
   }, [isLoading, isLeadsLoading, isOrdersLoading]);
 
   if (!isLoading && !isLeadsLoading) {
-    if (companies.find((item) => item._id === _id) === undefined)
+    if (companies.find((item) => item._id === id) === undefined)
       return <PageNotFound />;
   }
 
@@ -55,7 +56,7 @@ const CompanyInfoPage = () => {
         }
       });
     orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
-    history.push("/companies");
+    navigate.push("/companies");
   };
 
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (
@@ -113,7 +114,7 @@ const CompanyInfoPage = () => {
                     city={currentCompany.city}
                   />
                   <div className="mt-3 mb-1">
-                    <Link to={`/${_id}/edit`}>
+                    <Link to={`/${id}/edit`}>
                       <MyButton>Изменить информацию о компании</MyButton>
                     </Link>
                   </div>

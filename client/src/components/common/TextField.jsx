@@ -19,7 +19,7 @@ const TextField = ({
     setContent(target.value);
   }
   return (
-    <div className="relative z-0 mb-6 w-full group">
+    <div className="relative z-0 mb-2 w-full group">
       <input
         type={type}
         name={name}

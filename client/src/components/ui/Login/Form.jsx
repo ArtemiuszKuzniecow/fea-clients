@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import MyButton from "../../common/MyButton";
+import { useSelector } from "react-redux";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import closedEye from "../../../assets/icons/free-icon-eye-2311537.png";
 import openedEye from "../../../assets/icons/free-icon-visible-eye-57122.png";
-import PropTypes from "prop-types";
-import ErrorMessage from "./ErrorMessage";
-import { Redirect, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import {
   getErrorsSelector,
   getLoggedInStatusSelector,
 } from "../../../store/Users/selectors";
-import { useEffect } from "react";
+import MyButton from "../../common/MyButton";
+import ErrorMessage from "./ErrorMessage";
 
 const Form = ({ type, submitValue, submitFunction }) => {
   const {
@@ -25,7 +24,8 @@ const Form = ({ type, submitValue, submitFunction }) => {
   const [asyncErrors, setAsyncErrors] = useState({});
   const stateErrors = useSelector(getErrorsSelector());
   const isLoggedIn = useSelector(getLoggedInStatusSelector());
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
   const togglePassword = () => {
     setInputType((prevState) =>
       prevState.includes("password") ? "text" : "password"
@@ -42,17 +42,17 @@ const Form = ({ type, submitValue, submitFunction }) => {
   const onSubmit = (data) => {
     submitFunction(data);
     if (isLoggedIn) {
-      history.push(
-        history.location?.state?.from?.pathname &&
-          history.location?.state?.from?.pathname !== "/login"
-          ? history.location.state.from.pathname
+      navigate(
+        location?.state?.from?.pathname &&
+          location?.state?.from?.pathname !== "/login"
+          ? location?.state?.from?.pathname
           : "/"
       );
     }
     reset();
   };
 
-  if (isLoggedIn) return <Redirect to="/" />;
+  if (isLoggedIn) return <Navigate to="/" />;
 
   return (
     <div className="flex flex-row justify-center w-full max-w-xs">

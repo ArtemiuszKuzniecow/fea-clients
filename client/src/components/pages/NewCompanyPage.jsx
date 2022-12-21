@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { postNewLead } from "../../store/Leads/actions";
@@ -9,10 +9,11 @@ import Headline from "../common/Headline";
 import MyButton from "../common/MyButton";
 import TextField from "../common/TextField";
 import Loader from "../ui/Loader/Loader";
+import ErrorMessage from "../ui/Login/ErrorMessage";
 
 const NewCompanyPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isLoading, currentUserData } = useUserData();
   const [company, setCompany] = useState(null);
   const [hasBeenSubmited, setHasBeenSubmited] = useState(false);
@@ -48,7 +49,7 @@ const NewCompanyPage = () => {
       company.sphere !== ""
     ) {
       dispatch(postNewLead(company));
-      history.push("/companies");
+      navigate.push("/companies");
     }
   };
 
@@ -82,7 +83,7 @@ const NewCompanyPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && company.company === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -93,7 +94,7 @@ const NewCompanyPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && company.manager === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -139,7 +140,7 @@ const NewCompanyPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && company.directions === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
             <div>
@@ -150,7 +151,7 @@ const NewCompanyPage = () => {
                 onChange={handleChange}
               />
               {hasBeenSubmited && company.sphere === "" && (
-                <span>Это поле должно быть заполнено</span>
+                <ErrorMessage errorText="Это поле должно быть заполнено" />
               )}
             </div>
           </div>

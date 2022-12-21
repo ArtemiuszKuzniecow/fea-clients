@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
-import getDateFormat from "../../utils/getDateFormat";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
-import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { deleteOrder, editOrderParameter } from "../../store/Orders/actions";
+import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { getAllOrdersCommentsById } from "../../store/OrdersComments/selectors";
-import MyButton from "../common/MyButton";
+import getDateFormat from "../../utils/getDateFormat";
 import Comments from "../common/Comment/Comments";
-import TextField from "../common/TextField";
+import DropDownList from "../common/DropDownList";
+import Headline from "../common/Headline";
 import ModalContent from "../common/ModalContent";
 import ModalWindow from "../common/ModalWindow/ModalWindow";
-import Loader from "../ui/Loader/Loader";
-import Headline from "../common/Headline";
+import MyButton from "../common/MyButton";
 import TableLayout from "../common/TableLayout";
-import DropDownList from "../common/DropDownList";
-import cargo from "../../cargo.json";
+import TextField from "../common/TextField";
+import Loader from "../ui/Loader/Loader";
 
 const OrderPage = () => {
   const { _id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
     useUserData();
   const orderComments = useSelector(getAllOrdersCommentsById(_id));
@@ -30,6 +30,8 @@ const OrderPage = () => {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [price, setPrice] = useState({ price: "" });
+  const location = useLocation();
+
   useEffect(() => {
     if (orders && companies) {
       setCurrentOrder(orders.find((order) => order._id === _id));
@@ -77,7 +79,7 @@ const OrderPage = () => {
     dispatch(deleteOrder(currentOrder));
     orderComments &&
       orderComments.forEach((c) => dispatch(deleteOrderComment(c)));
-    history.push("/orders-list");
+    navigate.push("/orders-list");
   };
 
   return currentOrder && currentCompany ? (

@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import getDateFormat from "../../utils/getDateFormat";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { deleteLead, editLeadParameter } from "../../store/Leads/actions";
@@ -11,12 +10,13 @@ import { getAllCompanyComments } from "../../store/LeadsComments/selecetors";
 import { deleteOrder } from "../../store/Orders/actions";
 import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { getAllOrdersComments } from "../../store/OrdersComments/selectors";
-import MyButton from "./MyButton";
+import getDateFormat from "../../utils/getDateFormat";
 import Comments from "./Comment/Comments";
 import CompanyContacts from "./CompanyContacts";
 import DropDownList from "./DropDownList";
 import ModalContent from "./ModalContent";
 import ModalWindow from "./ModalWindow/ModalWindow";
+import MyButton from "./MyButton";
 
 const CompanyCard = ({ companyId }) => {
   const dispatch = useDispatch();
@@ -34,8 +34,8 @@ const CompanyCard = ({ companyId }) => {
   const { orders, isLoading, isOrdersLoading } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(company?._id));
   const ordersComments = useSelector(getAllOrdersComments());
-  const history = useHistory();
-  history.location.pathname = "/";
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChangeDate = () => {
     setChangeDate((prevState) => !prevState);
@@ -58,7 +58,7 @@ const CompanyCard = ({ companyId }) => {
         }
       });
     orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
-    history.push("/companies");
+    navigate("/companies");
   };
 
   const handleChangeData = ({ target }) => {
