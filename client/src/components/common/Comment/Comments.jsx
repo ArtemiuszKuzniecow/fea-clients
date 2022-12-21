@@ -21,7 +21,7 @@ import CommentForm from "./CommentForm";
 const Comments = ({ companyId, typeOfComments }) => {
   const userId = localStorageService.getUserId();
   const dispatch = useDispatch();
-  const { _id } = useParams();
+  const { id } = useParams();
   const {
     isLoading,
     isLeadsLoading,
@@ -31,7 +31,7 @@ const Comments = ({ companyId, typeOfComments }) => {
     orders,
   } = useUserData();
   const leadsComments = useSelector(getAllCompanyComments(companyId));
-  const ordersComments = useSelector(getAllOrdersCommentsById(_id));
+  const ordersComments = useSelector(getAllOrdersCommentsById(id));
   const [currentComments, setCurrentComments] = useState(null);
   const [allCommentsShown, setAllCommentsShown] = useState(false);
 
@@ -73,7 +73,7 @@ const Comments = ({ companyId, typeOfComments }) => {
         : {
             date: Date.now(),
             value: data,
-            orderId: _id,
+            orderId: id,
             userID: userId,
           };
     if (typeOfComments === "company") {

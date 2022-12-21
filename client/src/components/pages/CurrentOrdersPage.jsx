@@ -10,9 +10,9 @@ import TableLayout from "../common/TableLayout";
 
 const CurrentOrdersPage = () => {
   const [currentOrders, setCurrentOrders] = useState(null);
-  const { _id } = useParams();
+  const { id } = useParams();
   const { orders, isLoading, isOrdersLoading, getCompanyById } = useUserData();
-  const company = getCompanyById(_id);
+  const company = getCompanyById(id);
 
   useEffect(() => {
     !isOrdersLoading &&

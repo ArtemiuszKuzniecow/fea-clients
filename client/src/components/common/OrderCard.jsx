@@ -1,30 +1,30 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import getDateFormat from "../../utils/getDateFormat";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { deleteOrder } from "../../store/Orders/actions";
 import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { getAllOrdersCommentsById } from "../../store/OrdersComments/selectors";
-import MyButton from "./MyButton";
+import getDateFormat from "../../utils/getDateFormat";
 import ModalContent from "./ModalContent";
 import ModalWindow from "./ModalWindow/ModalWindow";
+import MyButton from "./MyButton";
 
 const OrderCard = ({ order, companyName, companyId }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const orderComments = useSelector(getAllOrdersCommentsById(order._id));
+  const location = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleRedirect = (id) => {
-    history.location.pathname = "/";
-    history.push(`orders-list/${id}`);
+    navigate(`../../orders-list/${id}`, { replace: true });
   };
   const handleDeleteOrder = () => {
     dispatch(deleteOrder(order));
     orderComments &&
       orderComments.forEach((c) => dispatch(deleteOrderComment(c)));
-    history.push("/orders-list");
+    navigate.push("/orders-list");
   };
 
   return (
