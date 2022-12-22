@@ -1,2 +1,2 @@
 # fea-clients
-JavaScript, TailwindCSS, React, Redux-toolkit, NodeJS, Express, MongoDB, Docker
+JavaScript, TailwindCSS, React, Redux-toolkit, React Router v6, NodeJS, Express, MongoDB, Docker
