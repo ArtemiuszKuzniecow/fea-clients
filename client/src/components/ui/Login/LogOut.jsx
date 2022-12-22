@@ -20,7 +20,7 @@ const LogOut = () => {
     dispatch(LeadsCommentsSlice.actions.clearData());
     dispatch(OrdersSlice.actions.clearData());
     dispatch(OrdersCommentsSlice.actions.clearData());
-    navigate.push("/");
+    navigate("/");
   }, []);
   return <Loader />;
 };

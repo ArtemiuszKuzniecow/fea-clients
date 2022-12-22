@@ -21,7 +21,7 @@ const EditCompanyPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editLead(company));
-    navigate.push(`/${id}`);
+    navigate(`/${id}`);
   };
 
   const handleChangeDropDown = (data) => {

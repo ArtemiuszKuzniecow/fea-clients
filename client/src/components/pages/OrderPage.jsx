@@ -77,7 +77,7 @@ const OrderPage = () => {
     dispatch(deleteOrder(currentOrder));
     orderComments &&
       orderComments.forEach((c) => dispatch(deleteOrderComment(c)));
-    navigate.push("/orders-list");
+    navigate("/orders-list");
   };
 
   return currentOrder && currentCompany ? (

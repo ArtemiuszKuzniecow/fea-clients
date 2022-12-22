@@ -54,7 +54,7 @@ const CompanyInfoPage = () => {
         }
       });
     orders && currentOrders.forEach((o) => dispatch(deleteOrder(o)));
-    navigate.push("/companies");
+    navigate("/companies");
   };
 
   return !isLoading && !isLeadsLoading && !isOrdersLoading ? (

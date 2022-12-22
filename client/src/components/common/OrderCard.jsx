@@ -23,7 +23,7 @@ const OrderCard = ({ order, companyName, companyId }) => {
     dispatch(deleteOrder(order));
     orderComments &&
       orderComments.forEach((c) => dispatch(deleteOrderComment(c)));
-    navigate.push("/orders-list");
+    navigate("/orders-list");
   };
 
   return (

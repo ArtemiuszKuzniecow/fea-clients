@@ -49,7 +49,7 @@ const NewCompanyPage = () => {
       company.sphere !== ""
     ) {
       dispatch(postNewLead(company));
-      navigate.push("/companies");
+      navigate("/companies");
     }
   };
 

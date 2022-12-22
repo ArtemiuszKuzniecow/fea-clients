@@ -69,7 +69,7 @@ const NewOrderPage = () => {
       order.weight !== ""
     ) {
       dispatch(postNewOrder(order));
-      navigate.push("orders-list");
+      navigate("orders-list");
     }
   };
 
