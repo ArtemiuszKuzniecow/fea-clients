@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cargo from "../../cargo.json";
 import useUserData from "../../hooks/useUserData";
 import { deleteLead, editLeadParameter } from "../../store/Leads/actions";
@@ -35,7 +35,6 @@ const CompanyCard = ({ companyId }) => {
   const leadsComments = useSelector(getAllCompanyComments(company?._id));
   const ordersComments = useSelector(getAllOrdersComments());
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleChangeDate = () => {
     setChangeDate((prevState) => !prevState);

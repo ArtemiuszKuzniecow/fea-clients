@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteOrder } from "../../store/Orders/actions";
 import { deleteOrderComment } from "../../store/OrdersComments/actions";
 import { getAllOrdersCommentsById } from "../../store/OrdersComments/selectors";
@@ -14,7 +14,6 @@ const OrderCard = ({ order, companyName, companyId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const orderComments = useSelector(getAllOrdersCommentsById(order._id));
-  const location = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleRedirect = (id) => {
