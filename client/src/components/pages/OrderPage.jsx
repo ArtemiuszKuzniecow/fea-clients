@@ -19,18 +19,16 @@ import Loader from "../ui/Loader/Loader";
 
 const OrderPage = () => {
   const { _id } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { isLoading, isLeadsLoading, isOrdersLoading, orders, companies } =
     useUserData();
-  const orderComments = useSelector(getAllOrdersCommentsById(_id));
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newPrice, setNewPrice] = useState(false);
   const [currentCompany, setCurrentCompany] = useState(null);
   const [currentOrder, setCurrentOrder] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [price, setPrice] = useState({ price: "" });
-  const location = useLocation();
+  const orderComments = useSelector(getAllOrdersCommentsById(_id));
 
   useEffect(() => {
     if (orders && companies) {

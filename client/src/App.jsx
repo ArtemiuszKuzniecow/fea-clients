@@ -7,8 +7,7 @@ import { getLoggedInStatusSelector } from "./store/Users/selectors";
 
 function App() {
   const isLoggedIn = useSelector(getLoggedInStatusSelector());
-  const location = useLocation();
-  const elements = useRoutes(routes(isLoggedIn, location));
+  const elements = useRoutes(routes(isLoggedIn));
 
   return (
     <AppLoader>

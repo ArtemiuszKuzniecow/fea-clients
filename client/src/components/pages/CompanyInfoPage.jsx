@@ -20,13 +20,11 @@ import Loader from "../ui/Loader/Loader";
 import PageNotFound from "./PageNotFound";
 
 const CompanyInfoPage = () => {
-  const params = useParams();
   const { id } = useParams();
   const { isLoading, isLeadsLoading, isOrdersLoading, companies, orders } =
     useUserData();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [currentCompany, setCurrentCompany] = useState();
   const [currentOrders, setCurrentOrders] = useState();
   const [isOpen, setIsOpen] = useState(false);

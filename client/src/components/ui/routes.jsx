@@ -12,11 +12,7 @@ import Login from "./Login/Login";
 import LogOut from "./Login/LogOut";
 import Registration from "./Login/Registration";
 
-{
-  /* <Navigate to="/login" state={{ referrer: location }} />; */
-}
-
-const routes = (isLoggedIn, location) => {
+const routes = (isLoggedIn) => {
   return [
     {
       path: "/",
@@ -36,43 +32,26 @@ const routes = (isLoggedIn, location) => {
     },
     {
       path: "/companies",
-      element: isLoggedIn ? (
-        <CompaniesPage />
-      ) : (
-        <Navigate to="/login" state={{ referrer: location }} />
-      ),
+      element: isLoggedIn ? <CompaniesPage /> : <Navigate to="/login" />,
     },
     {
       path: "/new-company",
-      element: isLoggedIn ? (
-        <NewCompanyPage />
-      ) : (
-        <Navigate to="/login" state={{ referrer: location }} />
-      ),
+      element: isLoggedIn ? <NewCompanyPage /> : <Navigate to="/login" />,
     },
     {
       path: "/new-order",
-      element: isLoggedIn ? (
-        <NewOrderPage />
-      ) : (
-        <Navigate to="/login" state={{ referrer: location }} />
-      ),
+      element: isLoggedIn ? <NewOrderPage /> : <Navigate to="/login" />,
     },
     {
       path: "orders-list",
-
       children: [
         {
           path: "",
-          element: isLoggedIn ? (
-            <OrdersListPage />
-          ) : (
-            <Navigate to="/login" state={{ referrer: location }} />
-          ),
+          element: isLoggedIn ? <OrdersListPage /> : <Navigate to="/login" />,
         },
         {
           path: ":_id",
-          element: <OrderPage />,
+          element: isLoggedIn ? <OrderPage /> : <Navigate to="/login" />,
         },
       ],
     },
@@ -82,26 +61,18 @@ const routes = (isLoggedIn, location) => {
       children: [
         {
           path: "",
-          element: isLoggedIn ? (
-            <CompanyInfoPage />
-          ) : (
-            <Navigate to="/login" state={{ referrer: location }} />
-          ),
+          element: isLoggedIn ? <CompanyInfoPage /> : <Navigate to="/login" />,
         },
         {
           path: "edit",
-          element: isLoggedIn ? (
-            <EditCompanyPage />
-          ) : (
-            <Navigate to="/login" state={{ referrer: location }} />
-          ),
+          element: isLoggedIn ? <EditCompanyPage /> : <Navigate to="/login" />,
         },
         {
           path: "orders",
           element: isLoggedIn ? (
             <CurrentOrdersPage />
           ) : (
-            <Navigate to="/login" state={{ referrer: location }} />
+            <Navigate to="/login" />
           ),
         },
       ],
